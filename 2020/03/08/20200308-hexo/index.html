@@ -11,21 +11,19 @@
   
   
   
-  <meta name="description" content="資料夾架構1234567891011121314151617181920├── .deploy_git├── .git├── node_modules├── public           # hexo g 生成靜態網站├── scaffolds|   ├── draft.md|   ├── page.md|   └── post.md├── source|   ├── _drafts|   └">
+  <meta name="description" content="資料夾架構跟 Hexo 要建立文章相關的資料夾  public 資料夾 - 生成靜態網站  scaffolds 資料夾 - 樣版  source &#x2F; _posts 資料夾 - 文章內容都放在這裡">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Hexo 主題設定">
 <meta property="og:url" content="https://orandigo.github.io/2020/03/08/20200308-hexo/index.html">
 <meta property="og:site_name" content="F2E 筆記">
-<meta property="og:description" content="資料夾架構1234567891011121314151617181920├── .deploy_git├── .git├── node_modules├── public           # hexo g 生成靜態網站├── scaffolds|   ├── draft.md|   ├── page.md|   └── post.md├── source|   ├── _drafts|   └">
+<meta property="og:description" content="資料夾架構跟 Hexo 要建立文章相關的資料夾  public 資料夾 - 生成靜態網站  scaffolds 資料夾 - 樣版  source &#x2F; _posts 資料夾 - 文章內容都放在這裡">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-03-07T17:25:04.000Z">
-<meta property="article:modified_time" content="2020-03-08T15:50:34.620Z">
+<meta property="article:modified_time" content="2020-03-13T14:42:09.237Z">
 <meta property="article:author" content="orandigo">
 <meta property="article:tag" content="w3HexSchool">
 <meta property="article:tag" content="hexo">
 <meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="F2E 筆記" type="application/atom+xml">
   
   <link rel="icon" href="/blog/css/images/favicon.ico">
   
@@ -64,10 +62,32 @@
 
 
   
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
 
 
 <header id="allheader" class="site-header" role="banner" 
-   >
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
   <div class="clearfix container">
       <div class="site-branding">
 
@@ -88,11 +108,7 @@
                     
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">首頁</a> </li>
                     
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">歸檔</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/categories">分類</a> </li>
-                    
-                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/tags">標籤</a> </li>
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">目錄</a> </li>
                     
                       <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">關於</a> </li>
                     
@@ -130,16 +146,27 @@
 	  <time datetime="2020-03-07T17:25:04.000Z" itemprop="datePublished">三月 8, 2020</time>
 	</a>
 
-       
       
-	<span id="busuanzi_container_page_pv">
-	  本文总阅读量<span id="busuanzi_value_page_pv"></span>次
-	</span>
-
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/Animal/">Animal</a>, <a class="article-category-link" href="/blog/categories/Animal/Cat/">Cat</a>, <a class="article-category-link" href="/blog/categories/Animal/Dog/">Dog</a>
+ 
+      
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="資料夾架構"><a href="#資料夾架構" class="headerlink" title="資料夾架構"></a>資料夾架構</h1><figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">├──</span> <span class="string">.deploy_git</span></span><br><span class="line"><span class="string">├──</span> <span class="string">.git</span></span><br><span class="line"><span class="string">├──</span> <span class="string">node_modules</span></span><br><span class="line"><span class="string">├──</span> <span class="string">public</span>           <span class="comment"># hexo g 生成靜態網站</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scaffolds</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">draft.md</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">page.md</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">post.md</span></span><br><span class="line"><span class="string">├──</span> <span class="string">source</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_drafts</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">_posts</span>       <span class="comment"># 文章資料夾</span></span><br><span class="line"><span class="string">├──</span> <span class="string">themes</span>           <span class="comment"># theme 版型資料夾</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">landscape</span>    <span class="comment"># 預設 theme</span></span><br><span class="line"><span class="string">|</span>       <span class="string">└──</span> <span class="string">_config.yml</span>  <span class="comment"># 版型樣式 設定</span></span><br><span class="line"><span class="string">├──</span> <span class="string">.gitignore</span></span><br><span class="line"><span class="string">├──</span> <span class="string">_config.yml</span>      <span class="comment"># 基本部署 設定</span></span><br><span class="line"><span class="string">├──</span> <span class="string">db.json</span></span><br><span class="line"><span class="string">├──</span> <span class="string">debug.log</span></span><br><span class="line"><span class="string">├──</span> <span class="string">package.json</span></span><br><span class="line"><span class="string">└──</span> <span class="string">package-lock.json</span></span><br></pre></td></tr></table></figure>
+        <h1 id="資料夾架構"><a href="#資料夾架構" class="headerlink" title="資料夾架構"></a>資料夾架構</h1><p>跟 Hexo 要建立文章相關的資料夾</p>
+<ul>
+<li><p>public 資料夾 - 生成靜態網站</p>
+</li>
+<li><p>scaffolds 資料夾 - 樣版</p>
+</li>
+<li><p>source / <code>_posts</code> 資料夾 - 文章內容都放在這裡</p>
+<a id="more"></a> 
+
+
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">├──</span> <span class="string">.deploy_git</span></span><br><span class="line"><span class="string">├──</span> <span class="string">.git</span></span><br><span class="line"><span class="string">├──</span> <span class="string">node_modules</span></span><br><span class="line"><span class="string">├──</span> <span class="string">public</span>           <span class="comment"># hexo g 生成靜態網站</span></span><br><span class="line"><span class="string">├──</span> <span class="string">scaffolds</span>        <span class="comment"># 指令產生的草稿、頁面、文章都會依照資料夾內的文件建立</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">draft.md</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">page.md</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">post.md</span>      <span class="comment"># 生成文章的樣版</span></span><br><span class="line"><span class="string">├──</span> <span class="string">source</span></span><br><span class="line"><span class="string">|</span>   <span class="string">├──</span> <span class="string">_drafts</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">_posts</span>       <span class="comment"># 文章資料夾</span></span><br><span class="line"><span class="string">├──</span> <span class="string">themes</span>           <span class="comment"># theme 版型資料夾</span></span><br><span class="line"><span class="string">|</span>   <span class="string">└──</span> <span class="string">landscape</span>    <span class="comment"># 預設 theme</span></span><br><span class="line"><span class="string">|</span>       <span class="string">└──</span> <span class="string">_config.yml</span>  <span class="comment"># 版型樣式 設定</span></span><br><span class="line"><span class="string">├──</span> <span class="string">.gitignore</span></span><br><span class="line"><span class="string">├──</span> <span class="string">_config.yml</span>      <span class="comment"># 基本部署 設定</span></span><br><span class="line"><span class="string">├──</span> <span class="string">db.json</span></span><br><span class="line"><span class="string">├──</span> <span class="string">package.json</span></span><br><span class="line"><span class="string">└──</span> <span class="string">package-lock.json</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -151,7 +178,7 @@
 <li>內容 “ : “ 後面都必需保留一格半型空格</li>
 <li>預設設定</li>
 </ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">標題</span> <span class="string">/</span> <span class="string">網站名</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">副標題</span> <span class="string">/</span> <span class="string">顯示在頁首</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">網站描述</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="string">關鍵字</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">作者</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">網站語言</span> <span class="string">(台灣:zh-tw)</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">時區</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment"># 例如 url 是 'http://UserName.github.io/repository/'</span></span><br><span class="line"><span class="comment"># root 就是倉庫名稱 '/repository/'</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">http://UserName.github.io/</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/repository</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">文章目錄(預設使用</span> <span class="string">YYYY\MM\DD\文章名稱)/</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Extensions</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">套用版型</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment 上傳路徑</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">部署的儲存庫路徑</span> <span class="string">/</span> <span class="string">git@github.com:</span> <span class="string">UserName</span> <span class="string">/</span> <span class="string">REPO</span> <span class="string">倉庫</span> <span class="string">.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">gh-pages</span> <span class="string">分支</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">部署訊息</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Site</span></span><br><span class="line"><span class="attr">title:</span> <span class="string">標題</span> <span class="string">/</span> <span class="string">網站名</span></span><br><span class="line"><span class="attr">subtitle:</span> <span class="string">副標題</span> <span class="string">/</span> <span class="string">顯示在頁首</span></span><br><span class="line"><span class="attr">description:</span> <span class="string">網站描述</span> <span class="string">(SEO、告訴搜尋引擎這個網站的描述)</span></span><br><span class="line"><span class="attr">keywords:</span> <span class="string">關鍵字</span></span><br><span class="line"><span class="attr">author:</span> <span class="string">作者</span></span><br><span class="line"><span class="attr">language:</span> <span class="string">網站語言</span> <span class="string">(台灣:zh-tw)</span></span><br><span class="line"><span class="attr">timezone:</span> <span class="string">時區</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># URL</span></span><br><span class="line"><span class="comment"># 例如 url 是 'http://UserName.github.io/repository/'</span></span><br><span class="line"><span class="comment"># root 就是倉庫名稱 '/repository/'</span></span><br><span class="line"><span class="attr">url:</span> <span class="string">http://UserName.github.io/</span></span><br><span class="line"><span class="attr">root:</span> <span class="string">/repository</span></span><br><span class="line"><span class="attr">permalink:</span> <span class="string">文章網址的永久連結格式(預設使用</span> <span class="string">YYYY\MM\DD\文章名稱)/</span></span><br><span class="line"><span class="attr">permalink_defaults:</span> <span class="string">永久連結網址的預設值</span></span><br><span class="line"><span class="comment"># 格式可參考官方教學</span></span><br><span class="line"><span class="comment"># https://hexo.io/zh-tw/docs/permalinks.html</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Extensions</span></span><br><span class="line">  <span class="attr">theme:</span> <span class="string">套用版型</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Deployment 上傳路徑</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repository:</span> <span class="string">部署的儲存庫路徑</span> <span class="string">/</span> <span class="string">https://github.com/UserName/repository.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">gh-pages</span> <span class="string">分支</span></span><br><span class="line">  <span class="attr">message:</span> <span class="string">部署訊息</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -165,8 +192,35 @@
 
 
 
+<h1 id="文章佈局"><a href="#文章佈局" class="headerlink" title="文章佈局"></a>文章佈局</h1><ul>
+<li><p>預設佈局 layout</p>
+<ul>
+<li>post : 文章</li>
+<li>page : 頁面</li>
+<li>draft : 草稿</li>
+</ul>
+</li>
+<li><p>鷹架 Scaffold : 可依照文章需要的格式去新增文章，就不用再微調</p>
+<ul>
+<li>這會依照 scaffolds 資料夾內建立好的預設檔案新增文章</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">hexo new photo <span class="string">"My Gallery"</span></span><br><span class="line"><span class="comment"># photo 是必須事先建立編排好的格式 .md 檔案</span></span><br><span class="line"><span class="comment"># "My Gallery" 是新增的文章檔名</span></span><br></pre></td></tr></table></figure>
 
 
+
+
+
+</li>
+</ul>
+<h1 id="新增草稿"><a href="#新增草稿" class="headerlink" title="新增草稿"></a>新增草稿</h1><p>在 Bash 輸入指令後會建立在 source /  _drafts  / 資料夾內</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new draft 文章名稱</span><br></pre></td></tr></table></figure>
+
+<p>只要在草稿 _drafts 資料夾內的文章，預設是不會出現在網頁上</p>
+<h2 id="草稿轉文章"><a href="#草稿轉文章" class="headerlink" title="草稿轉文章"></a>草稿轉文章</h2><p>輸入執行 <code>layout</code> 是要移動到的佈局、<code>title</code> 是要移動的檔名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo publish [layout] &lt;title&gt;</span><br></pre></td></tr></table></figure>
+
+<p>就會發現草稿的檔案和相關連資料夾會一起移動到 <code>_posts</code> 資料夾</p>
+<p>另外也可以手動搬移，只要從 <code>_drafts</code> 把文章放到 <code>_posts</code> 資料夾內就可以了</p>
 <h1 id="新增文章"><a href="#新增文章" class="headerlink" title="新增文章"></a>新增文章</h1><p>在 Bash 輸入指令後會建立在 source / _posts / 資料夾內</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new 文章名稱</span><br></pre></td></tr></table></figure>
 
@@ -181,7 +235,15 @@
 
 
 
-<h1 id="建立頁面"><a href="#建立頁面" class="headerlink" title="建立頁面"></a>建立頁面</h1><p>和文章不同，這是在建立 theme 的選單頁面 archives、categories、tags、about …</p>
+<h1 id="建立頁面"><a href="#建立頁面" class="headerlink" title="建立頁面"></a>建立頁面</h1><p>和文章不同，這是在建立 theme 的 menu 頁面 archives、categories、tags、about …</p>
+<p>在沒建立前，新增的 menu 都會出現 404 頁面</p>
+<p>所以在 <code>_config.yml</code> 內</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">Home:</span> <span class="string">/</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment"># 下面新增的 menu ，都需要產生頁面</span></span><br><span class="line">  <span class="attr">Archives:</span> <span class="string">/archives</span></span><br><span class="line">  <span class="attr">Categories:</span> <span class="string">/categories</span></span><br><span class="line">  <span class="attr">Tags:</span> <span class="string">/tags</span></span><br><span class="line">  <span class="attr">About:</span> <span class="string">/about</span></span><br><span class="line">  <span class="attr">Link:</span> <span class="string">/link</span></span><br><span class="line">  <span class="string">...</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
 <p>在 Bash 執行產生</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page 頁面名稱</span><br></pre></td></tr></table></figure>
 
@@ -212,7 +274,7 @@
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">hexo new page tags</span><br></pre></td></tr></table></figure>
 
 <p>在產生的 source/tags/inex.md 儲存以下內容</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">categories</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2019</span><span class="number">-04</span><span class="number">-01</span> <span class="number">22</span><span class="string">:55:41</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">"tags"</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">title:</span> <span class="string">tags</span></span><br><span class="line"><span class="attr">date:</span> <span class="number">2019</span><span class="number">-04</span><span class="number">-01</span> <span class="number">22</span><span class="string">:55:41</span></span><br><span class="line"><span class="attr">type:</span> <span class="string">"tags"</span></span><br></pre></td></tr></table></figure>
 
 <p>在文章開頭加上 tags 和標籤，當多個標籤時只要像下面作法就可以了</p>
 <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 一個 tag</span></span><br><span class="line"><span class="attr">tags:</span> <span class="string">Dog</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 多個 tag</span></span><br><span class="line"><span class="attr">tags:</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">Dog</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">Cat</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">Bear</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">Fox</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">Bat</span></span><br><span class="line"><span class="bullet">-</span> <span class="string">Deer</span></span><br></pre></td></tr></table></figure>
@@ -226,13 +288,16 @@
 <p>編輯  source /about/ index.md 內容</p>
 <p>若是沒出現 about 選單的話，可能是沒開啟 about 頁</p>
 <p>到 themes/ 套用版型名稱 /_config.yml  移除 menu &gt; about 前的 # 註解就會看到</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">home:</span> <span class="string">/</span></span><br><span class="line">  <span class="attr">categories:</span> <span class="string">/categories</span></span><br><span class="line">  <span class="attr">archives:</span> <span class="string">/archives</span></span><br><span class="line">  <span class="attr">tags:</span> <span class="string">/tags</span></span><br><span class="line">  <span class="comment"># about: /about</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">menu:</span></span><br><span class="line">  <span class="attr">about:</span> <span class="string">/about</span></span><br></pre></td></tr></table></figure>
 
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/Animal/">Animal</a>, <a class="article-category-link" href="/blog/categories/Animal/Cat/">Cat</a>, <a class="article-category-link" href="/blog/categories/Animal/Dog/">Dog</a>
+
       
   <span class="ico-tags"></span>
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
@@ -244,6 +309,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/blog/2020/03/13/20200313-hexo-search/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Hexo 站內搜尋
+        
+      </div>
+    </a>
   
   
     <a href="/blog/2020/03/01/20200301-hexo/" id="article-nav-older" class="article-nav-link-wrap">
@@ -262,7 +336,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目錄</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#資料夾架構"><span class="nav-number">1.</span> <span class="nav-text">資料夾架構</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本部署-設定"><span class="nav-number">2.</span> <span class="nav-text">基本部署 設定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新增文章"><span class="nav-number">3.</span> <span class="nav-text">新增文章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#刪除文章"><span class="nav-number">4.</span> <span class="nav-text">刪除文章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建立頁面"><span class="nav-number">5.</span> <span class="nav-text">建立頁面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#categories-分類頁面"><span class="nav-number">5.1.</span> <span class="nav-text">categories 分類頁面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tags-頁面"><span class="nav-number">5.2.</span> <span class="nav-text">tags 頁面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#about-關於頁面"><span class="nav-number">5.3.</span> <span class="nav-text">about 關於頁面</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#資料夾架構"><span class="nav-number">1.</span> <span class="nav-text">資料夾架構</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基本部署-設定"><span class="nav-number">2.</span> <span class="nav-text">基本部署 設定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#文章佈局"><span class="nav-number">3.</span> <span class="nav-text">文章佈局</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新增草稿"><span class="nav-number">4.</span> <span class="nav-text">新增草稿</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#草稿轉文章"><span class="nav-number">4.1.</span> <span class="nav-text">草稿轉文章</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#新增文章"><span class="nav-number">5.</span> <span class="nav-text">新增文章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#刪除文章"><span class="nav-number">6.</span> <span class="nav-text">刪除文章</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建立頁面"><span class="nav-number">7.</span> <span class="nav-text">建立頁面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#categories-分類頁面"><span class="nav-number">7.1.</span> <span class="nav-text">categories 分類頁面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#tags-頁面"><span class="nav-number">7.2.</span> <span class="nav-text">tags 頁面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#about-關於頁面"><span class="nav-number">7.3.</span> <span class="nav-text">about 關於頁面</span></a></li></ol></li></ol>
     
     </div>
   </aside>
@@ -277,10 +351,6 @@
   
     <a href="/blog/archives" class="mobile-nav-link">Archives</a>
   
-    <a href="/blog/categories" class="mobile-nav-link">Categories</a>
-  
-    <a href="/blog/tags" class="mobile-nav-link">Tags</a>
-  
     <a href="/blog/about" class="mobile-nav-link">About</a>
   
 </nav> -->
@@ -291,11 +361,6 @@
       <div class="site-info">
 	      &copy; 2020 F2E 筆記 All Rights Reserved.
         
-            <span id="busuanzi_container_site_uv">
-              本站访客数<span id="busuanzi_value_site_uv"></span>人次  
-              本站总访问量<span id="busuanzi_value_site_pv"></span>次
-            </span>
-          
       </div>
       <div class="site-credit">
         Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
@@ -315,6 +380,9 @@
 
 
     <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
     
     
 </script>
@@ -379,9 +447,6 @@
 
 
 
-
-	<script async src="//dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
-	</script>
 
 
 
