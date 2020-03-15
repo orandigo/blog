@@ -3,18 +3,18 @@
 <head>
   <meta charset="utf-8">
   
-  <title>第 1 頁 | F2E 筆記</title>
+  <title>第 1 頁 | 前端筆記</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   
   <meta property="og:type" content="website">
-<meta property="og:title" content="F2E 筆記">
+<meta property="og:title" content="前端筆記">
 <meta property="og:url" content="https://orandigo.github.io/index.html">
-<meta property="og:site_name" content="F2E 筆記">
+<meta property="og:site_name" content="前端筆記">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:author" content="orandigo">
+<meta property="article:author" content="Orange">
 <meta name="twitter:card" content="summary">
   
   <link rel="icon" href="/blog/css/images/favicon.ico">
@@ -85,7 +85,7 @@
 
           <h1 class="site-title">
             
-              <a href="/blog/" title="F2E 筆記" rel="home"> F2E 筆記 </a>
+              <a href="/blog/" title="前端筆記" rel="home"> 前端筆記 </a>
             
           </h1>
           
@@ -128,7 +128,7 @@
         
   
     <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/blog/2020/03/15/20200315-hexo-github/">刪除上傳 Hexo 到 master 分支的 commit</a>
+      <a class="article-title" href="/blog/2020/03/15/20200315-hexo-github/">可以上傳 Hexo 到 master 分支嗎？</a>
     </h1>
   
 
@@ -148,24 +148,17 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>起因是想說把分支設定成 master 會不會也行，就上傳看看</p>
-<p><strong>注：絕對不是想要省下一個分支的意思，只是想試試，試試而已 …</strong></p>
-<p>然後就把原本是上傳到 <code>gh-pages</code> 分支的 Hexo 發佈檔案上傳到 master</p>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/xxx/blog.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">gh-pages</span>  <span class="comment"># 分支</span></span><br></pre></td></tr></table></figure>
+        
 
-<p>結果就是上傳到 <code>master</code> 上的最新檔案是不會顯示的</p>
-<p>但可以上傳 Hexo 原始版本備份使用</p>
-<p>因為上傳的檔案都是依賴 Hexo 原始版本編譯成一般的 HTML、CSS、JS 格式</p>
-<p>當沒有本機的 Hexo 原始版本又沒上傳時就必需重新再設定一次 Hexo</p>
-<p>所以怕 Hexo 原始版本哪一天突然不見</p>
-<p>可以考慮上傳比較保險</p>
-<p>然後已經上傳在 <code>master</code> 的檔案，現在要來刪掉</p>
-<p>![](2020-03-15 133326.jpg)</p>
-<p>到 Git Bash 查 commit </p>
-<p>![](2020-03-15 134211.jpg)</p>
-<p><strong>囧</strong> </p>
-<p>commit 數不一樣</p>
+          
+          <div class="entry-summary">
+          前言起因是想說把分支設定成 master 會不會也行，就來上傳試看看
 
+        
+          <p class="article-more-link">
+            <a href="/blog/2020/03/15/20200315-hexo-github/#more">閱讀全文</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -215,36 +208,17 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="圖片顯示方式"><a href="#圖片顯示方式" class="headerlink" title="圖片顯示方式"></a>圖片顯示方式</h1><p>載入圖片的方式有 2 種</p>
-<ul>
-<li>一個是用 <strong>絕對路徑</strong><ul>
-<li>取得圖片在網路上的路徑就可顯示出來</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">圖片的文字描述</span>](<span class="link">https:// 圖片路徑 </span>)</span><br></pre></td></tr></table></figure>
+        
 
+          
+          <div class="entry-summary">
+          圖片顯示方式載入圖片的方式有 2 種
 
-
-<ul>
-<li>另一個是相對路徑<ul>
-<li>首先要在根目錄的 <code>_config.yml</code> 找到 <code>post_asset_folder</code> 開啟功能</li>
-</ul>
-</li>
-</ul>
-<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Writing</span></span><br><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
-
-
-
-<p>在開啟功能之後所有新增的文章，除了會產生一個  markdown  文章，也會建立一個相同名稱的資料夾作為存放圖片用</p>
-<p>因為是直接抓資料夾的圖片，所以就不用輸入資料夾名稱</p>
-<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">圖片的文字描述</span>](<span class="link">圖片.jpg</span>)</span><br></pre></td></tr></table></figure>
-
-
-
-<p>在這之前的文章要載入圖片，只需建立同名的資料夾就可以存放圖片使用</p>
-<p><img src="photo-1415369629372-26f2fe60c467.jpg" alt="載入圖片"></p>
-
+        
+          <p class="article-more-link">
+            <a href="/blog/2020/03/14/20200314-hexo/#more">閱讀全文</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -650,7 +624,7 @@ options 是設定個別樣式
               <div class="widget-entry-summary" style="margin: 0;">
             
 
-              <h6 style="margin: 0;"><a href="/blog/2020/03/15/20200315-hexo-github/">刪除上傳 Hexo 到 master 分支的 commit</a></h6>
+              <h6 style="margin: 0;"><a href="/blog/2020/03/15/20200315-hexo-github/">可以上傳 Hexo 到 master 分支嗎？</a></h6>
               <span>三月 15, 2020</span>
             </div>
 
@@ -771,7 +745,7 @@ options 是設定個別樣式
 
   <div class="clearfix container">
       <div class="site-info">
-	      &copy; 2020 F2E 筆記 All Rights Reserved.
+	      &copy; 2020 前端筆記 All Rights Reserved.
         
       </div>
       <div class="site-credit">
