@@ -120,6 +120,152 @@
         
           <section id="main">
   
+    <article id="post-20200315-hexo-github"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/blog/2020/03/15/20200315-hexo-github/">刪除上傳 Hexo 到 master 分支的 commit</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/03/15/20200315-hexo-github/" class="article-date">
+	  <time datetime="2020-03-15T14:08:10.000Z" itemprop="datePublished">三月 15, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/Hexo/">Hexo</a>, <a class="article-category-link" href="/blog/categories/Hexo/%E8%A8%AD%E5%AE%9A/">設定</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>起因是想說把分支設定成 master 會不會也行，就上傳看看</p>
+<p><strong>注：絕對不是想要省下一個分支的意思，只是想試試，試試而已 …</strong></p>
+<p>然後就把原本是上傳到 <code>gh-pages</code> 分支的 Hexo 發佈檔案上傳到 master</p>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Deployment</span></span><br><span class="line"><span class="attr">deploy:</span></span><br><span class="line">  <span class="attr">type:</span> <span class="string">git</span></span><br><span class="line">  <span class="attr">repo:</span> <span class="string">https://github.com/xxx/blog.git</span></span><br><span class="line">  <span class="attr">branch:</span> <span class="string">gh-pages</span>  <span class="comment"># 分支</span></span><br></pre></td></tr></table></figure>
+
+<p>結果就是上傳到 <code>master</code> 上的最新檔案是不會顯示的</p>
+<p>但可以上傳 Hexo 原始版本備份使用</p>
+<p>因為上傳的檔案都是依賴 Hexo 原始版本編譯成一般的 HTML、CSS、JS 格式</p>
+<p>當沒有本機的 Hexo 原始版本又沒上傳時就必需重新再設定一次 Hexo</p>
+<p>所以怕 Hexo 原始版本哪一天突然不見</p>
+<p>可以考慮上傳比較保險</p>
+<p>然後已經上傳在 <code>master</code> 的檔案，現在要來刪掉</p>
+<p>![](2020-03-15 133326.jpg)</p>
+<p>到 Git Bash 查 commit </p>
+<p>![](2020-03-15 134211.jpg)</p>
+<p><strong>囧</strong> </p>
+<p>commit 數不一樣</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/Hexo/">Hexo</a>, <a class="article-category-link" href="/blog/categories/Hexo/%E8%A8%AD%E5%AE%9A/">設定</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
+    <article id="post-20200314-hexo"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/blog/2020/03/14/20200314-hexo/">Hexo 圖片路徑</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/03/14/20200314-hexo/" class="article-date">
+	  <time datetime="2020-03-14T14:58:36.000Z" itemprop="datePublished">三月 14, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/Hexo/">Hexo</a>, <a class="article-category-link" href="/blog/categories/Hexo/%E8%A8%AD%E5%AE%9A/">設定</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="圖片顯示方式"><a href="#圖片顯示方式" class="headerlink" title="圖片顯示方式"></a>圖片顯示方式</h1><p>載入圖片的方式有 2 種</p>
+<ul>
+<li>一個是用 <strong>絕對路徑</strong><ul>
+<li>取得圖片在網路上的路徑就可顯示出來</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">圖片的文字描述</span>](<span class="link">https:// 圖片路徑 </span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>另一個是相對路徑<ul>
+<li>首先要在根目錄的 <code>_config.yml</code> 找到 <code>post_asset_folder</code> 開啟功能</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Writing</span></span><br><span class="line"><span class="attr">post_asset_folder:</span> <span class="literal">true</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>在開啟功能之後所有新增的文章，除了會產生一個  markdown  文章，也會建立一個相同名稱的資料夾作為存放圖片用</p>
+<p>因為是直接抓資料夾的圖片，所以就不用輸入資料夾名稱</p>
+<figure class="highlight markdown"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">![<span class="string">圖片的文字描述</span>](<span class="link">圖片.jpg</span>)</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在這之前的文章要載入圖片，只需建立同名的資料夾就可以存放圖片使用</p>
+<p><img src="photo-1415369629372-26f2fe60c467.jpg" alt="載入圖片"></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/Hexo/">Hexo</a>, <a class="article-category-link" href="/blog/categories/Hexo/%E8%A8%AD%E5%AE%9A/">設定</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-20200313-hexo-search"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -140,7 +286,10 @@
 	  <time datetime="2020-03-12T18:54:33.000Z" itemprop="datePublished">三月 13, 2020</time>
 	</a>
 
-       
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/Hexo/">Hexo</a>, <a class="article-category-link" href="/blog/categories/Hexo/%E5%B7%A5%E5%85%B7/">工具</a>
+ 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
@@ -160,9 +309,12 @@
     </div>
     <footer class="entry-meta entry-footer">
       
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/Hexo/">Hexo</a>, <a class="article-category-link" href="/blog/categories/Hexo/%E5%B7%A5%E5%85%B7/">工具</a>
+
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/hexo/" rel="tag">hexo</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
 
       
     </footer>
@@ -194,7 +346,10 @@
 	  <time datetime="2020-03-07T17:25:04.000Z" itemprop="datePublished">三月 8, 2020</time>
 	</a>
 
-       
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/Hexo/">Hexo</a>, <a class="article-category-link" href="/blog/categories/Hexo/%E8%A8%AD%E5%AE%9A/">設定</a>
+ 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
@@ -220,9 +375,12 @@ source / _posts 資料夾 - 文章內容都放在這裡
     </div>
     <footer class="entry-meta entry-footer">
       
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/Hexo/">Hexo</a>, <a class="article-category-link" href="/blog/categories/Hexo/%E8%A8%AD%E5%AE%9A/">設定</a>
+
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
 
       
     </footer>
@@ -254,7 +412,10 @@ source / _posts 資料夾 - 文章內容都放在這裡
 	  <time datetime="2020-03-01T11:47:27.000Z" itemprop="datePublished">三月 1, 2020</time>
 	</a>
 
-       
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/Hexo/">Hexo</a>, <a class="article-category-link" href="/blog/categories/Hexo/%E8%A8%AD%E5%AE%9A/">設定</a>
+ 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
@@ -276,9 +437,12 @@ http://markdown.tw/
     </div>
     <footer class="entry-meta entry-footer">
       
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/Hexo/">Hexo</a>, <a class="article-category-link" href="/blog/categories/Hexo/%E8%A8%AD%E5%AE%9A/">設定</a>
+
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/hexo/" rel="tag">hexo</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
 
       
     </footer>
@@ -310,7 +474,10 @@ http://markdown.tw/
 	  <time datetime="2020-02-23T15:43:26.000Z" itemprop="datePublished">二月 23, 2020</time>
 	</a>
 
-       
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/JavaScript/">JavaScript</a>, <a class="article-category-link" href="/blog/categories/JavaScript/library/">library</a>, <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/">類型</a>, <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/%E5%9C%96%E8%A1%A8%E9%A1%9E/">圖表類</a>
+ 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
@@ -339,9 +506,12 @@ options 是設定個別樣式
     </div>
     <footer class="entry-meta entry-footer">
       
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/JavaScript/">JavaScript</a>, <a class="article-category-link" href="/blog/categories/JavaScript/library/">library</a>, <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/">類型</a>, <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/%E5%9C%96%E8%A1%A8%E9%A1%9E/">圖表類</a>
+
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/JavaScript-library/" rel="tag">JavaScript library</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
 
       
     </footer>
@@ -404,7 +574,7 @@ options 是設定個別樣式
 
       
   <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/JavaScript-library/" rel="tag">JavaScript library</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
 
       
     </footer>
@@ -480,6 +650,30 @@ options 是設定個別樣式
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/blog/2020/03/15/20200315-hexo-github/">刪除上傳 Hexo 到 master 分支的 commit</a></h6>
+              <span>三月 15, 2020</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
+              <h6 style="margin: 0;"><a href="/blog/2020/03/14/20200314-hexo/">Hexo 圖片路徑</a></h6>
+              <span>三月 14, 2020</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/blog/2020/03/13/20200313-hexo-search/">Hexo 站內搜尋</a></h6>
               <span>三月 13, 2020</span>
             </div>
@@ -522,18 +716,6 @@ options 是設定個別樣式
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/blog/2020/02/16/20200216-chartjs/">Chart.js 圖表繪製</a></h6>
-              <span>二月 16, 2020</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -543,7 +725,7 @@ options 是設定個別樣式
   <div class="widget-wrap">
     <h3 class="widget-title">分類</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaScript/">JavaScript</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaScript/library/">library</a><span class="category-list-count">1</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/">類型</a><span class="category-list-count">1</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/%E5%9C%96%E8%A1%A8%E9%A1%9E/">圖表類</a><span class="category-list-count">1</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Hexo/">Hexo</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Hexo/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Hexo/%E8%A8%AD%E5%AE%9A/">設定</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaScript/">JavaScript</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaScript/library/">library</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/">類型</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/%E5%9C%96%E8%A1%A8%E9%A1%9E/">圖表類</a><span class="category-list-count">2</span></li></ul></li></ul>
     </div>
   </div>
 
@@ -554,7 +736,7 @@ options 是設定個別樣式
     <h3 class="widget-title">發文日期</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -564,7 +746,7 @@ options 是設定個別樣式
   <div class="widget-wrap">
     <h3 class="widget-title">標籤</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/JavaScript-library/" rel="tag">JavaScript library</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/hexo/" rel="tag">hexo</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a><span class="tag-list-count">4</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a><span class="tag-list-count">7</span></li></ul>
     </div>
   </div>
 
