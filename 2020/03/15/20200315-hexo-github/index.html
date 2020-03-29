@@ -18,11 +18,14 @@
 <meta property="og:site_name" content="前端筆記">
 <meta property="og:description" content="前言起因是想說把分支設定成 master 會不會也行，就來上傳試看看">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://orandigo.github.io/2020/03/15/20200315-hexo-github/20200315133326.jpg">
+<meta property="og:image" content="https://orandigo.github.io/2020/03/15/20200315-hexo-github/20200315134211.jpg">
 <meta property="article:published_time" content="2020-03-15T14:08:10.000Z">
-<meta property="article:modified_time" content="2020-03-22T10:33:28.837Z">
+<meta property="article:modified_time" content="2020-03-22T10:36:24.641Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://orandigo.github.io/2020/03/15/20200315-hexo-github/20200315133326.jpg">
   
   <link rel="icon" href="/blog/css/images/favicon.ico">
   
@@ -168,6 +171,21 @@
 <p>因為上傳的檔案都是依賴 Hexo 原始版本編譯成一般的 HTML、CSS、JS 格式</p>
 <p>若哪一天沒有 Hexo 原始版本又遠端備份時就必需重新再設定一次 Hexo</p>
 <p>所以要備份 Hexo 原始版本才不會哪一天突然不見就 Q Q</p>
+<h1 id="刪掉上傳"><a href="#刪掉上傳" class="headerlink" title="刪掉上傳"></a>刪掉上傳</h1><p>然後已經上傳在 <code>master</code> 的檔案，現在要來刪掉</p>
+<p>下圖是已上傳到 <code>master</code> 的 commits 數</p>
+<p><img src="20200315133326.jpg" alt=""></p>
+<p>為什麼會產生這麼多！？嗯，不知道，所以現在來清掉不是 Hexo 原始版本的 commit</p>
+<p>先到 Git Bash 查 commit</p>
+<p><img src="20200315134211.jpg" alt=""></p>
+<p>只有在 <code>hexo init</code> 後 commit 一個</p>
+<hr>
+<p>$ git reset –hard HEAD~   // 到前一個 commit<br>$ git push origin master  –force    // 強制推上去</p>
+<h1 id="移除-Github-上面的-commit"><a href="#移除-Github-上面的-commit" class="headerlink" title="移除 Github 上面的 commit"></a>移除 Github 上面的 commit</h1><p>刪除本地存儲庫上的提交。</p>
+<p>你可以使用<code>git rebase -i</code>來做到這一點。</p>
+<p>例如，如果它是你的最後一次提交，你可以執行<code>git rebase -i HEAD~2</code>並刪除編輯器窗口中的第二行。</p>
+<p>然後，使用<code>git push origin branchName --force</code>強制推送到 GitHub</p>
+<p>參考</p>
+<p><a href="http://www-cs-students.stanford.edu/~blynn/gitmagic/ch05.html#_8230_and_then_some" target="_blank" rel="noopener">Git Magic Chapter 5: Lessons of History — And Then Some</a></p>
 
       
     </div>
@@ -214,7 +232,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目錄</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#刪掉上傳"><span class="nav-number">2.</span> <span class="nav-text">刪掉上傳</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#移除-Github-上面的-commit"><span class="nav-number">3.</span> <span class="nav-text">移除 Github 上面的 commit</span></a></li></ol>
     
     </div>
   </aside>
