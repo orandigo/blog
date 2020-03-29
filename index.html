@@ -148,28 +148,21 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="關於-OpenProcessing"><a href="#關於-OpenProcessing" class="headerlink" title="關於 OpenProcessing"></a>關於 OpenProcessing</h1><ul>
-<li><a href="https://www.openprocessing.org/" target="_blank" rel="noopener">OpenProcessing - Creative Coding for the Curious Mind.</a><ul>
-<li>類似 Codepen 的線上創作平台</li>
-</ul>
-</li>
-</ul>
-<p><img src="20200329231627.jpg" alt="OpenProcessing - Creative Coding for the Curious Mind."></p>
-<ul>
-<li>登入後就可以點左上頭像下方的 Create a Sketch 建立新的畫布</li>
-</ul>
-<p><img src="20200329233648.jpg" alt=" Create a Sketch"></p>
-<ul>
-<li>在頭像右方的選單<ul>
-<li>Activity 為 Following 跟隨中的創作者更新動態</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li>位在上方中間的三角形是執行， <code>&lt;/&gt;</code> 是回到 mySketch 的 code 頁面</li>
-</ul>
-<p><img src="20200329234722.jpg" alt="Sketch"></p>
+        
 
+          
+          <div class="entry-summary">
+          關於 OpenProcessing
+OpenProcessing - Creative Coding for the Curious Mind.
+
+類似 Codepen 的線上創作平台
+
+
+        
+          <p class="article-more-link">
+            <a href="/blog/2020/03/29/20200329-openprocessing/#more">閱讀全文</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -219,80 +212,18 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="innerText"><a href="#innerText" class="headerlink" title="innerText"></a>innerText</h1><ul>
-<li><code>innerHTML</code> 取得在一個節點內的全部 HTML 標籤和文字</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> content = <span class="built_in">document</span>.getElementById(<span class="string">'content'</span>).innerText  ; </span><br><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">'content'</span>).innerText = <span class="string">'Hello'</span> ;</span><br></pre></td></tr></table></figure>
+        
 
-<ul>
-<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Node/innerText" target="_blank" rel="noopener">參考 MDN 文件中有說明到</a> <code>Node.innerText</code> 是一個代表節點及其後代之「已渲染」（rendered）文字內容的屬性。</li>
-</ul>
-<h2 id="範例一"><a href="#範例一" class="headerlink" title="範例一"></a>範例一</h2><p>在 HTML 放一個 <code>display: none</code> 的字</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>Hello <span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"display: none;"</span>&gt;</span>World<span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          
+          <div class="entry-summary">
+          innerText
+innerHTML 取得在一個節點內的全部 HTML 標籤和文字
 
-<ul>
-<li><code>innerText</code> 只會有 <code>Hello</code>，證明這會取得渲染後的文字內容</li>
-<li><code>textContent</code> 會是 <code>Hello World</code>， 這會取得文字在忽視 HTML 後的文字內容</li>
-</ul>
-<h2 id="範例二"><a href="#範例二" class="headerlink" title="範例二"></a>範例二</h2><p> <code>&lt;div class=content&gt;&lt;/div&gt;</code>  的內容</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    1<span class="tag">&lt;<span class="name">br</span>&gt;</span>2<span class="tag">&lt;<span class="name">br</span>&gt;</span>3<span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"display: none;"</span>&gt;</span>.5 <span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span>4</span><br><span class="line">    5</span><br><span class="line">    6</span><br><span class="line">    7</span><br><span class="line">    8</span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="20200322-165325.jpg" alt=""></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> content = <span class="built_in">document</span>.querySelector(<span class="string">'.content'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(content.innerText)</span><br></pre></td></tr></table></figure>
-
-<p>console 得到的值是並不會出現被隱藏的 <code>.5</code> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&quot;1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4 5 6 7 8&quot;</span><br></pre></td></tr></table></figure>
-
-<p>所以<code>innerText</code> 取得的文字與換行會和 HTML 渲染後呈現的樣子相像</p>
-<h1 id="innerHTML"><a href="#innerHTML" class="headerlink" title="innerHTML"></a>innerHTML</h1><ul>
-<li><code>innerText</code> 取得在一個節點內的全部樣式</li>
-</ul>
-<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><p><code>&lt;div class=content&gt;&lt;/div&gt;</code>  的內容</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    1<span class="tag">&lt;<span class="name">br</span>&gt;</span>2<span class="tag">&lt;<span class="name">br</span>&gt;</span>3<span class="tag">&lt;<span class="name">br</span>&gt;</span>4</span><br><span class="line">    5</span><br><span class="line">    6</span><br><span class="line">    7</span><br><span class="line">    8</span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="20200322-165325.jpg" alt=""></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> content = <span class="built_in">document</span>.querySelector(<span class="string">'.content'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(content.innerHTML)</span><br></pre></td></tr></table></figure>
-
-<p>就會取得節點內完整的標籤和文字</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&quot;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">1&lt;br&gt;2&lt;br&gt;3&lt;br&gt;4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">&lt;&#x2F;p&gt;</span><br><span class="line">&quot;</span><br></pre></td></tr></table></figure>
-
-<p>包括原始碼的換行都會保留</p>
-<h1 id="textContent"><a href="#textContent" class="headerlink" title="textContent"></a>textContent</h1><ul>
-<li><code>textContent</code> 取得在一個節點內的文字並包括換行</li>
-<li><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/Node/textContent" target="_blank" rel="noopener">參考 MDN 文件說明</a> <code>Node.textContent</code> 屬性表示了節點或其後代的文字內容。</li>
-</ul>
-<h2 id="範例-1"><a href="#範例-1" class="headerlink" title="範例"></a>範例</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span>  <span class="comment">&lt;!-- 從這裡開始的換行都有包括 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    1<span class="tag">&lt;<span class="name">br</span>&gt;</span>2<span class="tag">&lt;<span class="name">br</span>&gt;</span>3<span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"display: none;"</span>&gt;</span>.5 <span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span>4</span><br><span class="line">    5</span><br><span class="line">    6</span><br><span class="line">    7</span><br><span class="line">    8</span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="20200322-165325.jpg" alt=""></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> content = <span class="built_in">document</span>.querySelector(<span class="string">'.content'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(content.textContent)</span><br></pre></td></tr></table></figure>
-
-<p>console 得到的值是</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&quot;             &#x2F;&#x2F; div.content 開始的換行</span><br><span class="line">              &#x2F;&#x2F; p 的換行</span><br><span class="line">123.5 4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line"></span><br><span class="line">&quot;</span><br></pre></td></tr></table></figure>
-
-<p>只會取得呈現在 HTML 原始碼內的換行、空格和文字， <code>&lt;br&gt;</code> 會忽略</p>
-<p>所以<code>textContent</code> 取得的文字與換行會和原始碼相像</p>
-<h1 id="outerHTML"><a href="#outerHTML" class="headerlink" title="outerHTML"></a>outerHTML</h1><ul>
-<li><code>outerHTML</code> 包括在一個節點內的全部 HTML 標籤和文字</li>
-<li>另外還有<code>outerText</code> ，因為看起來是跟 <code>innerText</code> 相同就不多作範例。</li>
-</ul>
-<h2 id="範例-2"><a href="#範例-2" class="headerlink" title="範例"></a>範例</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"content"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">p</span>&gt;</span></span><br><span class="line">    1<span class="tag">&lt;<span class="name">br</span>&gt;</span>2<span class="tag">&lt;<span class="name">br</span>&gt;</span>3<span class="tag">&lt;<span class="name">span</span> <span class="attr">style</span>=<span class="string">"display: none;"</span>&gt;</span>.5 <span class="tag">&lt;/<span class="name">span</span>&gt;</span><span class="tag">&lt;<span class="name">br</span>&gt;</span>4</span><br><span class="line">    5</span><br><span class="line">    6</span><br><span class="line">    7</span><br><span class="line">    8</span><br><span class="line">  <span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="20200322-165325.jpg" alt=""></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> content = <span class="built_in">document</span>.querySelector(<span class="string">'.content'</span>)</span><br><span class="line"><span class="built_in">console</span>.log(content.outerHTML)</span><br></pre></td></tr></table></figure>
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&quot;&lt;div class&#x3D;&#39;content&#39;&gt;</span><br><span class="line">&lt;p&gt;</span><br><span class="line">1&lt;br&gt;2&lt;br&gt;3&lt;span style&#x3D;&#39;display: none;&#39;&gt;.5 &lt;&#x2F;span&gt;&lt;br&gt;4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">&lt;&#x2F;p&gt;</span><br><span class="line">&lt;&#x2F;div&gt;&quot;</span><br></pre></td></tr></table></figure>
-
-<p>得到的就會是包括節點 <strong>一模一樣</strong>的完整內容</p>
-<h1 id="createTextNode"><a href="#createTextNode" class="headerlink" title="createTextNode()"></a>createTextNode()</h1><p>要注意，在建立新節點後，只有 <code>textContent</code> 是唯一可用方法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> text = <span class="built_in">document</span>.createTextNode(<span class="string">'text'</span>);</span><br><span class="line"></span><br><span class="line"><span class="built_in">console</span>.log(text.innerText);    <span class="comment">//  undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(text.innerHTML);    <span class="comment">//  undefined</span></span><br><span class="line"><span class="built_in">console</span>.log(text.textContent);  <span class="comment">//  text</span></span><br><span class="line"><span class="built_in">console</span>.log(text.outerHTML);    <span class="comment">//  undefined</span></span><br></pre></td></tr></table></figure>
-
-
-
-
-
-<h1 id="參考文件"><a href="#參考文件" class="headerlink" title="參考文件"></a>參考文件</h1><p><a href="http://perfectionkills.com/the-poor-misunderstood-innerText/" target="_blank" rel="noopener">More on differences between innerText and textContent</a><br>提供的 <a href="https://codepen.io/kangax/pen/gbEWvR" target="_blank" rel="noopener">範例</a></p>
-<p><a href="https://www.zhangxinxu.com/wordpress/2019/09/js-dom-innertext-textcontent/" target="_blank" rel="noopener">小tips: JS DOM innerText和textContent的区别</a></p>
-
+        
+          <p class="article-more-link">
+            <a href="/blog/2020/03/22/20200322-innerText-innerHTML-textContent-outerHTML/#more">閱讀全文</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">
