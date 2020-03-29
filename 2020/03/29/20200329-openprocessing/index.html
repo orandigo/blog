@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://orandigo.github.io/2020/03/29/20200329-openprocessing/20200329233648.jpg">
 <meta property="og:image" content="https://orandigo.github.io/2020/03/29/20200329-openprocessing/20200329234722.jpg">
 <meta property="article:published_time" content="2020-03-29T15:18:15.000Z">
-<meta property="article:modified_time" content="2020-03-29T16:00:19.657Z">
+<meta property="article:modified_time" content="2020-03-29T16:31:11.454Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
@@ -167,20 +167,41 @@
 </li>
 </ul>
 <p><img src="20200329231627.jpg" alt="OpenProcessing - Creative Coding for the Curious Mind."></p>
-<h1 id="登入後畫面"><a href="#登入後畫面" class="headerlink" title="登入後畫面"></a>登入後畫面</h1><ul>
+<h1 id="使用者頁面"><a href="#使用者頁面" class="headerlink" title="使用者頁面"></a>使用者頁面</h1><ul>
 <li>登入後就可以點左上頭像下方的 Create a Sketch 建立新的畫布</li>
 </ul>
 <p><img src="20200329233648.jpg" alt=" Create a Sketch"></p>
 <ul>
-<li>在頭像右方的選單<ul>
+<li>在頭像右方的選單分別是<ul>
 <li>Activity 為 Following 跟隨中的創作者更新動態</li>
+<li>Sketches 個人作品列表</li>
+<li>Hearts 收藏作品</li>
+<li>Followers 被跟隨數量</li>
+<li>Following 跟隨數量</li>
 </ul>
 </li>
 </ul>
-<h1 id="建立-Sketch-畫面"><a href="#建立-Sketch-畫面" class="headerlink" title="建立 Sketch 畫面"></a>建立 Sketch 畫面</h1><ul>
+<h1 id="建立-Sketch-頁面"><a href="#建立-Sketch-頁面" class="headerlink" title="建立 Sketch 頁面"></a>建立 Sketch 頁面</h1><ul>
 <li>位在上方中間的三角形是執行， <code>&lt;/&gt;</code> 是回到 mySketch 的 code 頁面</li>
 </ul>
 <p><img src="20200329234722.jpg" alt="Sketch"></p>
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	createCanvas(windowWidth, windowHeight);</span><br><span class="line">	background(<span class="number">150</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  noStroke()</span><br><span class="line">	ellipse(mouseX, mouseY, <span class="number">20</span>, <span class="number">20</span>);</span><br><span class="line">  print(mouseX)  <span class="comment">// 作用和 console.log 相同</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>對語法不熟悉時，可參考 p5.js 的 <a href="https://p5js.org/reference/" target="_blank" rel="noopener">Reference 文件</a></p>
+<h1 id="參考文件"><a href="#參考文件" class="headerlink" title="參考文件"></a>參考文件</h1><ul>
+<li><p><a href="https://www.youtube.com/watch?v=P8LjXqlJKuw" target="_blank" rel="noopener">p5.js 快速上手與「互動藝術程式創作入門」課程介紹</a></p>
+<ul>
+<li><a href="https://www.openprocessing.org/sketch/862536" target="_blank" rel="noopener">範例</a></li>
+</ul>
+</li>
+<li><p><a href="https://p5js.org/" target="_blank" rel="noopener">p5.js</a></p>
+<ul>
+<li><a href="https://p5js.org/reference/" target="_blank" rel="noopener">Reference 文件</a></li>
+</ul>
+</li>
+</ul>
 
       
     </div>
@@ -218,7 +239,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目錄</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#關於-OpenProcessing"><span class="nav-number">1.</span> <span class="nav-text">關於 OpenProcessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#登入後畫面"><span class="nav-number">2.</span> <span class="nav-text">登入後畫面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建立-Sketch-畫面"><span class="nav-number">3.</span> <span class="nav-text">建立 Sketch 畫面</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#關於-OpenProcessing"><span class="nav-number">1.</span> <span class="nav-text">關於 OpenProcessing</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用者頁面"><span class="nav-number">2.</span> <span class="nav-text">使用者頁面</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建立-Sketch-頁面"><span class="nav-number">3.</span> <span class="nav-text">建立 Sketch 頁面</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#範例"><span class="nav-number">3.1.</span> <span class="nav-text">範例</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考文件"><span class="nav-number">4.</span> <span class="nav-text">參考文件</span></a></li></ol>
     
     </div>
   </aside>
