@@ -11,15 +11,15 @@
   
   
   
-  <meta name="description" content="應用程式建立12&lt;div id&#x3D;&quot;app&quot;&gt;&lt;&#x2F;div&gt;  123456let app &#x3D; new Vue(&amp;#123;  el: &#39;#app&#39;,   &#x2F;&#x2F; 綁定在 HTML 裡 id 是 app 的標籤    data: &amp;#123;      text: &#39;Vue 應用程式&#39;    &amp;#125;&amp;#125;)   el 綁定建議使用 ID 不限用 Id 也可以用 cla">
+  <meta name="description" content="應用程式建立12&lt;div id&#x3D;&quot;app&quot;&gt;&lt;&#x2F;div&gt;">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue 建立應用程式、雙向綁定">
 <meta property="og:url" content="https://orandigo.github.io/2020/04/05/20200405-vue/index.html">
 <meta property="og:site_name" content="前端筆記">
-<meta property="og:description" content="應用程式建立12&lt;div id&#x3D;&quot;app&quot;&gt;&lt;&#x2F;div&gt;  123456let app &#x3D; new Vue(&amp;#123;  el: &#39;#app&#39;,   &#x2F;&#x2F; 綁定在 HTML 裡 id 是 app 的標籤    data: &amp;#123;      text: &#39;Vue 應用程式&#39;    &amp;#125;&amp;#125;)   el 綁定建議使用 ID 不限用 Id 也可以用 cla">
+<meta property="og:description" content="應用程式建立12&lt;div id&#x3D;&quot;app&quot;&gt;&lt;&#x2F;div&gt;">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-04-05T15:12:34.000Z">
-<meta property="article:modified_time" content="2020-04-05T15:40:33.765Z">
+<meta property="article:modified_time" content="2020-04-05T15:59:56.678Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
@@ -61,10 +61,32 @@
 
 
   
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
 
 
 <header id="allheader" class="site-header" role="banner" 
-   >
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
   <div class="clearfix container">
       <div class="site-branding">
 
@@ -132,7 +154,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="應用程式建立"><a href="#應用程式建立" class="headerlink" title="應用程式建立"></a>應用程式建立</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
+ <a id="more"></a> 
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,   <span class="comment">// 綁定在 HTML 裡 id 是 app 的標籤</span></span><br><span class="line">    data: &#123;</span><br><span class="line">      text: <span class="string">'Vue 應用程式'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -172,17 +194,29 @@
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    lazyMsg: <span class="string">''</span>,</span><br><span class="line">    age: <span class="string">''</span>,</span><br><span class="line">    trimMsg: <span class="string">''</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><strong>.lazy</strong>：<code>v-model</code> 在每次 input 事件觸發後，預設表單輸入與寫入資料會是即時的，若加上 lazy 修飾符，則會延遲到 <code>change</code> 事件之後，也就是輸入完成後才會輸出資料</li>
+<li><p><strong>.lazy</strong></p>
+<ul>
+<li><p>在每次 input 事件後執行</p>
+</li>
+<li><p>預設表單輸入與資料輸出會是即時的</p>
+</li>
+<li><p>使用 <code>lazy</code> 時，則會延遲到 <code>change</code> 事件之後，也就是輸入完成離開 input 後才會輸出資料</p>
+</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; v-model.lazy&#x3D;&quot;lazyMsg&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
+</li>
+<li><p><strong>.number</strong></p>
 <ul>
-<li><strong>.number</strong>：如果想自動將用戶所輸入的<strong>內容轉換為數字型態</strong>，可以直接在<code>v-model</code>添加 number 修飾符。</li>
+<li>把輸入的 <strong>內容轉換成數字型態</strong></li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; v-model.number&#x3D;&quot;age&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"number"</span> <span class="attr">v-model.number</span>=<span class="string">"age"</span> /&gt;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><strong>.trim</strong>：為避免用戶誤輸入空白字元，因此，可以透過給<code>v-model</code>添加 trim 修飾符，自動過濾掉用戶所輸入的首尾空白字符。</li>
+<li>會使用 <code>type=&quot;number&quot;</code> 只是限制輸入數字，不會改變字串型態，還需要配合 <code>parseFloat()</code> 才會是數字型態</li>
+</ul>
+</li>
+<li><p><strong>.trim</strong>：為避免用戶誤輸入空白字元，因此，可以透過給<code>v-model</code>添加 trim 修飾符，自動過濾掉用戶所輸入的首尾空白字符。</p>
+</li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; v-model.trim&#x3D;&quot;trimMsg&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
 
@@ -284,6 +318,9 @@
 
 
     <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
     
     
 </script>

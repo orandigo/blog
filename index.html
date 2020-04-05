@@ -54,10 +54,32 @@
 
 
   
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
 
 
 <header id="allheader" class="site-header" role="banner" 
-   >
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
   <div class="clearfix container">
       <div class="site-branding">
 
@@ -126,79 +148,17 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="應用程式建立"><a href="#應用程式建立" class="headerlink" title="應用程式建立"></a>應用程式建立</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        
 
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,   <span class="comment">// 綁定在 HTML 裡 id 是 app 的標籤</span></span><br><span class="line">    data: &#123;</span><br><span class="line">      text: <span class="string">'Vue 應用程式'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+          
+          <div class="entry-summary">
+          應用程式建立12&lt;div id="app"&gt;&lt;/div&gt;
 
-<ul>
-<li><code>el</code> 綁定建議使用 ID<ul>
-<li>不限用 Id 也可以用 class ，但只會綁定第一個元素，同 class 名的第二個元素就不會有效果</li>
-</ul>
-</li>
-<li>不可使用巢狀<ul>
-<li>在已綁定 Vue 的元素之下，不可再綁定第 2 個 Vue 應用程式，第 2 個 Vue 會等同無效</li>
-</ul>
-</li>
-</ul>
-<h1 id="雙向綁定-Two-way-Binding"><a href="#雙向綁定-Two-way-Binding" class="headerlink" title="雙向綁定 Two-way Binding"></a>雙向綁定 Two-way Binding</h1><ul>
-<li><p>使用 HTML 屬性綁定</p>
-</li>
-<li><p>Vue 使用 getter 的方式監控資料內容，在寫入資料並同時在 <code>資料變動</code> 時改變其他地方的 setter </p>
-</li>
-</ul>
-<h2 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h2><p>常用於表單及元素來做雙向數據綁定</p>
-<ul>
-<li><p><a href="https://vuejs.org/v2/guide/forms.html#Text" target="_blank" rel="noopener">官方範例</a></p>
-<ul>
-<li>單行字串</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"message"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Message is: &#123;&#123; message &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>Checkbox</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"checkbox"</span> <span class="attr">v-model</span>=<span class="string">"checked"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"checkbox"</span>&gt;</span>&#123;&#123; checked &#125;&#125;<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><code>v-model</code> 修飾符</p>
-<ul>
-<li>分別有 lazyMsg、age、trimMsg</li>
-</ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    lazyMsg: <span class="string">''</span>,</span><br><span class="line">    age: <span class="string">''</span>,</span><br><span class="line">    trimMsg: <span class="string">''</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>.lazy</strong>：<code>v-model</code> 在每次 input 事件觸發後，預設表單輸入與寫入資料會是即時的，若加上 lazy 修飾符，則會延遲到 <code>change</code> 事件之後，也就是輸入完成後才會輸出資料</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; v-model.lazy&#x3D;&quot;lazyMsg&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>.number</strong>：如果想自動將用戶所輸入的<strong>內容轉換為數字型態</strong>，可以直接在<code>v-model</code>添加 number 修飾符。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; v-model.number&#x3D;&quot;age&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><strong>.trim</strong>：為避免用戶誤輸入空白字元，因此，可以透過給<code>v-model</code>添加 trim 修飾符，自動過濾掉用戶所輸入的首尾空白字符。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; v-model.trim&#x3D;&quot;trimMsg&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><p>Vue 指令：<code>v-text</code></p>
-<ul>
-<li><pre><code class="html"><span class="tag">&lt;<span class="name">div</span> <span class="attr">v-text</span>=<span class="string">"message"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span>
-<span class="comment"><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">  - 輸出文字、類似 &#96;&#123;&#123; text &#125;&#125;&#96; 的效果</span><br><span class="line"></span><br><span class="line">- Vue 指令：&#96;v-html&#96;</span><br><span class="line"></span><br><span class="line">  - &#96;&#96;&#96;html</span><br><span class="line">    &lt;div v-html&#x3D;&quot;message&quot;&gt;&lt;&#x2F;div&gt;</span><br></pre></td></tr></table></figure></span></code></pre>
-</li>
-<li><p>可輸出 HTML 標籤</p>
-</li>
-</ul>
-</li>
-</ul>
-
+        
+          <p class="article-more-link">
+            <a href="/blog/2020/04/05/20200405-vue/#more">閱讀全文</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">
@@ -985,6 +945,9 @@ options 是設定個別樣式
 
 
     <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
     
     
 </script>
