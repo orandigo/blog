@@ -22,7 +22,7 @@
 <meta property="og:image" content="https://orandigo.github.io/2020/03/29/20200329-openprocessing/20200329233648.jpg">
 <meta property="og:image" content="https://orandigo.github.io/2020/03/29/20200329-openprocessing/20200329234722.jpg">
 <meta property="article:published_time" content="2020-03-29T15:18:15.000Z">
-<meta property="article:modified_time" content="2020-03-29T16:31:11.454Z">
+<meta property="article:modified_time" content="2020-03-29T16:33:00.832Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
@@ -65,32 +65,10 @@
 
 
   
-  
-  <div class="site-header-image">
-    <img id="originBg" width="100%" alt="Hike News" src="">
-  </div>
-
-  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
-    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
-  </div>
-
-  <script>
-        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
-        var random = Math.floor((Math.random() * imgUrls.length ));
-        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
-          document.getElementById("originBg").src=imgUrls[random];
-          document.getElementById("blurBg").src=imgUrls[random];
-        } else {
-          document.getElementById("originBg").src='/blog/' + imgUrls[random];
-          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
-        }
-    </script>
-
-
 
 
 <header id="allheader" class="site-header" role="banner" 
-   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
+   >
   <div class="clearfix container">
       <div class="site-branding">
 
@@ -185,7 +163,7 @@
 <li>位在上方中間的三角形是執行， <code>&lt;/&gt;</code> 是回到 mySketch 的 code 頁面</li>
 </ul>
 <p><img src="20200329234722.jpg" alt="Sketch"></p>
-<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	createCanvas(windowWidth, windowHeight);</span><br><span class="line">	background(<span class="number">150</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  noStroke()</span><br><span class="line">	ellipse(mouseX, mouseY, <span class="number">20</span>, <span class="number">20</span>);</span><br><span class="line">  print(mouseX)  <span class="comment">// 作用和 console.log 相同</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="範例"><a href="#範例" class="headerlink" title="範例"></a>範例</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">setup</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">	createCanvas(windowWidth, windowHeight);</span><br><span class="line">	background(<span class="number">150</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">draw</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  noStroke();</span><br><span class="line">	ellipse(mouseX, mouseY, <span class="number">20</span>, <span class="number">20</span>);</span><br><span class="line">  print(mouseX)  <span class="comment">// 作用和 console.log 相同</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
@@ -221,6 +199,15 @@
   
     
 <nav id="article-nav">
+  
+    <a href="/blog/2020/04/05/20200405-vue/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Vue 建立應用程式、雙向綁定
+        
+      </div>
+    </a>
   
   
     <a href="/blog/2020/03/22/20200322-innerText-innerHTML-textContent-outerHTML/" id="article-nav-older" class="article-nav-link-wrap">
@@ -283,9 +270,6 @@
 
 
     <!-- headerblur min height -->
-    
-      var headerblur = document.getElementById("header-blur");
-      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
     
     
 </script>
