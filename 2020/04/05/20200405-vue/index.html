@@ -11,15 +11,15 @@
   
   
   
-  <meta name="description" content="應用程式建立12&lt;div id&#x3D;&quot;app&quot;&gt;&lt;&#x2F;div&gt;">
+  <meta name="description" content="學習 Vue 使用資料綁定">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Vue 建立應用程式、雙向綁定">
 <meta property="og:url" content="https://orandigo.github.io/2020/04/05/20200405-vue/index.html">
 <meta property="og:site_name" content="前端筆記">
-<meta property="og:description" content="應用程式建立12&lt;div id&#x3D;&quot;app&quot;&gt;&lt;&#x2F;div&gt;">
+<meta property="og:description" content="學習 Vue 使用資料綁定">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-04-05T15:12:34.000Z">
-<meta property="article:modified_time" content="2020-04-05T16:09:47.531Z">
+<meta property="article:modified_time" content="2020-04-05T19:21:48.944Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
@@ -147,14 +147,16 @@
 
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/blog/categories/%E7%AD%86%E8%A8%98/">筆記</a>
+    <a class="article-category-link" href="/blog/categories/Vue/">Vue</a>, <a class="article-category-link" href="/blog/categories/Vue/%E7%AD%86%E8%A8%98/">筆記</a>
  
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="應用程式建立"><a href="#應用程式建立" class="headerlink" title="應用程式建立"></a>應用程式建立</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
- <a id="more"></a> 
+        <p>學習 Vue 使用資料綁定</p>
+<a id="more"></a> 
+
+<h1 id="應用程式建立"><a href="#應用程式建立" class="headerlink" title="應用程式建立"></a>應用程式建立</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,   <span class="comment">// 綁定在 HTML 裡 id 是 app 的標籤</span></span><br><span class="line">    data: &#123;</span><br><span class="line">      text: <span class="string">'Vue 應用程式'</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
 
 <ul>
@@ -167,19 +169,45 @@
 </ul>
 </li>
 </ul>
-<h1 id="雙向綁定-Two-way-Binding"><a href="#雙向綁定-Two-way-Binding" class="headerlink" title="雙向綁定 Two-way Binding"></a>雙向綁定 Two-way Binding</h1><ul>
-<li><p>使用 HTML 屬性綁定</p>
+<h1 id="雙向綁定"><a href="#雙向綁定" class="headerlink" title="雙向綁定"></a>雙向綁定</h1><ul>
+<li><p>使用 <code>v-model</code> 在 <code>&lt;input&gt;</code>、<code>&lt;textarea&gt;</code> 及 <code>&lt;select&gt;</code> 元素建立雙向綁定</p>
+</li>
+<li><p>負責監控使用者輸入資料及更新資料內容</p>
 </li>
 <li><p>Vue 使用 getter 的方式監控資料內容，在寫入資料並同時在 <code>資料變動</code> 時改變其他地方的 setter </p>
 </li>
+<li><p><a href="https://vuejs.org/v2/guide/forms.html" target="_blank" rel="noopener">官方說明</a></p>
+</li>
+<li><p>不同的元素有不同的使用屬性、事件</p>
+<ul>
+<li><p>text 和 textarea 元素使用 value 屬性和 input 事件</p>
+</li>
+<li><p>checkbox 和 radio 使用 checked 屬性和 change 事件</p>
+</li>
+<li><p>select 字串把 value 當作 prop 、 change 事件</p>
+</li>
 </ul>
-<h2 id="v-model"><a href="#v-model" class="headerlink" title="v-model"></a>v-model</h2><p>常用於表單及元素來做雙向數據綁定</p>
+</li>
+<li><p>表單綁定方法</p>
 <ul>
-<li><p><a href="https://vuejs.org/v2/guide/forms.html#Text" target="_blank" rel="noopener">官方範例</a></p>
-<ul>
+<li><p>基本用法 <code>v-model</code> </p>
+</li>
+<li><p>值綁定</p>
+</li>
+<li><p>修飾符</p>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="基本用法範例"><a href="#基本用法範例" class="headerlink" title="基本用法範例"></a>基本用法範例</h3><ul>
 <li>單行字串</li>
 </ul>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-model</span>=<span class="string">"message"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>Message is: &#123;&#123; message &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>多行字串</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>Multiline message is:<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span> <span class="attr">style</span>=<span class="string">"white-space: pre-line;"</span>&gt;</span>&#123;&#123; message &#125;&#125;<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">br</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">textarea</span> <span class="attr">v-model</span>=<span class="string">"message"</span> <span class="attr">placeholder</span>=<span class="string">"add multiple lines"</span>&gt;</span><span class="tag">&lt;/<span class="name">textarea</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
 <li>Checkbox</li>
@@ -187,9 +215,7 @@
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"checkbox"</span> <span class="attr">id</span>=<span class="string">"checkbox"</span> <span class="attr">v-model</span>=<span class="string">"checked"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">label</span> <span class="attr">for</span>=<span class="string">"checkbox"</span>&gt;</span>&#123;&#123; checked &#125;&#125;<span class="tag">&lt;/<span class="name">label</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <ul>
-<li><p><code>v-model</code> 修飾符</p>
-<ul>
-<li>分別有 lazyMsg、age、trimMsg</li>
+<li><code>v-model</code> 修飾符：lazyMsg、age、trimMsg</li>
 </ul>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> app = <span class="keyword">new</span> Vue(&#123;</span><br><span class="line">  el: <span class="string">'#app'</span>,</span><br><span class="line">  data: &#123;</span><br><span class="line">    lazyMsg: <span class="string">''</span>,</span><br><span class="line">    age: <span class="string">''</span>,</span><br><span class="line">    trimMsg: <span class="string">''</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
@@ -219,17 +245,13 @@
 </li>
 </ul>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;input type&#x3D;&quot;text&quot; v-model.trim&#x3D;&quot;trimMsg&quot; &#x2F;&gt;</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ul>
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/blog/categories/%E7%AD%86%E8%A8%98/">筆記</a>
+    <a class="article-category-link" href="/blog/categories/Vue/">Vue</a>, <a class="article-category-link" href="/blog/categories/Vue/%E7%AD%86%E8%A8%98/">筆記</a>
 
       
   <span class="ico-tags"></span>
@@ -260,7 +282,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目錄</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#應用程式建立"><span class="nav-number">1.</span> <span class="nav-text">應用程式建立</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#雙向綁定-Two-way-Binding"><span class="nav-number">2.</span> <span class="nav-text">雙向綁定 Two-way Binding</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#v-model"><span class="nav-number">2.1.</span> <span class="nav-text">v-model</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#應用程式建立"><span class="nav-number">1.</span> <span class="nav-text">應用程式建立</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#雙向綁定"><span class="nav-number">2.</span> <span class="nav-text">雙向綁定</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本用法範例"><span class="nav-number">2.0.1.</span> <span class="nav-text">基本用法範例</span></a></li></ol></li></ol></li></ol>
     
     </div>
   </aside>
