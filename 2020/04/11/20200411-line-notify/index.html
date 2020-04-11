@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>用 Line Notify 通知行事曆行程 | 前端筆記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="w3HexSchool" />
+  
+  
+  
+  
+  <meta name="description" content="正好看到有 Line Notify 這方便的工具 若是可以用 Line 提醒就可以省下連接網路點開日曆耗費的時間 所以就來 diy 一下">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 Line Notify 通知行事曆行程">
+<meta property="og:url" content="https://orandigo.github.io/2020/04/11/20200411-line-notify/index.html">
+<meta property="og:site_name" content="前端筆記">
+<meta property="og:description" content="正好看到有 Line Notify 這方便的工具 若是可以用 Line 提醒就可以省下連接網路點開日曆耗費的時間 所以就來 diy 一下">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://orandigo.github.io/2020/04/11/20200411-line-notify/20200411-010319.png">
+<meta property="og:image" content="https://orandigo.github.io/2020/04/11/20200411-line-notify/20200411-010202.png">
+<meta property="og:image" content="https://orandigo.github.io/2020/04/11/20200411-line-notify/20200411-011236.png">
+<meta property="og:image" content="https://orandigo.github.io/2020/04/11/20200411-line-notify/20200411-011358.png">
+<meta property="og:image" content="https://orandigo.github.io/2020/04/11/20200411-line-notify/20200411-011422.png">
+<meta property="og:image" content="https://orandigo.github.io/2020/04/11/20200411-line-notify/20200411-011422.png">
+<meta property="article:published_time" content="2020-04-11T14:57:28.000Z">
+<meta property="article:modified_time" content="2020-04-11T15:52:54.472Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://orandigo.github.io/2020/04/11/20200411-line-notify/20200411-010319.png">
+  
+  <link rel="icon" href="/blog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+  
+<script src="/blog/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/blog/css/fashion.css" >
+  <link rel="stylesheet" href="/blog/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
+
+
+<header id="allheader" class="site-header" role="banner" 
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/blog/" title="前端筆記" rel="home"> 前端筆記 </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">首頁</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">目錄</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">關於</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-20200411-line-notify" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      用 Line Notify 通知行事曆行程
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/04/11/20200411-line-notify/" class="article-date">
+	  <time datetime="2020-04-11T14:57:28.000Z" itemprop="datePublished">四月 11, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/">類型</a>, <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/Line-Notify/">Line Notify</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>正好看到有 Line Notify 這方便的工具</p>
+<p>若是可以用 Line 提醒就可以省下連接網路點開日曆耗費的時間</p>
+<p>所以就來 diy 一下</p>
+<a id="more"></a> 
+
+<h1 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h1><ul>
+<li>Google Calendar 行事曆</li>
+<li><a href="https://www.google.com/script/start/" target="_blank" rel="noopener">Google Apps Script 工具</a></li>
+<li><a href="https://notify-bot.line.me/zh_TW/" target="_blank" rel="noopener">LINE Notify</a></li>
+</ul>
+<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><ul>
+<li><p>加 Line Notify 為好友</p>
+<ul>
+<li><a href="https://notify-bot.line.me/zh_TW/" target="_blank" rel="noopener">https://notify-bot.line.me/zh_TW/</a> </li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><a href="https://www.google.com/script/start/" target="_blank" rel="noopener">搜尋 Google Apps Scripts 並安裝</a></p>
+<ul>
+<li><p>到  <strong>雲端硬碟</strong> 建立 Google Apps Script 檔案</p>
+</li>
+<li><p>在檔案內設定左上角的 <strong>專案名稱</strong></p>
+</li>
+<li><p>設定時區為台北 ： 在 檔案 &gt; 專案屬性 </p>
+</li>
+</ul>
+<p><img src="20200411-010319.png" alt="20200411-010319.png"></p>
+<p><img src="20200411-010202.png" alt="20200411-010202.png"></p>
+<ul>
+<li>寫好程式碼後，執行時會需要 核對權限 &gt; 選擇使用的帳戶</li>
+</ul>
+<p><img src="20200411-011236.png" alt="20200411-011236.png"></p>
+<ul>
+<li>和確認是否使用按 <strong>進階</strong> &gt; 前往「 <strong>自訂專案名稱</strong> 」(不安全)</li>
+</ul>
+<p><img src="20200411-011358.png" alt="20200411-011358.png"></p>
+<ul>
+<li>了解允許存取的風險按 <strong>允許</strong></li>
+</ul>
+<p><img src="20200411-011422.png" alt="20200411-011422.png"></p>
+</li>
+</ul>
+<h1 id="Google-Apps-Script-程式碼"><a href="#Google-Apps-Script-程式碼" class="headerlink" title="Google Apps Script 程式碼"></a>Google Apps Script 程式碼</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> lineToken　=　<span class="string">'abcdefg...'</span>;   <span class="comment">// Line Notify 的權杖</span></span><br><span class="line"><span class="keyword">let</span> CalendarID = <span class="string">"xxxxx@gmail.com"</span>;   <span class="comment">// google 月曆 ID</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+<h2 id="Line-Notify-權杖"><a href="#Line-Notify-權杖" class="headerlink" title="Line Notify 權杖"></a>Line Notify 權杖</h2><p>到 <a href="https://notify-bot.line.me/zh_TW/" target="_blank" rel="noopener">LINE Notify</a> 右上 <strong>登入</strong> 登入帳號 &gt; 個人頁面 後滑到最下面點擊 發行存取權杖（開發人員用）的 <strong>發行權杖</strong></p>
+<h2 id="月曆-ID"><a href="#月曆-ID" class="headerlink" title="月曆 ID"></a>月曆 ID</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> calendar = CalendarApp.getCalendarById(CalendarID);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="設定時間"><a href="#設定時間" class="headerlink" title="設定時間"></a>設定時間</h2><p><a href="https://developers.google.com/apps-script/reference/calendar/calendar" target="_blank" rel="noopener">可以用 google apps script 的函式</a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getTitle()  <span class="comment">// 活動標題</span></span><br><span class="line">getStartTime()  <span class="comment">// 開始時間</span></span><br><span class="line">getEndTime()  <span class="comment">// 結束時間</span></span><br><span class="line">getEvents()  <span class="comment">// 取得時間內發生的所有事件</span></span><br></pre></td></tr></table></figure>
+
+<p>再配合 javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> nowTime = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">const</span> endTime = <span class="keyword">new</span> <span class="built_in">Date</span>(nowTime.getTime() + <span class="number">1000</span> * <span class="number">60</span> * <span class="number">60</span> * <span class="number">24</span> *<span class="number">1</span>); </span><br><span class="line"><span class="keyword">const</span> calendarData = calendar.getEvents(nowTime, endTime);</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://developers.google.com/apps-script/reference/calendar/calendar-event" target="_blank" rel="noopener">關於取得月曆事件的相關資訊</a></p>
+<h2 id="提醒次數"><a href="#提醒次數" class="headerlink" title="提醒次數"></a>提醒次數</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">setTag(<span class="string">"Confirmed"</span>, <span class="string">"Yes"</span>);</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://developers.google.com/apps-script/reference/calendar/calendar-event#gettagkey" target="_blank" rel="noopener">https://developers.google.com/apps-script/reference/calendar/calendar-event#gettagkey</a></p>
+<p>這是要避免重複提醒，但執行就是會出錯</p>
+<p><img src="20200411-011422.png" alt="20200411-011422.png"></p>
+<p>而出錯的原因是 <code>item.getTag(&quot;Confirmed&quot;)</code> 是 <code>null</code></p>
+<p>所以刪除這個設定，改用 <strong>現有專案的起動程序</strong> 設定在每天固定時間提醒</p>
+<h1 id="參考文件"><a href="#參考文件" class="headerlink" title="參考文件"></a>參考文件</h1><p><a href="https://medium.com/@timchen0607/%E6%88%91%E6%87%B6%E5%BE%97%E7%9C%8B%E8%A1%8C%E4%BA%8B%E6%9B%86-line%E4%BD%A0%E5%8F%AF%E4%BB%A5%E9%80%9A%E7%9F%A5%E6%88%91%E5%97%8E-dc51b647f605" target="_blank" rel="noopener">我懶得看行事曆，LINE你可以通知我嗎?</a></p>
+<p><a href="https://medium.com/@amazing_timberwolf_pug_843/%E5%88%9D%E5%BF%83%E8%80%85%E4%B9%9F%E6%9C%83google%E6%97%A5%E6%9B%86%E5%88%B0line%E7%9A%84%E9%80%9A%E7%9F%A5-27d28bdaa8d2" target="_blank" rel="noopener">讓Line提醒你google 日曆的活動</a></p>
+<p><a href="https://notify-bot.line.me/doc/" target="_blank" rel="noopener">LINE Notify API Document</a> </p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/">類型</a>, <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/Line-Notify/">Line Notify</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/04/05/20200405-vue/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Vue 建立應用程式、雙向綁定</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目錄</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#工具"><span class="nav-number">1.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#流程"><span class="nav-number">2.</span> <span class="nav-text">流程</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Google-Apps-Script-程式碼"><span class="nav-number">3.</span> <span class="nav-text">Google Apps Script 程式碼</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Line-Notify-權杖"><span class="nav-number">3.1.</span> <span class="nav-text">Line Notify 權杖</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#月曆-ID"><span class="nav-number">3.2.</span> <span class="nav-text">月曆 ID</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#設定時間"><span class="nav-number">3.3.</span> <span class="nav-text">設定時間</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提醒次數"><span class="nav-number">3.4.</span> <span class="nav-text">提醒次數</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考文件"><span class="nav-number">4.</span> <span class="nav-text">參考文件</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2020 前端筆記 All Rights Reserved.
+        
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/bootstrap.js"></script>
+
+
+<script src="/blog/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-124626412-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
