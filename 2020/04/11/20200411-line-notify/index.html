@@ -25,7 +25,7 @@
 <meta property="og:image" content="https://orandigo.github.io/2020/04/11/20200411-line-notify/20200411-011422.png">
 <meta property="og:image" content="https://orandigo.github.io/2020/04/11/20200411-line-notify/20200411-011422.png">
 <meta property="article:published_time" content="2020-04-11T14:57:28.000Z">
-<meta property="article:modified_time" content="2020-04-11T15:52:54.472Z">
+<meta property="article:modified_time" content="2020-04-11T15:57:43.655Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
@@ -203,7 +203,7 @@
 <p><img src="20200411-011422.png" alt="20200411-011422.png"></p>
 </li>
 </ul>
-<h1 id="Google-Apps-Script-程式碼"><a href="#Google-Apps-Script-程式碼" class="headerlink" title="Google Apps Script 程式碼"></a>Google Apps Script 程式碼</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> lineToken　=　<span class="string">'abcdefg...'</span>;   <span class="comment">// Line Notify 的權杖</span></span><br><span class="line"><span class="keyword">let</span> CalendarID = <span class="string">"xxxxx@gmail.com"</span>;   <span class="comment">// google 月曆 ID</span></span><br></pre></td></tr></table></figure>
+<h1 id="Google-Apps-Script-程式碼"><a href="#Google-Apps-Script-程式碼" class="headerlink" title="Google Apps Script 程式碼"></a>Google Apps Script 程式碼</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> lineToken　=　<span class="string">'abcdefg...'</span>;   <span class="comment">// Line Notify 的權杖</span></span><br><span class="line"><span class="keyword">const</span> CalendarID = <span class="string">"xxxxx@gmail.com"</span>;   <span class="comment">// google 月曆 ID</span></span><br></pre></td></tr></table></figure>
 
 
 
@@ -211,12 +211,8 @@
 <h2 id="Line-Notify-權杖"><a href="#Line-Notify-權杖" class="headerlink" title="Line Notify 權杖"></a>Line Notify 權杖</h2><p>到 <a href="https://notify-bot.line.me/zh_TW/" target="_blank" rel="noopener">LINE Notify</a> 右上 <strong>登入</strong> 登入帳號 &gt; 個人頁面 後滑到最下面點擊 發行存取權杖（開發人員用）的 <strong>發行權杖</strong></p>
 <h2 id="月曆-ID"><a href="#月曆-ID" class="headerlink" title="月曆 ID"></a>月曆 ID</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> calendar = CalendarApp.getCalendarById(CalendarID);</span><br></pre></td></tr></table></figure>
 
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
-
-
-
-
-
+<p><code>CalendarID</code> 是上方的 google 月曆 ID </p>
+<p>又或者是抓取自已的行事曆也是可以直接使用、不使用變數</p>
 <h2 id="設定時間"><a href="#設定時間" class="headerlink" title="設定時間"></a>設定時間</h2><p><a href="https://developers.google.com/apps-script/reference/calendar/calendar" target="_blank" rel="noopener">可以用 google apps script 的函式</a></p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">getTitle()  <span class="comment">// 活動標題</span></span><br><span class="line">getStartTime()  <span class="comment">// 開始時間</span></span><br><span class="line">getEndTime()  <span class="comment">// 結束時間</span></span><br><span class="line">getEvents()  <span class="comment">// 取得時間內發生的所有事件</span></span><br></pre></td></tr></table></figure>
 
