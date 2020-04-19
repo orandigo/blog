@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>v-bind 動態屬性 | 前端筆記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="w3HexSchool" />
+  
+  
+  
+  
+  <meta name="description" content="學習 Vue 的動態屬性綁定 的筆記">
+<meta property="og:type" content="article">
+<meta property="og:title" content="v-bind 動態屬性">
+<meta property="og:url" content="https://orandigo.github.io/2020/04/19/20200419-vue/index.html">
+<meta property="og:site_name" content="前端筆記">
+<meta property="og:description" content="學習 Vue 的動態屬性綁定 的筆記">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-04-19T14:02:12.000Z">
+<meta property="article:modified_time" content="2020-04-19T15:48:20.005Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="icon" href="/blog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+  
+<script src="/blog/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/blog/css/fashion.css" >
+  <link rel="stylesheet" href="/blog/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/blog/" title="前端筆記" rel="home"> 前端筆記 </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">首頁</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">目錄</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">關於</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-20200419-vue" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      v-bind 動態屬性
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/04/19/20200419-vue/" class="article-date">
+	  <time datetime="2020-04-19T14:02:12.000Z" itemprop="datePublished">四月 19, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/Vue/">Vue</a>, <a class="article-category-link" href="/blog/categories/Vue/%E7%AD%86%E8%A8%98/">筆記</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><strong>學習 Vue 的動態屬性綁定</strong> 的筆記</p>
+<a id="more"></a> 
+
+
+<h1 id="關於-v-bind"><a href="#關於-v-bind" class="headerlink" title="關於 v-bind"></a>關於 <code>v-bind</code></h1><p>要讓在 HTML 標籤內的屬性 [例如 ： src 、 class 、 style 等 ] 能和 Vue 程式碼的 data 內容動態呈現，就可以加上 <code>v-bind</code> 綁定。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">v-bind:</span>[<span class="attr">key</span>]=<span class="string">"value"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>關於 HTML 標籤內的 <a href="https://developer.mozilla.org/zh-TW/docs/Web/HTML/Attributes" target="_blank" rel="noopener">屬性列表可參考這裡</a> </p>
+<h1 id="v-bind-的使用方式"><a href="#v-bind-的使用方式" class="headerlink" title="v-bind 的使用方式"></a><code>v-bind</code> 的使用方式</h1><h2 id="插入圖片-lt-img-gt"><a href="#插入圖片-lt-img-gt" class="headerlink" title="插入圖片 &lt;img&gt;"></a>插入圖片 <code>&lt;img&gt;</code></h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">v-bind:src</span>=<span class="string">"imgSrc"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">  el: <span class="string">'#app'</span>,</span></span><br><span class="line">  data: &#123;</span><br><span class="line"><span class="actionscript">    imgSrc: <span class="string">'img.jpg'</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="把-字串和-字串-接成一個"><a href="#把-字串和-字串-接成一個" class="headerlink" title="把 字串和 字串 接成一個"></a>把 <code>字串</code>和 <code>字串</code> 接成一個</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">v-bind:src</span>=<span class="string">"'/path/to/images/' + fileName"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="綁定-Class-名稱"><a href="#綁定-Class-名稱" class="headerlink" title="綁定 Class 名稱"></a>綁定 Class 名稱</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-bind:class</span>=<span class="string">"className"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">  el: <span class="string">'#app'</span>,</span></span><br><span class="line">  data: &#123;</span><br><span class="line"><span class="actionscript">    className: <span class="string">'item'</span></span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="綁定-Style-的屬性和值"><a href="#綁定-Style-的屬性和值" class="headerlink" title="綁定 Style 的屬性和值"></a>綁定 Style 的屬性和值</h2><ul>
+<li>要注意使用 CSS 遇到有 <code>-</code> 的屬性時要加上單引號 <code>&#39;</code> 或是改成 <strong>駝峰的寫法</strong> ，不然會出錯。</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-bind:style</span>=<span class="string">"&#123;'background-color':BGcolor, color: textColor, fontSize: size + 'px'&#125;"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">  el: <span class="string">'#app'</span>,</span></span><br><span class="line">  data: &#123;</span><br><span class="line"><span class="actionscript">    textColor: <span class="string">'red'</span>,</span></span><br><span class="line"><span class="actionscript">    BGcolor: <span class="string">'gray'</span>,</span></span><br><span class="line">    size: 56</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="合併成物件"><a href="#合併成物件" class="headerlink" title="合併成物件"></a>合併成物件</h2><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-bind:style</span>=<span class="string">"&#123;</span></span></span><br><span class="line"><span class="tag"><span class="string">    'background-color':BGcolor,</span></span></span><br><span class="line"><span class="tag"><span class="string">    color: textColor,</span></span></span><br><span class="line"><span class="tag"><span class="string">    fontSize: size + 'px'</span></span></span><br><span class="line"><span class="tag"><span class="string">  &#125;"</span>&gt;</span>Hello World<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">v-bind</span>=<span class="string">"&#123; src: '/path/to/images/' + imgSrc, class: className, alt: altText&#125;"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript"><span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="actionscript">  el: <span class="string">'#app'</span>,</span></span><br><span class="line">  data: &#123;</span><br><span class="line"><span class="actionscript">    imgSrc: <span class="string">'img.jpg'</span>,</span></span><br><span class="line"><span class="actionscript">    className: <span class="string">'item'</span>,</span></span><br><span class="line"><span class="actionscript">    altText: <span class="string">'這是一張圖片'</span>,</span></span><br><span class="line"><span class="actionscript">    textColor: <span class="string">'red'</span>,</span></span><br><span class="line"><span class="actionscript">    BGcolor: <span class="string">'gray'</span>,</span></span><br><span class="line">    size: 56</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="刪除-v-bind-縮寫成-吧"><a href="#刪除-v-bind-縮寫成-吧" class="headerlink" title="刪除 v-bind: 縮寫成 : 吧"></a>刪除 <code>v-bind:</code> 縮寫成 <code>:</code> 吧</h1><p><code>v-bind:</code> 提供了縮寫 <code>:</code> ，讓原本一長串回到像是在寫 HTML </p>
+<p><strong>但只有加上冒號的 v-bind: 適用， v-bind 是不能縮寫成 : 的</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">:</span>[<span class="attr">key</span>]=<span class="string">"value"</span>&gt;</span><span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">v-bind:src</span>=<span class="string">"imgSrc"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">:src</span>=<span class="string">"imageSrc"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">v-bind:src</span>=<span class="string">"imgSrc"</span> <span class="attr">v-bind:class</span>=<span class="string">"className"</span> <span class="attr">v-bind:style</span>=<span class="string">"&#123;width: '350px'&#125;"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">:src</span>=<span class="string">"imgSrc"</span> <span class="attr">:class</span>=<span class="string">"className"</span> <span class="attr">:style</span>=<span class="string">"&#123;width: '350px'&#125;"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+<h1 id="參考文件"><a href="#參考文件" class="headerlink" title="參考文件"></a>參考文件</h1><p><a href="https://cn.vuejs.org/v2/api/#v-bind" target="_blank" rel="noopener">指令 v-bind</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/Vue/">Vue</a>, <a class="article-category-link" href="/blog/categories/Vue/%E7%AD%86%E8%A8%98/">筆記</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/04/11/20200411-line-notify/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">用 Line Notify 通知行事曆行程</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目錄</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#關於-v-bind"><span class="nav-number">1.</span> <span class="nav-text">關於 v-bind</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#v-bind-的使用方式"><span class="nav-number">2.</span> <span class="nav-text">v-bind 的使用方式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#插入圖片-lt-img-gt"><span class="nav-number">2.1.</span> <span class="nav-text">插入圖片 &lt;img&gt;</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#把-字串和-字串-接成一個"><span class="nav-number">2.2.</span> <span class="nav-text">把 字串和 字串 接成一個</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#綁定-Class-名稱"><span class="nav-number">2.3.</span> <span class="nav-text">綁定 Class 名稱</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#綁定-Style-的屬性和值"><span class="nav-number">2.4.</span> <span class="nav-text">綁定 Style 的屬性和值</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合併成物件"><span class="nav-number">2.5.</span> <span class="nav-text">合併成物件</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#刪除-v-bind-縮寫成-吧"><span class="nav-number">3.</span> <span class="nav-text">刪除 v-bind: 縮寫成 : 吧</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考文件"><span class="nav-number">4.</span> <span class="nav-text">參考文件</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2020 前端筆記 All Rights Reserved.
+        
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/bootstrap.js"></script>
+
+
+<script src="/blog/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-124626412-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
