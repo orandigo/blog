@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>20200426-gascalendar | 前端筆記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="w3HexSchool" />
+  
+  
+  
+  
+  <meta name="description" content="接續前一篇的 用 Line Notify 通知行事曆行程 試用幾天發現 2 個問題：  當有 全天的活動 的時候是不會被傳送，只會傳送 有設定時間的活動  活動說明取得時是有包括 HTML 的標籤，所以 LINE 收到時會出現許多的 HTML 標籤  所以現在要修改一下 傳送當天所有的活動  以及 移除活動的說明的 HTML 標籤  出現一大堆不需要的 HTML 標籤感覺還滿雜亂的">
+<meta property="og:type" content="article">
+<meta property="og:title" content="20200426-gascalendar">
+<meta property="og:url" content="https://orandigo.github.io/2020/04/26/20200426-gascalendar/index.html">
+<meta property="og:site_name" content="前端筆記">
+<meta property="og:description" content="接續前一篇的 用 Line Notify 通知行事曆行程 試用幾天發現 2 個問題：  當有 全天的活動 的時候是不會被傳送，只會傳送 有設定時間的活動  活動說明取得時是有包括 HTML 的標籤，所以 LINE 收到時會出現許多的 HTML 標籤  所以現在要修改一下 傳送當天所有的活動  以及 移除活動的說明的 HTML 標籤  出現一大堆不需要的 HTML 標籤感覺還滿雜亂的">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-04-26T06:12:34.000Z">
+<meta property="article:modified_time" content="2020-04-26T08:10:09.586Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="icon" href="/blog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+  
+<script src="/blog/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/blog/css/fashion.css" >
+  <link rel="stylesheet" href="/blog/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
+
+
+<header id="allheader" class="site-header" role="banner" 
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/blog/" title="前端筆記" rel="home"> 前端筆記 </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">首頁</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">目錄</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">關於</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-20200426-gascalendar" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      20200426-gascalendar
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/04/26/20200426-gascalendar/" class="article-date">
+	  <time datetime="2020-04-26T06:12:34.000Z" itemprop="datePublished">四月 26, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/">類型</a>, <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/GAS/">GAS</a>, <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/Line-Notify/">Line Notify</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>接續前一篇的 <a href="https://orandigo.github.io/blog/2020/04/11/20200411-line-notify/">用 Line Notify 通知行事曆行程</a></p>
+<p>試用幾天發現 2 個問題：</p>
+<ol>
+<li>當有 <strong>全天的活動</strong> 的時候是不會被傳送，只會傳送 <strong>有設定時間的活動</strong> </li>
+<li>活動說明取得時是有包括 HTML 的標籤，所以 LINE 收到時會出現許多的 HTML 標籤</li>
+</ol>
+<p>所以現在要修改一下 <strong>傳送當天所有的活動</strong> </p>
+<p>以及 <strong>移除活動的說明的 HTML 標籤</strong></p>
+<p> 出現一大堆不需要的 HTML 標籤感覺還滿雜亂的</p>
+<a id="more"></a> 
+
+<h1 id="取出月曆的全部活動"><a href="#取出月曆的全部活動" class="headerlink" title="取出月曆的全部活動"></a>取出月曆的全部活動</h1><p><a href="https://developers.google.com/apps-script/reference/calendar/calendar" target="_blank" rel="noopener">關於 Calendar 文件</a> 有寫到</p>
+<ul>
+<li><p><code>getEvents(startTime, endTime)</code> 取得全部有設定時間的事件</p>
+</li>
+<li><p><code>getEventsForDay(date)</code> 取得指定日期當天的所有事件</p>
+<ul>
+<li>date 的日期會乎略時間只保留日期</li>
+</ul>
+</li>
+</ul>
+<p>當中有個範例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Determines how many events are happening today.</span></span><br><span class="line"><span class="keyword">var</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>();</span><br><span class="line"><span class="keyword">var</span> events = CalendarApp.getDefaultCalendar().getEventsForDay(today);</span><br><span class="line">Logger.log(<span class="string">'Number of events: '</span> + events.length);</span><br></pre></td></tr></table></figure>
+
+<p>從範例可以得知</p>
+<p>要取得當天活動的數量就算參數給完整的日期、時間、時區</p>
+<p><code>getEventsForDay()</code> 也只會抓日期</p>
+<p>而得到的就會是 <code>today</code> 當天所取得的全部事件</p>
+<p>所以寫法就可以大大縮短成</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> today = <span class="keyword">new</span> <span class="built_in">Date</span>(),</span><br><span class="line">      getCalendar = CalendarApp.getCalendarById(GoogleCalendarID),</span><br><span class="line">      todayCalendar = getCalendar.getEventsForDay(today);</span><br><span class="line"><span class="comment">// 依序取得當天的活動事件</span></span><br><span class="line">todayCalendar.forEach(<span class="function"><span class="params">item</span> =&gt;</span> &#123;               </span><br><span class="line">  <span class="keyword">if</span>(todayCalendar.length &gt; <span class="number">0</span>) &#123;</span><br><span class="line">    notifyStr += (item.getTitle() != <span class="string">""</span>) ? (<span class="string">"\n\n"</span> + <span class="string">'主題: '</span> + item.getTitle() + <span class="string">"\n"</span>) : (<span class="string">"\n"</span>);</span><br><span class="line">    notifyStr += (item.getDescription() != <span class="string">""</span>) ? (<span class="string">'內容:\n'</span> + stripHTML(item.getDescription())) : <span class="string">""</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p>成功取得需要收到的訊息</p>
+<h1 id="移除-HTML-標籤"><a href="#移除-HTML-標籤" class="headerlink" title="移除 HTML 標籤"></a>移除 HTML 標籤</h1><p>因為取出來的說明內容是包括了 HTML 標籤的字串</p>
+<p>所以用 <strong>正則表示式</strong> 篩選出標籤的格式</p>
+<p>關於正則表示式  <a href="">MDN 參考文章</a> 裡說到，這是被用來匹配字串中字元組合的模式。 </p>
+<ul>
+<li>在 JavaScript 中，正則表示式也是物件</li>
+<li>可被運用在 <code>RegExp</code>、<code>exec</code>、<code>test</code> 方法中，以及 <code>String</code> 的 <code>match</code> 、 <code>replace</code> 、 <code>search</code> 、 <code>split</code> 等方法中。</li>
+</ul>
+<p>這裡會用到的是 <code>replace()</code>  ，這個方法會把原本的字串紿過比對篩選後傳回一個新的字串。  <a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/String/replace" target="_blank" rel="noopener">說明文件</a> </p>
+<p>文件裡有個的範例就很適合</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'Twas the night before Xmas...'</span>;</span><br><span class="line"><span class="keyword">var</span> newstr = str.replace(<span class="regexp">/xmas/i</span>, <span class="string">'Christmas'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(newstr);</span><br></pre></td></tr></table></figure>
+
+<p>結果會回傳 <code>Twas the night before Christmas...</code> 字串</p>
+<p>過程就是 <code>replace()</code> 會把 <code>str</code> 字串內有 xmas 字串用 <code>/i</code>  <strong>忽略大小寫</strong> 的方式比對</p>
+<p>要修改 HTML 的話就要把比對方式改為 <code>/g</code> 全域並多次比對。</p>
+<p>為什麼是多次比對呢？</p>
+<p>再用上方的範例來試試看有不同大小字的字串時</p>
+<p>出現第 1 個字串在比對成功後就不會再繼續了</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> str = <span class="string">'Xmas &amp; xmas &amp; xmas...'</span>;</span><br><span class="line"><span class="keyword">var</span> newstr = str.replace(<span class="regexp">/xmas/i</span>, <span class="string">'Christmas'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(newstr);</span><br><span class="line"><span class="comment">// Christmas &amp; xmas &amp; xmas...</span></span><br></pre></td></tr></table></figure>
+
+<p>當改成 <code>/g</code> 時</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newstr = str.replace(<span class="regexp">/xmas/g</span>, <span class="string">'Christmas'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(newstr);</span><br><span class="line"><span class="comment">// Xmas &amp; Christmas &amp; Christmas...</span></span><br></pre></td></tr></table></figure>
+
+<p>會出現第 1個字串沒改變是因為少加了 <strong>忽略大小寫</strong> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> newstr = str.replace(<span class="regexp">/xmas/gi</span>, <span class="string">'Christmas'</span>);</span><br><span class="line"><span class="built_in">console</span>.log(newstr);</span><br><span class="line"><span class="comment">// Christmas &amp; Christmas &amp; Christmas...</span></span><br></pre></td></tr></table></figure>
+
+<p>加上後就會修改每個不論大小寫的 xmas 成 Christmas</p>
+<p>回到一開始的活動說明字串</p>
+<p>我只需要把 <code>&lt;</code> 、 <code>&gt;</code> 以及裡面所有字元 <code>.</code> 和空格 <code>\s</code> 全部 <code>*?</code>清空就可以了 </p>
+<p>然後再用 <code>/g</code> 一一刪除</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">stripHTML</span>(<span class="params">str</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> reTag = <span class="regexp">/&lt;(?:.|\s)*?&gt;/g</span>;</span><br><span class="line">  <span class="keyword">return</span> str.replace(reTag,<span class="string">""</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="程式碼"><a href="#程式碼" class="headerlink" title="程式碼"></a>程式碼</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">const LineNotifyToken &#x3D; &#39;abcde...&#39;,</span><br><span class="line">      GoogleCalendarID &#x3D; &#39;ABCED...&#39;,</span><br><span class="line">      today &#x3D; new Date(),</span><br><span class="line">      getCalendar &#x3D; CalendarApp.getCalendarById(GoogleCalendarID),</span><br><span class="line">      todayCalendar &#x3D; getCalendar.getEventsForDay(today);</span><br><span class="line"></span><br><span class="line">function SendNotify() &#123;</span><br><span class="line">  let notifyStr &#x3D; &#39;&#39;;</span><br><span class="line">  todayCalendar.forEach(item &#x3D;&gt; &#123;               </span><br><span class="line">    if(todayCalendar.length &gt; 0) &#123;</span><br><span class="line">      notifyStr +&#x3D; (item.getTitle() !&#x3D; &quot;&quot;) ? (&quot;\n\n&quot; + &#39;主題: &#39; + item.getTitle() + &quot;\n&quot;) : (&quot;\n&quot;);</span><br><span class="line">      notifyStr +&#x3D; (item.getDescription() !&#x3D; &quot;&quot;) ? (&#39;內容:\n&#39; + stripHTML(item.getDescription())) : &quot;&quot;;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;)</span><br><span class="line">  </span><br><span class="line">  function stripHTML(str) &#123;</span><br><span class="line">    let reTag &#x3D; &#x2F;&lt;(?:.|\s)*?&gt;&#x2F;g;</span><br><span class="line">    return str.replace(reTag,&quot;&quot;);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  UrlFetchApp.fetch(&quot;https:&#x2F;&#x2F;notify-api.line.me&#x2F;api&#x2F;notify&quot;, &#123;</span><br><span class="line">    &quot;method&quot;  : &quot;post&quot;,</span><br><span class="line">    &quot;payload&quot; : &#123;&quot;message&quot; : notifyStr&#125;,</span><br><span class="line">    &quot;headers&quot; : &#123;&quot;Authorization&quot; : &quot;Bearer &quot; + LineNotifyToken&#125;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/">類型</a>, <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/GAS/">GAS</a>, <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/Line-Notify/">Line Notify</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/04/19/20200419-vue/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">v-bind 動態屬性</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目錄</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#取出月曆的全部活動"><span class="nav-number">1.</span> <span class="nav-text">取出月曆的全部活動</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#移除-HTML-標籤"><span class="nav-number">2.</span> <span class="nav-text">移除 HTML 標籤</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#程式碼"><span class="nav-number">3.</span> <span class="nav-text">程式碼</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2020 前端筆記 All Rights Reserved.
+        
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/bootstrap.js"></script>
+
+
+<script src="/blog/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-124626412-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
