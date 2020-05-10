@@ -18,16 +18,16 @@
 <meta property="og:site_name" content="前端筆記">
 <meta property="og:description" content="簡介利用 CSS 的 display:none  和 display: block 做出的選單效果">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://orandigo.github.io/2020/05/10/20200510-css-menu/20200510-css-menu%5Cmenu-1.png">
-<meta property="og:image" content="https://orandigo.github.io/2020/05/10/20200510-css-menu/20200510-css-menu%5Cmenu-2.png">
-<meta property="og:image" content="https://orandigo.github.io/2020/05/10/20200510-css-menu/20200510-css-menu%5Cmenu-3.png">
-<meta property="og:image" content="https://orandigo.github.io/2020/05/10/20200510-css-menu/20200510-css-menu%5Cmenu-1.png">
+<meta property="og:image" content="https://orandigo.github.io/2020/05/10/20200510-css-menu/menu-1.png">
+<meta property="og:image" content="https://orandigo.github.io/2020/05/10/20200510-css-menu/menu-2.png">
+<meta property="og:image" content="https://orandigo.github.io/2020/05/10/20200510-css-menu/menu-3.png">
+<meta property="og:image" content="https://orandigo.github.io/2020/05/10/20200510-css-menu/menu-1.png">
 <meta property="article:published_time" content="2020-05-10T14:24:32.000Z">
-<meta property="article:modified_time" content="2020-05-10T15:57:22.070Z">
+<meta property="article:modified_time" content="2020-05-10T15:59:17.953Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://orandigo.github.io/2020/05/10/20200510-css-menu/20200510-css-menu%5Cmenu-1.png">
+<meta name="twitter:image" content="https://orandigo.github.io/2020/05/10/20200510-css-menu/menu-1.png">
   
   <link rel="icon" href="/blog/css/images/favicon.ico">
   
@@ -159,7 +159,7 @@
     <div class="article-entry" itemprop="articleBody">
       
         <h1 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h1><p>利用 CSS 的 <code>display:none</code>  和 <code>display: block</code> 做出的選單效果</p>
-<p><img src="20200510-css-menu%5Cmenu-1.png" alt="選單效果圖"></p>
+<p><img src="menu-1.png" alt="選單效果圖"></p>
 <a id="more"></a> 
 
 
@@ -175,7 +175,7 @@
 
 
 <p>就會產生下方的效果</p>
-<p>​​​​​<img src="20200510-css-menu%5Cmenu-2.png" alt="單層選單"></p>
+<p>​​​​​<img src="menu-2.png" alt="單層選單"></p>
 <h1 id="產生向下一層的選單"><a href="#產生向下一層的選單" class="headerlink" title="產生向下一層的選單"></a>產生向下一層的選單</h1><p>在 Card 的 <code>LI</code> 內建立新的 <code>UL</code> 、 <code>LI</code> </p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Card</span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Card-1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Card-2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Card-3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Card-4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Card-5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -194,7 +194,7 @@
 <p>所以要改成和上一層的 <code>LI</code> 同寬 <code>width: 100%</code></p>
 <p>同樣的在不修改滑鼠滑入效果時就會沿用上一層的設定</p>
 <p>就會產生像下圖的效果</p>
-<p><img src="20200510-css-menu%5Cmenu-3.png" alt="向下一層的選單"></p>
+<p><img src="menu-3.png" alt="向下一層的選單"></p>
 <h1 id="向下二層的選單"><a href="#向下二層的選單" class="headerlink" title="向下二層的選單"></a>向下二層的選單</h1><p>一樣在 <code>LI</code> 內建立新的 <code>UL</code> 、 <code>LI</code> </p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">li</span>&gt;</span>Card-4</span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Card-4-1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Card-4-2<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Card-4-3<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Card-4-4<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span>Card-4-5<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
@@ -208,7 +208,7 @@
 
 
 
-<p><img src="20200510-css-menu%5Cmenu-1.png" alt="向下一層的選單"></p>
+<p><img src="menu-1.png" alt="向下一層的選單"></p>
 
       
     </div>
