@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>filter 變色特效 | 前端筆記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="w3HexSchool" />
+  
+  
+  
+  
+  <meta name="description" content="簡介原圖只是要改變顏色不用再進到繪圖軟體修改圖，只要用 filter 的 CSS 屬性就可以，雖然不能作到細節修飾，但對只是要作復古、灰階的黑白圖之類的效果還是很方便。 另外在按鍵也可以使用，只需要設定全部按鍵的 :hover 、:active 、:focus 會改變的亮暗度、飽和度後，在個別按鍵設定顏色就會有一般或按下時不同的顏色，加上設定的是個別按鍵所以顏色不同但都可以有一致性的變化。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="filter 變色特效">
+<meta property="og:url" content="https://orandigo.github.io/2020/05/31/20200531-filter/index.html">
+<meta property="og:site_name" content="前端筆記">
+<meta property="og:description" content="簡介原圖只是要改變顏色不用再進到繪圖軟體修改圖，只要用 filter 的 CSS 屬性就可以，雖然不能作到細節修飾，但對只是要作復古、灰階的黑白圖之類的效果還是很方便。 另外在按鍵也可以使用，只需要設定全部按鍵的 :hover 、:active 、:focus 會改變的亮暗度、飽和度後，在個別按鍵設定顏色就會有一般或按下時不同的顏色，加上設定的是個別按鍵所以顏色不同但都可以有一致性的變化。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://orandigo.github.io/2020/05/31/20200531-filter/hsl_top.jpg">
+<meta property="article:published_time" content="2020-05-31T13:35:53.000Z">
+<meta property="article:modified_time" content="2020-05-31T15:55:20.475Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://orandigo.github.io/2020/05/31/20200531-filter/hsl_top.jpg">
+  
+  <link rel="icon" href="/blog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+  
+<script src="/blog/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/blog/css/fashion.css" >
+  <link rel="stylesheet" href="/blog/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/blog/" title="前端筆記" rel="home"> 前端筆記 </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">首頁</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">目錄</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">關於</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-20200531-filter" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      filter 變色特效
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/05/31/20200531-filter/" class="article-date">
+	  <time datetime="2020-05-31T13:35:53.000Z" itemprop="datePublished">五月 31, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/CSS/">CSS</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h1><p>原圖只是要改變顏色不用再進到繪圖軟體修改圖，只要用 <code>filter</code> 的 CSS 屬性就可以，雖然不能作到細節修飾，但對只是要作復古、灰階的黑白圖之類的效果還是很方便。</p>
+<p>另外在按鍵也可以使用，只需要設定全部按鍵的 <code>:hover</code> 、<code>:active</code> 、<code>:focus</code> 會改變的亮暗度、飽和度後，在個別按鍵設定顏色就會有一般或按下時不同的顏色，加上設定的是個別按鍵所以顏色不同但都可以有一致性的變化。</p>
+<a id="more"></a> 
+
+<ul>
+<li><p>變色特效可改變的有</p>
+<ul>
+<li>色調 - 改變不同的顏色</li>
+<li>亮度 - 增減白色的量</li>
+<li>飽和度 - 增減顏色的鮮艷度</li>
+</ul>
+</li>
+<li><p>使用元素</p>
+<ul>
+<li>有加上顏色的標籤 <code>&lt;div&gt;</code> 、<code>&lt;span&gt;</code> …</li>
+<li>圖片 <code>&lt;img&gt;</code> </li>
+<li>SVG 圖<ul>
+<li>使用 <code>filter: url(&quot;filters.svg#filter-id&quot;)</code> 在 <code>filters.svg</code> 加上 <code>filter-id</code> 效果名稱的特效</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>還可以指定加在元素的前後</p>
+<ul>
+<li>加在目前的元素上 <code>filter: blur(5px);</code> </li>
+<li>效果加在後面 <code>backdrop-filter: none;</code> </li>
+</ul>
+</li>
+<li><p>參考文件</p>
+<ul>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/CSS/Filter_Effects" target="_blank" rel="noopener">Filter Effects</a> </li>
+</ul>
+</li>
+</ul>
+<h2 id="色調旋轉-filter-hue-rotate"><a href="#色調旋轉-filter-hue-rotate" class="headerlink" title="色調旋轉 filter: hue-rotate()"></a>色調旋轉 <code>filter: hue-rotate()</code></h2><p><img src="hsl_top.jpg" alt="色調圖"></p>
+<blockquote>
+<p>圖片出處:  <a href="http://koi.tspu.ru/kg/hsb.htm" target="_blank" rel="noopener">http://koi.tspu.ru/kg/hsb.htm</a> </p>
+</blockquote>
+<p>色調的角度範圍從 0 到 360 度，就像上圖的角度，不論是超過或小於 0 之外的值，都是加減 360 度取得符合範圍內的值。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* -90 + 360 = 轉 270 度 */</span></span><br><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">hue-rotate</span>(<span class="selector-tag">-90deg</span>)  </span><br><span class="line"><span class="comment">/* 不變 */</span></span><br><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">hue-rotate</span>(0<span class="selector-tag">deg</span>)</span><br><span class="line"><span class="comment">/* 轉 90 度 */</span></span><br><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">hue-rotate</span>(90<span class="selector-tag">deg</span>)</span><br><span class="line"><span class="comment">/* 405 - 360 = 轉 45 度 */</span></span><br><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">hue-rotate</span>(405<span class="selector-tag">deg</span>)</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>角度還可以使用 <code>turn</code> 、<code>rad</code></li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">hue-rotate</span>(0);</span><br><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">hue-rotate</span>(90<span class="selector-tag">deg</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 1 turn = 360 度 */</span></span><br><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">hue-rotate</span>(<span class="selector-tag">-0</span><span class="selector-class">.25turn</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 3.142 rad = 360 度 */</span></span><br><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">hue-rotate</span>(3<span class="selector-class">.142rad</span>);</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://codepen.io/designerJordan/pen/qDEjr" target="_blank" rel="noopener">https://codepen.io/designerJordan/pen/qDEjr</a></p>
+<h2 id="負片效果-filter-invert"><a href="#負片效果-filter-invert" class="headerlink" title="負片效果 filter: invert()"></a>負片效果 <code>filter: invert()</code></h2><ul>
+<li>設定值介於 0 % ~ 100 % 之間、 50 % 等於純灰色的圖<ul>
+<li>也可用 0 ~ 1 之間的值</li>
+</ul>
+</li>
+</ul>
+<h2 id="亮度調整-filter-brightness"><a href="#亮度調整-filter-brightness" class="headerlink" title="亮度調整 filter: brightness()"></a>亮度調整 <code>filter: brightness()</code></h2><ul>
+<li>設定值可以是百分比或是有小數點，但不可以是負數<ul>
+<li>百分比 - 預設 100%<ul>
+<li>0% = 全黑</li>
+<li>100% = 正常亮度</li>
+<li>100% 以上百分比愈高顏色愈亮白</li>
+</ul>
+</li>
+<li>數字 - 預設 1 <ul>
+<li>0 = 全黑</li>
+<li>1 = 正常亮度</li>
+<li>數字愈高顏色愈亮白</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">brightness</span>(100%);</span><br><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">brightness</span>(<span class="selector-class">.5</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="飽和度調整-saturate"><a href="#飽和度調整-saturate" class="headerlink" title="飽和度調整 saturate()"></a>飽和度調整 <code>saturate()</code></h2><ul>
+<li>設定值可以是百分比或是有小數點，但不可以是負數<ul>
+<li>預設 1 、 100%</li>
+<li>值也可以超過 100% 再提高飽和度</li>
+</ul>
+</li>
+</ul>
+<h2 id="對比度-filter-contrast"><a href="#對比度-filter-contrast" class="headerlink" title="對比度 filter: contrast()"></a>對比度 <code>filter: contrast()</code></h2><ul>
+<li>設定值可以是百分比或是有小數點，但不可以是負數<ul>
+<li>0 = 0% = 全黑</li>
+<li>1 = 100% = 不變 / 預設值</li>
+<li>值可以超過 1 / 100% 值愈高對比愈強 + 亮白</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">contrast</span>(200%)</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="高斯模糊-filter-blur"><a href="#高斯模糊-filter-blur" class="headerlink" title="高斯模糊 filter: blur()"></a>高斯模糊 <code>filter: blur()</code></h2><p>設定值預設是 0 ，是指模糊的半徑，值不能是負數</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">blur</span>(<span class="selector-tag">radius</span>)</span><br><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">blur</span>(0);</span><br><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">blur</span>(4<span class="selector-tag">px</span>);</span><br><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">blur</span>(1<span class="selector-class">.5rem</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="陰影效果-filter-drop-shadow"><a href="#陰影效果-filter-drop-shadow" class="headerlink" title="陰影效果 filter: drop-shadow()"></a>陰影效果 <code>filter: drop-shadow()</code></h2><ul>
+<li><p>這個效果不同於塊狀陰影的 <code>box-shadow()</code> 會依據圖片外框加陰影</p>
+</li>
+<li><p>也沒有  <code>inset</code> 可以使用</p>
+</li>
+</ul>
+<h2 id="彩色轉灰階-filter-grayscale"><a href="#彩色轉灰階-filter-grayscale" class="headerlink" title="彩色轉灰階 filter: grayscale()"></a>彩色轉灰階 <code>filter: grayscale()</code></h2><ul>
+<li>設定值 0% ~ 100%</li>
+<li>預設 = 0% = 0</li>
+<li>無色彩的灰階 = 100% = 1 </li>
+</ul>
+<h2 id="透明度-filter-opacity"><a href="#透明度-filter-opacity" class="headerlink" title="透明度 filter: opacity()"></a>透明度 <code>filter: opacity()</code></h2><ul>
+<li>和 <code>opacity</code> 屬性功能相同<br>但因為是透過 <code>filter</code> 使用<br>所以有些瀏覽器會使用硬件加速讓效能更好 </li>
+<li>設定值 0 和 0% 是全透明， 1 和 100% 是不透明</li>
+</ul>
+<h2 id="轉深褐色、復古效果-filter-sepia"><a href="#轉深褐色、復古效果-filter-sepia" class="headerlink" title="轉深褐色、復古效果 filter: sepia()"></a>轉深褐色、復古效果 <code>filter: sepia()</code></h2><ul>
+<li>設定值介於 0% 至 100%<ul>
+<li>預設 0 、 0%</li>
+<li>100% 完全是深褐色</li>
+</ul>
+</li>
+</ul>
+<h2 id="多重調色"><a href="#多重調色" class="headerlink" title="多重調色"></a>多重調色</h2><p>以上的設定不需要一個一行的寫，可以把 <code>filter:</code> 後的設定屬性作串連<br>只需要在效果之間加上 <strong>一格空白</strong> 就行了</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">contrast</span>(175%) <span class="selector-tag">brightness</span>(30%);</span><br><span class="line"><span class="selector-tag">filter</span>: <span class="selector-tag">drop-shadow</span>(16<span class="selector-tag">px</span> 16<span class="selector-tag">px</span> 20<span class="selector-tag">px</span> <span class="selector-tag">red</span>) <span class="selector-tag">invert</span>(75%);</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="參考文件"><a href="#參考文件" class="headerlink" title="參考文件"></a>參考文件</h1><p><a href="https://developer.mozilla.org/en-US/docs/Web/CSS/filter" target="_blank" rel="noopener">mozilla: filter</a></p>
+<p>Hue Rotation And Invert :CSS Filter Property<br><a href="https://css-magz.blogspot.com/2017/04/hue-rotation-and-invert-css-filter.html" target="_blank" rel="noopener">https://css-magz.blogspot.com/2017/04/hue-rotation-and-invert-css-filter.html</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/CSS/">CSS</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/05/24/20200524-animate-css/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Animate.css 動畫插件</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目錄</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#簡介"><span class="nav-number">1.</span> <span class="nav-text">簡介</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#色調旋轉-filter-hue-rotate"><span class="nav-number">1.1.</span> <span class="nav-text">色調旋轉 filter: hue-rotate()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#負片效果-filter-invert"><span class="nav-number">1.2.</span> <span class="nav-text">負片效果 filter: invert()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#亮度調整-filter-brightness"><span class="nav-number">1.3.</span> <span class="nav-text">亮度調整 filter: brightness()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#飽和度調整-saturate"><span class="nav-number">1.4.</span> <span class="nav-text">飽和度調整 saturate()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#對比度-filter-contrast"><span class="nav-number">1.5.</span> <span class="nav-text">對比度 filter: contrast()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#高斯模糊-filter-blur"><span class="nav-number">1.6.</span> <span class="nav-text">高斯模糊 filter: blur()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#陰影效果-filter-drop-shadow"><span class="nav-number">1.7.</span> <span class="nav-text">陰影效果 filter: drop-shadow()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#彩色轉灰階-filter-grayscale"><span class="nav-number">1.8.</span> <span class="nav-text">彩色轉灰階 filter: grayscale()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#透明度-filter-opacity"><span class="nav-number">1.9.</span> <span class="nav-text">透明度 filter: opacity()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#轉深褐色、復古效果-filter-sepia"><span class="nav-number">1.10.</span> <span class="nav-text">轉深褐色、復古效果 filter: sepia()</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#多重調色"><span class="nav-number">1.11.</span> <span class="nav-text">多重調色</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考文件"><span class="nav-number">2.</span> <span class="nav-text">參考文件</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2020 前端筆記 All Rights Reserved.
+        
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/bootstrap.js"></script>
+
+
+<script src="/blog/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-124626412-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
