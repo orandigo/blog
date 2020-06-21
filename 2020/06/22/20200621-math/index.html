@@ -11,15 +11,15 @@
   
   
   
-  <meta name="description" content="簡介 Math 是一個擁有數學常數及數學函數（非函式物件）屬性及方法的內建物件 。Math 不是建構函式。所有 Math 的屬性及方法皆為靜態。 https:&#x2F;&#x2F;developer.mozilla.org&#x2F;zh-TW&#x2F;docs&#x2F;Web&#x2F;JavaScript&#x2F;Reference&#x2F;Global_Objects&#x2F;Math">
+  <meta name="description" content="簡介 Math 是一個擁有數學常數及數學函數（非函式物件）屬性及方法的內建物件 。Math 不是建構函式。所有 Math 的屬性及方法皆為靜態。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MATH 數學屬性">
-<meta property="og:url" content="https://orandigo.github.io/2020/06/07/20200621-math/index.html">
+<meta property="og:url" content="https://orandigo.github.io/2020/06/22/20200621-math/index.html">
 <meta property="og:site_name" content="前端筆記">
-<meta property="og:description" content="簡介 Math 是一個擁有數學常數及數學函數（非函式物件）屬性及方法的內建物件 。Math 不是建構函式。所有 Math 的屬性及方法皆為靜態。 https:&#x2F;&#x2F;developer.mozilla.org&#x2F;zh-TW&#x2F;docs&#x2F;Web&#x2F;JavaScript&#x2F;Reference&#x2F;Global_Objects&#x2F;Math">
+<meta property="og:description" content="簡介 Math 是一個擁有數學常數及數學函數（非函式物件）屬性及方法的內建物件 。Math 不是建構函式。所有 Math 的屬性及方法皆為靜態。">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2020-06-07T13:52:07.000Z">
-<meta property="article:modified_time" content="2020-06-21T15:58:52.755Z">
+<meta property="article:published_time" content="2020-06-22T13:52:07.000Z">
+<meta property="article:modified_time" content="2020-06-21T16:45:05.877Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
@@ -61,10 +61,32 @@
 
 
   
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
 
 
 <header id="allheader" class="site-header" role="banner" 
-   >
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
   <div class="clearfix container">
       <div class="site-branding">
 
@@ -119,8 +141,8 @@
     
     <div class="article-meta">
       
-	<a href="/blog/2020/06/07/20200621-math/" class="article-date">
-	  <time datetime="2020-06-07T13:52:07.000Z" itemprop="datePublished">六月 7, 2020</time>
+	<a href="/blog/2020/06/22/20200621-math/" class="article-date">
+	  <time datetime="2020-06-22T13:52:07.000Z" itemprop="datePublished">六月 22, 2020</time>
 	</a>
 
       
@@ -133,15 +155,11 @@
       
         <h1 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h1><blockquote>
 <p><code>Math</code> 是一個擁有數學常數及數學函數（非函式物件）屬性及方法的內建物件 。<br><code>Math</code> 不是建構函式。<br>所有 <code>Math</code> 的屬性及方法皆為靜態。</p>
-<p><a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Math" target="_blank" rel="noopener">https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Math</a> </p>
 </blockquote>
 <a id="more"></a> 
 
-
-
-
-
-<h1 id="物件的屬性"><a href="#物件的屬性" class="headerlink" title="物件的屬性"></a>物件的屬性</h1><p>物件的屬性也是常數值，在 Javascript 內由精確數字定義出來的，都會得到固定的值。</p>
+<p><a href="https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Math" target="_blank" rel="noopener">https://developer.mozilla.org/zh-TW/docs/Web/JavaScript/Reference/Global_Objects/Math</a> </p>
+<h1 id="物件的屬性"><a href="#物件的屬性" class="headerlink" title="物件的屬性"></a>物件的屬性</h1><p>物件的屬性也稱常數值，在 Javascript 內由精確數字定義出來的，都會得到固定的值。</p>
 <table>
 <thead>
 <tr>
@@ -191,19 +209,41 @@
 <td align="left">1.414</td>
 </tr>
 </tbody></table>
-<p>到現在我常用的也只有 <code>Math.PI</code> ，多用在畫圓形時。</p>
 <h1 id="物件的方法"><a href="#物件的方法" class="headerlink" title="物件的方法"></a>物件的方法</h1><ul>
 <li>三角函數 </li>
 <li>數字取值</li>
+<li>數字計算</li>
+<li>判斷正負數值</li>
 </ul>
-<h2 id="三角函數"><a href="#三角函數" class="headerlink" title="三角函數"></a>三角函數</h2><p><code>sin()</code></p>
-<p><code>cos()</code></p>
-<p><code>tan()</code></p>
-<p><code>asin()</code></p>
-<p><code>acos()</code></p>
-<p><code>atan()</code></p>
-<p><code>atan2()</code></p>
-<h2 id="數字取值的方法"><a href="#數字取值的方法" class="headerlink" title="數字取值的方法"></a>數字取值的方法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 回傳數字的絕對值，負值會轉成正數。</span></span><br><span class="line"><span class="built_in">Math</span>.abs(<span class="number">5.55</span>)   <span class="comment">//5.55</span></span><br><span class="line"><span class="built_in">Math</span>.abs(<span class="number">-3.2</span>)   <span class="comment">//3.25</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 四捨五入</span></span><br><span class="line"><span class="built_in">Math</span>.round(<span class="number">3.14</span>)   <span class="comment">// 3</span></span><br><span class="line"><span class="built_in">Math</span>.round(<span class="number">5.49999</span>)   <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">Math</span>.round(<span class="number">5.5</span>)   <span class="comment">// 6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 最大整數</span></span><br><span class="line"><span class="built_in">Math</span>.floor(<span class="number">3.14</span>) <span class="comment">// 3</span></span><br><span class="line"><span class="built_in">Math</span>.floor(<span class="number">5.4</span>) <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">Math</span>.floor(<span class="number">-5.4</span>) <span class="comment">// -6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 最小整數</span></span><br><span class="line"><span class="built_in">Math</span>.ceil(<span class="number">3.14</span>) <span class="comment">// 4</span></span><br><span class="line"><span class="built_in">Math</span>.ceil(<span class="number">5.4</span>) <span class="comment">// 6</span></span><br><span class="line"><span class="built_in">Math</span>.ceil(<span class="number">-5.4</span>) <span class="comment">// -5</span></span><br></pre></td></tr></table></figure>
+<h2 id="三角函數"><a href="#三角函數" class="headerlink" title="三角函數"></a>三角函數</h2><p>利用三角函數取得角度的值</p>
+<ul>
+<li><p>取得角度正值 ( 順時鐘 )</p>
+<ul>
+<li><code>sin()</code> 、 <code>cos()</code> 值會介於 -1 到 1 之間，因為是靜態的方法，所以是固定值。</li>
+<li><code>tan()</code> 值還可使用角度值</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>取得相反角度值 ( 逆時鐘 )<ul>
+<li><code>asin()</code></li>
+<li><code>acos()</code></li>
+<li><code>atan()</code></li>
+<li><code>atan2()</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="數字取值的方法"><a href="#數字取值的方法" class="headerlink" title="數字取值的方法"></a>數字取值的方法</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 回傳數字的絕對值，負值會轉成正數。</span></span><br><span class="line"><span class="built_in">Math</span>.abs(<span class="number">5.55</span>)   <span class="comment">//5.55</span></span><br><span class="line"><span class="built_in">Math</span>.abs(<span class="number">-3.2</span>)   <span class="comment">//3.25</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得介於 0 至 1 之間的亂數</span></span><br><span class="line"><span class="built_in">Math</span>.random()</span><br><span class="line"></span><br><span class="line"><span class="comment">// 四捨五入</span></span><br><span class="line"><span class="built_in">Math</span>.round(<span class="number">3.14</span>)   <span class="comment">// 3</span></span><br><span class="line"><span class="built_in">Math</span>.round(<span class="number">5.49999</span>)   <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">Math</span>.round(<span class="number">5.5</span>)   <span class="comment">// 6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得比原數值小的最大整數</span></span><br><span class="line"><span class="built_in">Math</span>.floor(<span class="number">3.94</span>) <span class="comment">// 3</span></span><br><span class="line"><span class="built_in">Math</span>.floor(<span class="number">5.1</span>) <span class="comment">// 5</span></span><br><span class="line"><span class="built_in">Math</span>.floor(<span class="number">-5.4</span>) <span class="comment">// -6</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 取得比原數值大的最小整數</span></span><br><span class="line"><span class="built_in">Math</span>.ceil(<span class="number">3.94</span>) <span class="comment">// 4</span></span><br><span class="line"><span class="built_in">Math</span>.ceil(<span class="number">5.1</span>) <span class="comment">// 6</span></span><br><span class="line"><span class="built_in">Math</span>.ceil(<span class="number">-5.4</span>) <span class="comment">// -5</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="數字計算"><a href="#數字計算" class="headerlink" title="數字計算"></a>數字計算</h2><p>Math.pow()  次方、平方根</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 次方</span></span><br><span class="line"><span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">2</span>)   <span class="comment">// 2 * 2 = 4</span></span><br><span class="line"><span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">3</span>)   <span class="comment">// 2 * 2 * 2 = 8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 平方根</span></span><br><span class="line"><span class="built_in">Math</span>.pow(<span class="number">4</span>, <span class="number">0.5</span>)   <span class="comment">// 2 （4 的平方根）</span></span><br><span class="line"><span class="built_in">Math</span>.pow(<span class="number">8</span>, <span class="number">1</span>/<span class="number">3</span>)   <span class="comment">// 2 （8 的立方根）</span></span><br><span class="line"><span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">0.5</span>)   <span class="comment">// 1.4142135623730951 （2 的平方根）</span></span><br><span class="line"><span class="built_in">Math</span>.pow(<span class="number">2</span>, <span class="number">1</span>/<span class="number">3</span>)   <span class="comment">// 1.2599210498948732 （2 的立方根）</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="判斷正負值"><a href="#判斷正負值" class="headerlink" title="判斷正負值"></a>判斷正負值</h2><p><code>Math.sign()</code> 不論值的大小，只會回傳正負值和 <code>NaN</code> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">Math</span>.sign(<span class="number">199</span>)   <span class="comment">//  1</span></span><br><span class="line"><span class="built_in">Math</span>.sign(<span class="number">-199</span>)   <span class="comment">// -1</span></span><br><span class="line"><span class="built_in">Math</span>.sign(<span class="number">0</span>)   <span class="comment">//  0</span></span><br><span class="line"><span class="built_in">Math</span>.sign(<span class="number">-0</span>)   <span class="comment">// -0</span></span><br><span class="line"><span class="built_in">Math</span>.sign(<span class="literal">NaN</span>)   <span class="comment">// NaN</span></span><br></pre></td></tr></table></figure>
 
 
       
@@ -242,7 +282,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目錄</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#簡介"><span class="nav-number">1.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#物件的屬性"><span class="nav-number">2.</span> <span class="nav-text">物件的屬性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#物件的方法"><span class="nav-number">3.</span> <span class="nav-text">物件的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#三角函數"><span class="nav-number">3.1.</span> <span class="nav-text">三角函數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#數字取值的方法"><span class="nav-number">3.2.</span> <span class="nav-text">數字取值的方法</span></a></li></ol></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#簡介"><span class="nav-number">1.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#物件的屬性"><span class="nav-number">2.</span> <span class="nav-text">物件的屬性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#物件的方法"><span class="nav-number">3.</span> <span class="nav-text">物件的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#三角函數"><span class="nav-number">3.1.</span> <span class="nav-text">三角函數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#數字取值的方法"><span class="nav-number">3.2.</span> <span class="nav-text">數字取值的方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#數字計算"><span class="nav-number">3.3.</span> <span class="nav-text">數字計算</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判斷正負值"><span class="nav-number">3.4.</span> <span class="nav-text">判斷正負值</span></a></li></ol></li></ol>
     
     </div>
   </aside>
@@ -286,6 +326,9 @@
 
 
     <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
     
     
 </script>
