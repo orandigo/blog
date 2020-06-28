@@ -145,41 +145,17 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h1><p>Input 有許多常用的屬性，例 <code>type=&quot;button&quot;</code> 、<code>type=&quot;number&quot;</code>、<code>type=&quot;password&quot;</code>、<code>type=&quot;checkbox&quot;</code>、<code>type=&quot;date&quot;</code> … 等，關於日期和時間類除了基本的 <code>type=&quot;date&quot;</code> 外還有另外 4 個十分方便的屬性，以下就要來說明。</p>
-<h1 id="month-年月"><a href="#month-年月" class="headerlink" title="month 年月"></a>month 年月</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"month"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+        
 
-<p><img src="input-date-03.png" alt=""> </p>
-<p>只會有年份和月份可以選取，又可以 <strong>設定預設值</strong>  <code>value</code> 和 <strong>限制可選範圍</strong> [ 最早從<code>min</code> 、最後至 <code>max</code> ] </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>= <span class="string">"month"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">value</span>= <span class="string">"2020-05"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">min</span>= <span class="string">"2020-03"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">max</span>= <span class="string">"2020-10"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          
+          <div class="entry-summary">
+          簡介Input 有許多常用的屬性，例 type=&quot;button&quot; 、type=&quot;number&quot;、type=&quot;password&quot;、type=&quot;checkbox&quot;、type=&quot;date&quot; … 等，關於日期和時間類除了基本的 type=&quot;date&quot; 外還有另外 4 個十分方便的屬性，以下就要來說明。
 
-
-
-<h1 id="date-年月日"><a href="#date-年月日" class="headerlink" title="date 年月日"></a>date 年月日</h1><p><img src="input-date-01.png" alt=""> </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"date"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">value</span>=<span class="string">"2020-06-25"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">min</span>=<span class="string">"2020-01-01"</span> <span class="attr">max</span>=<span class="string">"2020-12-31"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>預設日期 <code>value</code></li>
-<li>限制可選日期起始日 <code>min</code></li>
-<li>限制可選日期結束日 <code>max</code></li>
-</ul>
-<h1 id="time-時間"><a href="#time-時間" class="headerlink" title="time 時間"></a>time 時間</h1><p><img src="input-date-04.png" alt=""> </p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"time"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">value</span>=<span class="string">"13:30"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">min</span>=<span class="string">"09:00"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">max</span>=<span class="string">"18:00"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>關於時間的選擇還可以使用 <code>step=&quot;1&quot;</code> 增加秒數欄位，但 <strong>目前這功能在有些瀏覽器會看不到的情況</strong> ，使用時要注意。</p>
-<h1 id="datetime-local-本地年月日-時間"><a href="#datetime-local-本地年月日-時間" class="headerlink" title="datetime-local 本地年月日 + 時間"></a>datetime-local 本地年月日 + 時間</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"datetime-local"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">value</span>=<span class="string">"2018-06-12T19:30"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">min</span>=<span class="string">"2018-06-07T00:00"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">max</span>=<span class="string">"2018-06-14T00:00"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="input-date-02.png" alt=""></p>
-<ul>
-<li>日期後要加上 <strong>T</strong> 就可再接上時間設定</li>
-<li>時間可加上 <code>step=&quot;1&quot;</code> 呈現秒數欄位</li>
-</ul>
-<h1 id="week-呈現年份-週數"><a href="#week-呈現年份-週數" class="headerlink" title="week 呈現年份 + 週數"></a>week 呈現年份 + 週數</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"week"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">min</span>=<span class="string">"2020-W26"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">max</span>=<span class="string">"2020-W30"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p><img src="input-date-05.png" alt=""></p>
-<ul>
-<li>可使用 <code>step=&quot;1&quot;</code> 代表可選擇每一週，<code>step=&quot;2&quot;</code> 時就會是每 2 週才可選</li>
-</ul>
-
+        
+          <p class="article-more-link">
+            <a href="/blog/2020/06/28/20200628-input-date/#more">閱讀全文</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">
