@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Input 日期、時間 標籤 | 前端筆記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="w3HexSchool" />
+  
+  
+  
+  
+  <meta name="description" content="簡介Input 有許多常用的屬性，例 type&#x3D;&quot;button&quot; 、type&#x3D;&quot;number&quot;、type&#x3D;&quot;password&quot;、type&#x3D;&quot;checkbox&quot;、type&#x3D;&quot;date&quot; … 等，關於日期和時間類除了基本的 type&#x3D;&quot;date&quot; 外還有另外 4 個十分方便的屬性，以">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Input 日期、時間 標籤">
+<meta property="og:url" content="https://orandigo.github.io/2020/06/28/20200628-input-date/index.html">
+<meta property="og:site_name" content="前端筆記">
+<meta property="og:description" content="簡介Input 有許多常用的屬性，例 type&#x3D;&quot;button&quot; 、type&#x3D;&quot;number&quot;、type&#x3D;&quot;password&quot;、type&#x3D;&quot;checkbox&quot;、type&#x3D;&quot;date&quot; … 等，關於日期和時間類除了基本的 type&#x3D;&quot;date&quot; 外還有另外 4 個十分方便的屬性，以">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://orandigo.github.io/2020/06/28/20200628-input-date/input-date-03.png">
+<meta property="og:image" content="https://orandigo.github.io/2020/06/28/20200628-input-date/input-date-01.png">
+<meta property="og:image" content="https://orandigo.github.io/2020/06/28/20200628-input-date/input-date-04.png">
+<meta property="og:image" content="https://orandigo.github.io/2020/06/28/20200628-input-date/input-date-02.png">
+<meta property="og:image" content="https://orandigo.github.io/2020/06/28/20200628-input-date/input-date-05.png">
+<meta property="article:published_time" content="2020-06-28T14:51:13.000Z">
+<meta property="article:modified_time" content="2020-06-28T15:58:28.336Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://orandigo.github.io/2020/06/28/20200628-input-date/input-date-03.png">
+  
+  <link rel="icon" href="/blog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+  
+<script src="/blog/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/blog/css/fashion.css" >
+  <link rel="stylesheet" href="/blog/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
+
+
+<header id="allheader" class="site-header" role="banner" 
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/blog/" title="前端筆記" rel="home"> 前端筆記 </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">首頁</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">目錄</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">關於</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-20200628-input-date" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Input 日期、時間 標籤
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/06/28/20200628-input-date/" class="article-date">
+	  <time datetime="2020-06-28T14:51:13.000Z" itemprop="datePublished">六月 28, 2020</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h1><p>Input 有許多常用的屬性，例 <code>type=&quot;button&quot;</code> 、<code>type=&quot;number&quot;</code>、<code>type=&quot;password&quot;</code>、<code>type=&quot;checkbox&quot;</code>、<code>type=&quot;date&quot;</code> … 等，關於日期和時間類除了基本的 <code>type=&quot;date&quot;</code> 外還有另外 4 個十分方便的屬性，以下就要來說明。</p>
+<h1 id="month-年月"><a href="#month-年月" class="headerlink" title="month 年月"></a>month 年月</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"month"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="input-date-03.png" alt=""> </p>
+<p>只會有年份和月份可以選取，又可以 <strong>設定預設值</strong>  <code>value</code> 和 <strong>限制可選範圍</strong> [ 最早從<code>min</code> 、最後至 <code>max</code> ] </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>= <span class="string">"month"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">value</span>= <span class="string">"2020-05"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">min</span>= <span class="string">"2020-03"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">max</span>= <span class="string">"2020-10"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="date-年月日"><a href="#date-年月日" class="headerlink" title="date 年月日"></a>date 年月日</h1><p><img src="input-date-01.png" alt=""> </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"date"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">value</span>=<span class="string">"2020-06-25"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">min</span>=<span class="string">"2020-01-01"</span> <span class="attr">max</span>=<span class="string">"2020-12-31"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>預設日期 <code>value</code></li>
+<li>限制可選日期起始日 <code>min</code></li>
+<li>限制可選日期結束日 <code>max</code></li>
+</ul>
+<h1 id="time-時間"><a href="#time-時間" class="headerlink" title="time 時間"></a>time 時間</h1><p><img src="input-date-04.png" alt=""> </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"time"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">value</span>=<span class="string">"13:30"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">min</span>=<span class="string">"09:00"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">max</span>=<span class="string">"18:00"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>關於時間的選擇還可以使用 <code>step=&quot;1&quot;</code> 增加秒數欄位，但 <strong>目前這功能在有些瀏覽器會看不到的情況</strong> ，使用時要注意。</p>
+<h1 id="datetime-local-本地年月日-時間"><a href="#datetime-local-本地年月日-時間" class="headerlink" title="datetime-local 本地年月日 + 時間"></a>datetime-local 本地年月日 + 時間</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"datetime-local"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">value</span>=<span class="string">"2018-06-12T19:30"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">min</span>=<span class="string">"2018-06-07T00:00"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">max</span>=<span class="string">"2018-06-14T00:00"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="input-date-02.png" alt=""></p>
+<ul>
+<li>日期後要加上 <strong>T</strong> 就可再接上時間設定</li>
+<li>時間可加上 <code>step=&quot;1&quot;</code> 呈現秒數欄位</li>
+</ul>
+<h1 id="week-呈現年份-週數"><a href="#week-呈現年份-週數" class="headerlink" title="week 呈現年份 + 週數"></a>week 呈現年份 + 週數</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"week"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">min</span>=<span class="string">"2020-W26"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">max</span>=<span class="string">"2020-W30"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p><img src="input-date-05.png" alt=""></p>
+<ul>
+<li>可使用 <code>step=&quot;1&quot;</code> 代表可選擇每一週，<code>step=&quot;2&quot;</code> 時就會是每 2 週才可選</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/06/21/20200621-math/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">MATH 數學屬性</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目錄</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#簡介"><span class="nav-number">1.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#month-年月"><span class="nav-number">2.</span> <span class="nav-text">month 年月</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#date-年月日"><span class="nav-number">3.</span> <span class="nav-text">date 年月日</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#time-時間"><span class="nav-number">4.</span> <span class="nav-text">time 時間</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#datetime-local-本地年月日-時間"><span class="nav-number">5.</span> <span class="nav-text">datetime-local 本地年月日 + 時間</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#week-呈現年份-週數"><span class="nav-number">6.</span> <span class="nav-text">week 呈現年份 + 週數</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2020 前端筆記 All Rights Reserved.
+        
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/bootstrap.js"></script>
+
+
+<script src="/blog/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-124626412-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
