@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>轉換成列印格式 | 前端筆記</title>
+  <title>SASS | 前端筆記</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="w3HexSchool" />
@@ -11,15 +11,15 @@
   
   
   
-  <meta name="description" content="用插件 Paper CSS 轉換">
+  <meta name="description" content="學習目的簡介在編寫 CSS 時常會為了一個效果而寫一大長串的樣式、編排，又或者是使用了許多幾乎有著相同文字效果的元素，讓整個 CSS 檔案很龐大之外，在之後的修改維護也十分的不方便。 而使用 SASS 或 SCSS 就可以用巢狀的方式，一個包一個的整理整齊，兩者最大的不同是 SCSS 還保留著大括號 { } 和分號 ; ，SASS 就不需要了。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="轉換成列印格式">
-<meta property="og:url" content="https://orandigo.github.io/2020/07/05/20200705-css-print/index.html">
+<meta property="og:title" content="SASS">
+<meta property="og:url" content="https://orandigo.github.io/2020/07/12/20200712-sass/index.html">
 <meta property="og:site_name" content="前端筆記">
-<meta property="og:description" content="用插件 Paper CSS 轉換">
+<meta property="og:description" content="學習目的簡介在編寫 CSS 時常會為了一個效果而寫一大長串的樣式、編排，又或者是使用了許多幾乎有著相同文字效果的元素，讓整個 CSS 檔案很龐大之外，在之後的修改維護也十分的不方便。 而使用 SASS 或 SCSS 就可以用巢狀的方式，一個包一個的整理整齊，兩者最大的不同是 SCSS 還保留著大括號 { } 和分號 ; ，SASS 就不需要了。">
 <meta property="og:locale" content="zh_TW">
-<meta property="article:published_time" content="2020-07-05T15:24:26.000Z">
-<meta property="article:modified_time" content="2020-07-05T17:27:43.915Z">
+<meta property="article:published_time" content="2020-07-12T14:56:31.000Z">
+<meta property="article:modified_time" content="2020-07-12T15:56:15.488Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
@@ -125,7 +125,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-20200705-css-print" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-20200712-sass" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -133,7 +133,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      轉換成列印格式
+      SASS
     </h1>
   
 
@@ -141,71 +141,64 @@
     
     <div class="article-meta">
       
-	<a href="/blog/2020/07/05/20200705-css-print/" class="article-date">
-	  <time datetime="2020-07-05T15:24:26.000Z" itemprop="datePublished">七月 5, 2020</time>
+	<a href="/blog/2020/07/12/20200712-sass/" class="article-date">
+	  <time datetime="2020-07-12T14:56:31.000Z" itemprop="datePublished">七月 12, 2020</time>
 	</a>
 
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/blog/categories/CSS/">CSS</a>, <a class="article-category-link" href="/blog/categories/CSS/%E5%B1%AC%E6%80%A7/">屬性</a>, <a class="article-category-link" href="/blog/categories/CSS/%E6%8F%92%E4%BB%B6/">插件</a>
+    <a class="article-category-link" href="/blog/categories/CSS/">CSS</a>, <a class="article-category-link" href="/blog/categories/CSS/%E5%8A%9F%E8%83%BD/">功能</a>
  
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="用插件-Paper-CSS-轉換"><a href="#用插件-Paper-CSS-轉換" class="headerlink" title="用插件 Paper CSS 轉換"></a>用插件 Paper CSS 轉換</h1><a id="more"></a> 
-
-<p><a href="https://github.com/cognitom/paper-css" target="_blank" rel="noopener">Paper CSS for happy printing</a></p>
-<ul>
-<li><p>使用方式有</p>
-<ul>
-<li>直接到 Github 下載</li>
-<li>CDN</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span> <span class="attr">href</span>=<span class="string">"https://cdnjs.cloudflare.com/ajax/libs/paper-css/0.3.0/paper.css"</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<ul>
-<li>用 NPM 下載</li>
-</ul>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install paper-css</span><br></pre></td></tr></table></figure>
+        <h1 id="學習目的"><a href="#學習目的" class="headerlink" title="學習目的"></a>學習目的</h1><h1 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h1><p>在編寫 CSS 時常會為了一個效果而寫一大長串的樣式、編排，又或者是使用了許多幾乎有著相同文字效果的元素，讓整個 CSS 檔案很龐大之外，在之後的修改維護也十分的不方便。</p>
+<p>而使用 SASS 或 SCSS 就可以用巢狀的方式，一個包一個的整理整齊，兩者最大的不同是 SCSS 還保留著大括號 <code>{ }</code> 和分號 <code>;</code> ，SASS 就不需要了。</p>
+ <a id="more"></a> 
 
 
 
-</li>
-</ul>
-<h2 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h2><ul>
-<li>在 CSS 設定列印尺寸</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@page</span> &#123;</span><br><span class="line">  <span class="attribute">size</span>: A4</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Variable-變數"><a href="#Variable-變數" class="headerlink" title="Variable 變數"></a>Variable 變數</h1><p>定義變數的方式是使用 <code>$</code> 加變數名稱，而且不能有空格。</p>
+<p>預先定義會用到的主要樣式</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$text-m</span>: <span class="number">18px</span>;</span><br><span class="line"><span class="variable">$title-font</span>: <span class="string">"Arial"</span>;</span><br></pre></td></tr></table></figure>
 
-<ul>
-<li>在要轉換成可列印的 HTML 元素加上 </li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">class</span>=<span class="string">"A4"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 當外層設定尺寸後，內容元素就會成為工作表的格式 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">section</span> <span class="attr">class</span>=<span class="string">"sheet padding-10mm"</span>&gt;</span></span><br><span class="line">    </span><br><span class="line">  <span class="comment">&lt;!-- 工作表的內容推擠 padding-**mm" 只可設定 10、15、20、25 --&gt;</span></span><br><span class="line">    內容一樣可用 HTML 作切版設計</span><br><span class="line"></span><br><span class="line">  <span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>顏色</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$text-color</span>: <span class="number">#f00</span>;</span><br></pre></td></tr></table></figure>
+
+<p>以及文字計算</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$text-l</span>: <span class="variable">$text-m</span> *<span class="number">1.5</span>;</span><br></pre></td></tr></table></figure>
+
+<p>顏色的處理</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">color</span>: <span class="variable">$text-color</span>;</span><br><span class="line"><span class="attribute">box-shadow</span>: <span class="number">5px</span> <span class="number">5px</span> <span class="number">10px</span> darken(<span class="variable">$text-color</span>, <span class="number">20%</span>);</span><br></pre></td></tr></table></figure>
+
+<p>都是十分的方便</p>
+<h1 id="mixin-和-include"><a href="#mixin-和-include" class="headerlink" title="@mixin 和 @include"></a>@mixin 和 @include</h1><p>這就像在使用 <code>function bluebox () { }</code> 的作法</p>
+<p>打包用 <code>@mixin</code> 把全部的樣式都放進來</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@mixin</span> bluebox &#123;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#FFF</span>;</span><br><span class="line">  <span class="attribute">background-color</span>: blue;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>要使用時是用 <code>@include</code> 把包在裡面的置入</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.box</span> &#123;</span><br><span class="line">  <span class="keyword">@include</span> bluebox;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>而且還可以加上變數配合計算產生使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@mixin color($color, $size) &#123;</span><br><span class="line">  color: $color;</span><br><span class="line">  font-size: $size *1.5;</span><br><span class="line">&#125;</span><br><span class="line">.box &#123;</span><br><span class="line">  @include color(#f00, 16px);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
 
 
 
-<h2 id="可用列印尺寸"><a href="#可用列印尺寸" class="headerlink" title="可用列印尺寸"></a>可用列印尺寸</h2><p>有 A3 、 A4、  A5、 名信片大小，也可到 <a href="https://github.com/cognitom/paper-css/tree/master/examples" target="_blank" rel="noopener">Example</a> 下載看看</p>
-<h2 id="轉成-PDF"><a href="#轉成-PDF" class="headerlink" title="轉成 PDF"></a>轉成 PDF</h2><p>需要先載入 Electron-pdf 插件</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install --global electron-pdf</span><br></pre></td></tr></table></figure>
+<h1 id="import"><a href="#import" class="headerlink" title="@import"></a>@import</h1><p>最後還可以參考 Bootstrap 的方式把各類的樣式拆分多個 SASS / CSS 檔案後，再用 <code>@import</code> <strong>加檔案名和副檔名</strong> 匯入，而副檔名也可省略。</p>
+<figure class="highlight scss"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@import</span> <span class="string">"functions"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"variables"</span>;</span><br><span class="line"><span class="keyword">@import</span> <span class="string">"CSSreset"</span>;</span><br></pre></td></tr></table></figure>
 
-<p>再執行轉換</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">electron-pdf 原網頁檔案檔名.html 轉換後檔名.pdf</span><br></pre></td></tr></table></figure>
-
-<p>可用的功能可以到 <a href="https://github.com/fraserxu/electron-pdf#all-available-options" target="_blank" rel="noopener">All Available Options</a> 看看</p>
-<h1 id="題外話-設定為不可列印"><a href="#題外話-設定為不可列印" class="headerlink" title="[ 題外話 ] 設定為不可列印"></a>[ 題外話 ] 設定為不可列印</h1><p>設定方式就是在 <code>@media print</code> 設定當列印時要把 <code>body</code> 的標籤內容 <strong>不呈現</strong> </p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">@media</span> print &#123; <span class="selector-tag">body</span> &#123; <span class="attribute">display</span>:none &#125; &#125;</span><br></pre></td></tr></table></figure>
-
-<p>同理列印時只隱藏某些標籤的話，就只要設定 classname 的屬性為 <code>display:none</code> </p>
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/blog/categories/CSS/">CSS</a>, <a class="article-category-link" href="/blog/categories/CSS/%E5%B1%AC%E6%80%A7/">屬性</a>, <a class="article-category-link" href="/blog/categories/CSS/%E6%8F%92%E4%BB%B6/">插件</a>
+    <a class="article-category-link" href="/blog/categories/CSS/">CSS</a>, <a class="article-category-link" href="/blog/categories/CSS/%E5%8A%9F%E8%83%BD/">功能</a>
 
       
   <span class="ico-tags"></span>
@@ -219,19 +212,10 @@
     
 <nav id="article-nav">
   
-    <a href="/blog/2020/07/12/20200712-sass/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          SASS
-        
-      </div>
-    </a>
   
-  
-    <a href="/blog/2020/06/28/20200628-input-date/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/blog/2020/07/05/20200705-css-print/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">Input 日期、時間 標籤</div>
+      <div class="article-nav-title">轉換成列印格式</div>
     </a>
   
 </nav>
@@ -245,7 +229,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目錄</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#用插件-Paper-CSS-轉換"><span class="nav-number">1.</span> <span class="nav-text">用插件 Paper CSS 轉換</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方式"><span class="nav-number">1.1.</span> <span class="nav-text">使用方式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#可用列印尺寸"><span class="nav-number">1.2.</span> <span class="nav-text">可用列印尺寸</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#轉成-PDF"><span class="nav-number">1.3.</span> <span class="nav-text">轉成 PDF</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#題外話-設定為不可列印"><span class="nav-number">2.</span> <span class="nav-text">[ 題外話 ] 設定為不可列印</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#學習目的"><span class="nav-number">1.</span> <span class="nav-text">學習目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#簡介"><span class="nav-number">2.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Variable-變數"><span class="nav-number">3.</span> <span class="nav-text">Variable 變數</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mixin-和-include"><span class="nav-number">4.</span> <span class="nav-text">@mixin 和 @include</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#import"><span class="nav-number">5.</span> <span class="nav-text">@import</span></a></li></ol>
     
     </div>
   </aside>
