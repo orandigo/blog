@@ -142,70 +142,29 @@
 
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/blog/categories/CSS/">CSS</a>, <a class="article-category-link" href="/blog/categories/CSS/%E5%8A%9F%E8%83%BD/">功能</a>
+    <a class="article-category-link" href="/blog/categories/JavaScript/">JavaScript</a>, <a class="article-category-link" href="/blog/categories/JavaScript/%E5%87%BD%E5%BC%8F/">函式</a>
  
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-         <a id="more"></a> 
+        
 
+          
+          <div class="entry-summary">
+          簡介因為需要使用重複執行，所以整理一下。
 
-
-<h1 id="for-迴圈（for-Loop）"><a href="#for-迴圈（for-Loop）" class="headerlink" title="for 迴圈（for Loop）"></a>for 迴圈（for Loop）</h1><p>當 for 裡面的變數 i 和條件判斷是 ture 時執行內容後再回到前面的 for 迴圈，直到判斷是 false 時才會停止。</p>
-<p>寫法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> ( <span class="keyword">var</span> i = <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ ) &#123;</span><br><span class="line">　<span class="built_in">console</span>.log(i)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<ul>
-<li><p><code>var i = 0</code> 是設定初始值</p>
-</li>
-<li><p><code>i &lt; 10</code> 條件判斷決定迴圈何時停止，當 ture 時執行，false 時停止</p>
-</li>
-<li><p><code>i++</code> 當內容執行完後執行 ( 算術運算子 )</p>
-</li>
-<li><p>在寫迴圈的時候，要注意避免產生無限迴圈</p>
-</li>
-</ul>
-<h2 id="使用-forEach-簡化"><a href="#使用-forEach-簡化" class="headerlink" title="使用 forEach 簡化"></a>使用 forEach 簡化</h2><p>當條件判斷的值是陣列長度時，原本寫法為</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; array.length; i++) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(Ary[i]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>這就會把陣列 array 的值一個一個取出</p>
-<p>要簡化寫法就可以使用 forEach 讓陣列依序執行</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">array.forEach(<span class="function"><span class="keyword">function</span> (<span class="params">value</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-
-<p>而要注意不能使用 break 中斷迴圈，或 return 跳到迴圈外。</p>
-<h1 id="for-in-迴圈"><a href="#for-in-迴圈" class="headerlink" title="for..in 迴圈"></a>for..in 迴圈</h1><p>這會把 myArray 當作 <strong>物件</strong> 依序執行</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">var</span> index <span class="keyword">in</span> myArray) &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(myArray[index]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>因為不是作為陣列 Array 而是物件 Object 執行，所以有幾點要注意：</p>
-<ul>
-<li><p>index 不會是 number (0, 1, 2) 而是 string (‘0’, ‘1’, ‘2’)</p>
-</li>
-<li><p>會找到自定義的屬性名稱，像是 myArray.name 屬性，就會得到一個 index 叫做 ‘name’</p>
-</li>
-</ul>
-<h1 id="while-迴圈"><a href="#while-迴圈" class="headerlink" title="while 迴圈"></a>while 迴圈</h1><p>當條件是 ture 的時候執行，直到條件是 false 才會停止</p>
-<p>常用在顯示搜尋結果或是目錄清單等。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>( i &lt; <span class="number">10</span> ) &#123;</span><br><span class="line">　<span class="built_in">document</span>.write(i);</span><br><span class="line">　i++;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 0123456789</span></span><br></pre></td></tr></table></figure>
-
-
-
-<h1 id="do…while-迴圈"><a href="#do…while-迴圈" class="headerlink" title="do…while 迴圈"></a>do…while 迴圈</h1><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">do</span> &#123;</span><br><span class="line">　<span class="built_in">document</span>.write(i);</span><br><span class="line">　i++;</span><br><span class="line">&#125;<span class="keyword">while</span>( i &lt; <span class="number">10</span> );</span><br></pre></td></tr></table></figure>
-
-<p>與 while 迴圈差別在 do…while 會先執行內容再判斷，而 while 是先判斷再執行內容。</p>
-<h1 id="ES6-的-for…of"><a href="#ES6-的-for…of" class="headerlink" title="ES6 的 for…of"></a>ES6 的 for…of</h1><blockquote>
-<p>可以搭配 break, continue, return</p>
-</blockquote>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (variable <span class="keyword">of</span> iterable) &#123;</span><br><span class="line">  statement</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>variable 指的是值不是索引，直接看下面的例子會比較清楚</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用在陣列時</span></span><br><span class="line"><span class="keyword">const</span> iterable = [<span class="number">10</span>, <span class="number">20</span>, <span class="number">30</span>];</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> value <span class="keyword">of</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 10</span></span><br><span class="line"><span class="comment">// 20</span></span><br><span class="line"><span class="comment">// 30</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用在字串時</span></span><br><span class="line"><span class="keyword">const</span> iterable = <span class="string">'boo'</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> value <span class="keyword">of</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// "b"</span></span><br><span class="line"><span class="comment">// "o"</span></span><br><span class="line"><span class="comment">// "o"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 在陣列內的陣列內取值</span></span><br><span class="line"><span class="keyword">const</span> iterable = <span class="keyword">new</span> <span class="built_in">Map</span>([[<span class="string">'a'</span>, <span class="number">1</span>], [<span class="string">'b'</span>, <span class="number">2</span>], [<span class="string">'c'</span>, <span class="number">3</span>]]);</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">const</span> [key, value] <span class="keyword">of</span> iterable) &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(value);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 1</span></span><br><span class="line"><span class="comment">// 2</span></span><br><span class="line"><span class="comment">// 3</span></span><br></pre></td></tr></table></figure>
+        
+          <p class="article-more-link">
+            <a href="/blog/2020/07/26/20200726-js-loop/#more">閱讀全文</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/blog/categories/CSS/">CSS</a>, <a class="article-category-link" href="/blog/categories/CSS/%E5%8A%9F%E8%83%BD/">功能</a>
+    <a class="article-category-link" href="/blog/categories/JavaScript/">JavaScript</a>, <a class="article-category-link" href="/blog/categories/JavaScript/%E5%87%BD%E5%BC%8F/">函式</a>
 
       
   <span class="ico-tags"></span>
@@ -906,7 +865,7 @@ Animate.csshttps://animate.style/
   <div class="widget-wrap">
     <h3 class="widget-title">分類</h3>
     <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/CSS/">CSS</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/CSS/%E5%8A%9F%E8%83%BD/">功能</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/CSS/%E5%AF%A6%E4%BE%8B/">實例</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/CSS/%E5%B1%AC%E6%80%A7/">屬性</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/CSS/%E6%8F%92%E4%BB%B6/">插件</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Hexo/">Hexo</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Hexo/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Hexo/%E8%A8%AD%E5%AE%9A/">設定</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaScript/">JavaScript</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaScript/jQuery/">jQuery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaScript/library/">library</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaScript/%E5%B1%AC%E6%80%A7/">屬性</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Vue/">Vue</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Vue/%E7%AD%86%E8%A8%98/">筆記</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/">類型</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/GAS/">GAS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/Line-Notify/">Line Notify</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/%E5%9C%96%E8%A1%A8%E9%A1%9E/">圖表類</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/%E8%A1%A8%E6%A0%BC%E9%A1%9E/">表格類</a><span class="category-list-count">1</span></li></ul></li></ul>
+      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/CSS/">CSS</a><span class="category-list-count">6</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/CSS/%E5%8A%9F%E8%83%BD/">功能</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/CSS/%E5%AF%A6%E4%BE%8B/">實例</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/CSS/%E5%B1%AC%E6%80%A7/">屬性</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/CSS/%E6%8F%92%E4%BB%B6/">插件</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Hexo/">Hexo</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Hexo/%E5%B7%A5%E5%85%B7/">工具</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Hexo/%E8%A8%AD%E5%AE%9A/">設定</a><span class="category-list-count">4</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaScript/">JavaScript</a><span class="category-list-count">7</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaScript/jQuery/">jQuery</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaScript/library/">library</a><span class="category-list-count">3</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaScript/%E5%87%BD%E5%BC%8F/">函式</a><span class="category-list-count">1</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/JavaScript/%E5%B1%AC%E6%80%A7/">屬性</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Vue/">Vue</a><span class="category-list-count">2</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/Vue/%E7%AD%86%E8%A8%98/">筆記</a><span class="category-list-count">2</span></li></ul></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/">類型</a><span class="category-list-count">5</span><ul class="category-list-child"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/GAS/">GAS</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/Line-Notify/">Line Notify</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/%E5%9C%96%E8%A1%A8%E9%A1%9E/">圖表類</a><span class="category-list-count">2</span></li><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/%E8%A1%A8%E6%A0%BC%E9%A1%9E/">表格類</a><span class="category-list-count">1</span></li></ul></li></ul>
     </div>
   </div>
 
