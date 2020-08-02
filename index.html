@@ -120,6 +120,99 @@
         
           <section id="main">
   
+    <article id="post-20200802-canvas-watermark"  class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" itemprop="name">
+      <a class="article-title" href="/blog/2020/08/02/20200802-canvas-watermark/">用 Canvas 在圖片加上浮水印</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/08/02/20200802-canvas-watermark/" class="article-date">
+	  <time datetime="2020-08-02T12:37:30.000Z" itemprop="datePublished">八月 2, 2020</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>最近整理出了一批用不上的舊物，保留了接近全新或是完全未使用的物品，就要修圖時才發現，開繪圖程式再開檔案加字就花了一點時間，又要把相片壓縮、打字、加浮水印 … ，這又要花了不少時間，加上只是為了縮小圖片加字而去開啟繪圖程式，又是要一張一張相片的做太麻煩了，所以就想到用 Canvas ，直接用 <code>&lt;input  type=&quot;file&quot; &gt;</code> 載入圖後，再用按鍵另存成新的圖檔，就可以快速完成，所以接下來就開始實做。</p>
+<h1 id="建立畫板"><a href="#建立畫板" class="headerlink" title="建立畫板"></a>建立畫板</h1><p>在 HTML 中建立 Cancas</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"cvs"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>和載入圖片的按鍵</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">id</span>=<span class="string">"loadPic"</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>要從 input 取得圖片 ，取值方式可參考 <a href="https://developer.mozilla.org/zh-TW/docs/Web/API/File/Using_files_from_web_applications" target="_blank" rel="noopener">MDN 在網頁應用程式中使用本地檔案</a> </p>
+<p>要先判斷有沒有資料才向下執行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">readURL</span>(<span class="params">input</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">if</span> (input.files &amp;&amp; input.files[<span class="number">0</span>]) &#123; </span><br><span class="line">    <span class="comment">// 執行內容</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>當 input.files 有值時，建立 <code>new FileReader()</code>  讀取資料。</p>
+<p>再來就等 FileReader 確定有接收到資料後就可以執行載入圖片了。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span><br><span class="line">reader.onload = <span class="function"><span class="keyword">function</span> (<span class="params">e</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 圖片載入</span></span><br><span class="line">&#125;;</span><br><span class="line">reader.readAsDataURL(input.files[<span class="number">0</span>]);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>再來就設定載入後的圖片寬高，這裡我設定的是固定高度是 300 px ，寬是等比例縮放。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> img = <span class="keyword">new</span> Image();</span><br><span class="line">img.onload = <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</span><br><span class="line">  canvas.height = <span class="number">450</span>;</span><br><span class="line">  canvas.width = (canvas.height / img.height) * img.width;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 載入圖片</span></span><br><span class="line">  ctx.drawImage(img, <span class="number">0</span>, <span class="number">0</span>, canvas.width, canvas.height);</span><br><span class="line">  </span><br><span class="line">  ctx.font = <span class="string">"60px monospace"</span>; <span class="comment">// 字級 字體</span></span><br><span class="line">  ctx.textBaseline = <span class="string">"top"</span>; <span class="comment">// 文字對齊的基準線</span></span><br><span class="line">  <span class="keyword">var</span> textW = ctx.measureText(<span class="string">"浮水印"</span>).width; <span class="comment">// 取得文字的長度</span></span><br><span class="line">  ctx.fillText(</span><br><span class="line">    <span class="string">"浮水印"</span>,</span><br><span class="line">    (canvas.width - textW) / <span class="number">2</span>,</span><br><span class="line">    (canvas.height - <span class="number">60</span>) / <span class="number">2</span></span><br><span class="line">  ); <span class="comment">// 置中</span></span><br><span class="line">&#125;;</span><br><span class="line">img.src = e.target.result;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>另存新檔的話就直接使用 a 標籤完成</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">download</span>=<span class="string">"另存新檔.jpg"</span> <span class="attr">onclick</span>=<span class="string">"this.href=canvas.toDataURL();"</span>&gt;</span>下載圖片<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>這樣就完成一個簡單又快速完成有加字和轉存圖片的工具</p>
+<ul>
+<li><p>以下為完整的轉存圖片</p>
+<ul>
+<li>HTML 元素</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"#"</span> <span class="attr">download</span>=<span class="string">"販售品.jpg"</span> <span class="attr">onclick</span>=<span class="string">"this.href=canvas.toDataURL();"</span> &gt;</span>下載圖片<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">type</span>=<span class="string">"file"</span> <span class="attr">onchange</span>=<span class="string">"readURL(this)"</span> <span class="attr">id</span>=<span class="string">"loadPic"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">"cvs"</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>用 img 標籤檢查 input 是不是有正確取出資料</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">""</span> <span class="attr">id</span>=<span class="string">"imgload"</span> <span class="attr">alt</span>=<span class="string">""</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="actionscript">  <span class="function"><span class="keyword">function</span> <span class="title">readURL</span><span class="params">(input)</span> </span>&#123;</span></span><br><span class="line">    if (input.files &amp;&amp; input.files[0]) &#123;</span><br><span class="line"><span class="actionscript">      <span class="keyword">var</span> reader = <span class="keyword">new</span> FileReader();</span></span><br><span class="line"><span class="actionscript">      reader.onload = <span class="function"><span class="keyword">function</span><span class="params">(e)</span> </span>&#123;</span></span><br><span class="line"><span class="javascript">        $(<span class="string">'#blah'</span>).attr(<span class="string">'src'</span>, e.target.result);</span></span><br><span class="line">      &#125;</span><br><span class="line">      reader.readAsDataURL(input.files[0]);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line"><span class="javascript">  $(<span class="string">"#imgInp"</span>).change(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span></span><br><span class="line"><span class="actionscript">    readURL(<span class="keyword">this</span>);</span></span><br><span class="line">  &#125;);</span><br><span class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>參考資料</p>
+<ul>
+<li><a href="https://stackoverflow.com/questions/45828195/image-input-to-canvas-and-color-picker" target="_blank" rel="noopener">Image input to canvas and color picker</a> </li>
+<li><a href="https://stackoverflow.com/questions/4459379/preview-an-image-before-it-is-uploaded" target="_blank" rel="noopener">Preview an image before it is uploaded</a> </li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+</article>
+
+<!-- Table of Contents -->
+
+  
     <article id="post-20200726-js-loop"  class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
@@ -660,67 +753,6 @@ Animate.csshttps://animate.style/
 <!-- Table of Contents -->
 
   
-    <article id="post-20200510-css-menu"  class="article article-type-post" itemscope itemprop="blogPost" >
-  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="thumb" itemprop="name">
-      <a class="article-title" href="/blog/2020/05/10/20200510-css-menu/">CSS 選單</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-meta">
-      
-	<a href="/blog/2020/05/10/20200510-css-menu/" class="article-date">
-	  <time datetime="2020-05-10T14:24:32.000Z" itemprop="datePublished">五月 10, 2020</time>
-	</a>
-
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/blog/categories/CSS/">CSS</a>, <a class="article-category-link" href="/blog/categories/CSS/%E5%AF%A6%E4%BE%8B/">實例</a>
- 
-      
-    </div>
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-
-          
-          <div class="entry-summary">
-          簡介利用 CSS 的 display:none  和 display: block 做出的選單效果
-
-
-        
-          <p class="article-more-link">
-            <a href="/blog/2020/05/10/20200510-css-menu/#more">閱讀全文</a>
-          </p>
-        </div>
-      
-    </div>
-    <footer class="entry-meta entry-footer">
-      
-	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/blog/categories/CSS/">CSS</a>, <a class="article-category-link" href="/blog/categories/CSS/%E5%AF%A6%E4%BE%8B/">實例</a>
-
-      
-  <span class="ico-tags"></span>
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
-
-      
-    </footer>
-    <hr class="entry-footer-hr">
-  </div>
-  
-</article>
-
-<!-- Table of Contents -->
-
-  
 
 
   <nav id="page-nav">
@@ -790,6 +822,18 @@ Animate.csshttps://animate.style/
               <div class="widget-entry-summary" style="margin: 0;">
             
 
+              <h6 style="margin: 0;"><a href="/blog/2020/08/02/20200802-canvas-watermark/">用 Canvas 在圖片加上浮水印</a></h6>
+              <span>八月 2, 2020</span>
+            </div>
+
+          </li>
+        
+          <li class="clearfix">
+
+            
+              <div class="widget-entry-summary" style="margin: 0;">
+            
+
               <h6 style="margin: 0;"><a href="/blog/2020/07/26/20200726-js-loop/">20200726-js-loop</a></h6>
               <span>七月 26, 2020</span>
             </div>
@@ -844,18 +888,6 @@ Animate.csshttps://animate.style/
 
           </li>
         
-          <li class="clearfix">
-
-            
-              <div class="widget-entry-summary" style="margin: 0;">
-            
-
-              <h6 style="margin: 0;"><a href="/blog/2020/06/07/20200607-flex/">Flexbox 排版</a></h6>
-              <span>六月 7, 2020</span>
-            </div>
-
-          </li>
-        
       </ul>
     </div>
   </div>
@@ -876,7 +908,7 @@ Animate.csshttps://animate.style/
     <h3 class="widget-title">發文日期</h3>
 
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">七月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/08/">八月 2020</a><span class="archive-list-count">1</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/07/">七月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/06/">六月 2020</a><span class="archive-list-count">3</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/05/">五月 2020</a><span class="archive-list-count">5</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/04/">四月 2020</a><span class="archive-list-count">4</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/03/">三月 2020</a><span class="archive-list-count">6</span></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2020/02/">二月 2020</a><span class="archive-list-count">2</span></li></ul>
     </div>
   </div>
 
@@ -886,7 +918,7 @@ Animate.csshttps://animate.style/
   <div class="widget-wrap">
     <h3 class="widget-title">標籤</h3>
     <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a><span class="tag-list-count">21</span></li></ul>
+      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a><span class="tag-list-count">22</span></li></ul>
     </div>
   </div>
 
