@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>打字練習 | 前端筆記</title>
+  <title>Sticky footer 固定頁尾 | 前端筆記</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="w3HexSchool" />
@@ -11,21 +11,18 @@
   
   
   
-  <meta name="description" content="目的利用工具加強打字的速度和記憶按鍵的位置，希望能改善打錯字的機率。">
+  <meta name="description" content="目的當頁面短時，會因為內容不多而應該保持在頁面最下方頁尾 Footer 區塊向上跑，讓原本每一頁都相同的設計，因為內容的多寡改變；">
 <meta property="og:type" content="article">
-<meta property="og:title" content="打字練習">
-<meta property="og:url" content="https://orandigo.github.io/2020/08/09/20200809-english-type/index.html">
+<meta property="og:title" content="Sticky footer 固定頁尾">
+<meta property="og:url" content="https://orandigo.github.io/2020/08/23/20200823-sticky-footer/index.html">
 <meta property="og:site_name" content="前端筆記">
-<meta property="og:description" content="目的利用工具加強打字的速度和記憶按鍵的位置，希望能改善打錯字的機率。">
+<meta property="og:description" content="目的當頁面短時，會因為內容不多而應該保持在頁面最下方頁尾 Footer 區塊向上跑，讓原本每一頁都相同的設計，因為內容的多寡改變；">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://orandigo.github.io/2020/08/09/20200809-english-type/english-keybr.png">
-<meta property="og:image" content="https://orandigo.github.io/2020/08/09/20200809-english-type/chinese-typing_tw.png">
-<meta property="article:published_time" content="2020-08-09T13:09:38.000Z">
-<meta property="article:modified_time" content="2020-08-09T16:26:53.651Z">
+<meta property="article:published_time" content="2020-08-23T15:21:21.000Z">
+<meta property="article:modified_time" content="2020-08-23T15:54:16.244Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://orandigo.github.io/2020/08/09/20200809-english-type/english-keybr.png">
   
   <link rel="icon" href="/blog/css/images/favicon.ico">
   
@@ -128,7 +125,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-20200809-english-type" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-20200823-sticky-footer" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -136,7 +133,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      打字練習
+      Sticky footer 固定頁尾
     </h1>
   
 
@@ -144,8 +141,8 @@
     
     <div class="article-meta">
       
-	<a href="/blog/2020/08/09/20200809-english-type/" class="article-date">
-	  <time datetime="2020-08-09T13:09:38.000Z" itemprop="datePublished">八月 9, 2020</time>
+	<a href="/blog/2020/08/23/20200823-sticky-footer/" class="article-date">
+	  <time datetime="2020-08-23T15:21:21.000Z" itemprop="datePublished">八月 23, 2020</time>
 	</a>
 
        
@@ -153,52 +150,21 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>利用工具加強打字的速度和記憶按鍵的位置，希望能改善打錯字的機率。</p>
- <a id="more"></a> 
+        <h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>當頁面短時，會因為內容不多而應該保持在頁面最下方頁尾 Footer 區塊向上跑，讓原本每一頁都相同的設計，因為內容的多寡改變；</p>
+<a id="more"></a> 
 
+<p>所以可以用 <strong>Sticky Footer</strong> 的效果，目的是要保持頁尾 <code>footer</code> 的區塊、列，在瀏覽到頁面內容最後時會出現在畫面的最下方，有提示使用者已經看到最後的用意。</p>
+<h1 id="min-height-margin-bottom"><a href="#min-height-margin-bottom" class="headerlink" title="min-height + margin-bottom"></a>min-height + margin-bottom</h1><p>在 HTML 內最少必需要有 <strong>內容</strong> <code>wrapper</code> 和 <strong>頁尾</strong> <code>footer</code> 的區塊</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrapper"</span>&gt;</span></span><br><span class="line">  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus cum, expedita labore modi possimus exercitationem sapiente quae autem fugiat voluptatem repellendus rerum quisquam, architecto, ratione non est eligendi! Quaerat, cum?</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"footer"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在 CSS 設定</p>
 <ul>
-<li>線上工具<ul>
-<li>keybr 英打練習<br><a href="https://www.keybr.com/" target="_blank" rel="noopener">https://www.keybr.com/</a></li>
-<li>typing.io 英打練習<br><a href="https://typing.io/" target="_blank" rel="noopener">https://typing.io/</a></li>
-<li>Typing.tw 線上中打練習<br><a href="https://typing.tw/" target="_blank" rel="noopener">https://typing.tw/</a> </li>
+<li><code>html</code> 和 <code>body</code> 設定 100% 的高和 <code>.wrapper</code> 的 CSS 屬性 <code>min-height</code> 一起才會有效果</li>
+<li><code>min-height</code> 是要確保最小的高度，會因為內容不夠自動拉至 100% 的高</li>
+<li><code>margin-bottom</code> 的負值是把 <code>.footer</code> 的高減掉才不會超過 100%</li>
 </ul>
-</li>
-</ul>
-<hr>
-<h1 id="keybr-英打練習"><a href="#keybr-英打練習" class="headerlink" title="keybr 英打練習"></a>keybr 英打練習</h1><blockquote>
-<p>keybr<br><a href="https://www.keybr.com/" target="_blank" rel="noopener">https://www.keybr.com/</a></p>
-</blockquote>
-<p>這是可以使用亂數產生文章或提供文字的方式產生文章，並練習去習慣鍵盤的位置。</p>
-<p>除了打字練習也包括 7 種語言和  5 種鍵盤格式可以選擇改變要練習的環境</p>
-<p><img src="english-keybr.png" alt="keybr 介面"></p>
-<ul>
-<li><p>設定方式在右上的 settings … 內</p>
-<ul>
-<li>Keyboard Layout 設定語言和鍵盤</li>
-<li>Learning Mode 設定亂數產生或輸入要產生亂數文章的單字</li>
-<li>DONE 儲存設定</li>
-</ul>
-</li>
-<li><p>暫停練習</p>
-<ul>
-<li>用滑鼠點文章外的空白處，就會看到像上圖出現 Click to activate … 的字，要繼續時直接打字就可以了。</li>
-</ul>
-</li>
-<li><p>另外發現也因為可以輸入自訂的單字和文章，所以也能練習邊打字邊記住單字。</p>
-</li>
-</ul>
-<hr>
-<h1 id="typing-io-程式碼練習"><a href="#typing-io-程式碼練習" class="headerlink" title="typing.io 程式碼練習"></a>typing.io 程式碼練習</h1><blockquote>
-<p>typing.io<br><a href="https://typing.io/" target="_blank" rel="noopener">https://typing.io/</a></p>
-</blockquote>
-<p>這可以模擬用編寫程式碼的方式來練習打字的速度，可以選擇不註冊帳號或免費的方式練習。</p>
-<p>模擬的程式語言有 jQuery 、 Bootstrap 、 Git  … 可練習，全是使用 open source code ，所以模擬打字時會跟實際的打字感覺接近。</p>
-<hr>
-<h1 id="typing-tw-中打練習"><a href="#typing-tw-中打練習" class="headerlink" title="typing.tw 中打練習"></a>typing.tw 中打練習</h1><blockquote>
-<p> Typing.tw<br> <a href="https://typing.tw/" target="_blank" rel="noopener">https://typing.tw/</a> </p>
-</blockquote>
-<p>要練習中文可使用這個線上工具試試，這會自動產生內建的文章也會計時，雖然沒有記錄的功能但還是有像下圖的除錯可以知道出錯率和評價。</p>
-<p><img src="chinese-typing_tw.png" alt="Typing.tw 計算介面"></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span>, <span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.wrapper</span> &#123;</span><br><span class="line">  <span class="attribute">min-height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: -<span class="number">30px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.footer</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#f80</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
 
       
     </div>
@@ -216,19 +182,10 @@
     
 <nav id="article-nav">
   
-    <a href="/blog/2020/08/23/20200823-sticky-footer/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          Sticky footer 固定頁尾
-        
-      </div>
-    </a>
   
-  
-    <a href="/blog/2020/08/02/20200802-canvas-watermark/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/blog/2020/08/09/20200809-english-type/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">用 Canvas 在圖片加上浮水印</div>
+      <div class="article-nav-title">打字練習</div>
     </a>
   
 </nav>
@@ -242,7 +199,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目錄</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目的"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#keybr-英打練習"><span class="nav-number">2.</span> <span class="nav-text">keybr 英打練習</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#typing-io-程式碼練習"><span class="nav-number">3.</span> <span class="nav-text">typing.io 程式碼練習</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#typing-tw-中打練習"><span class="nav-number">4.</span> <span class="nav-text">typing.tw 中打練習</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目的"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#min-height-margin-bottom"><span class="nav-number">2.</span> <span class="nav-text">min-height + margin-bottom</span></a></li></ol>
     
     </div>
   </aside>
