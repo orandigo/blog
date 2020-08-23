@@ -18,11 +18,14 @@
 <meta property="og:site_name" content="前端筆記">
 <meta property="og:description" content="目的當頁面短時，會因為內容不多而應該保持在頁面最下方頁尾 Footer 區塊向上跑，讓原本每一頁都相同的設計，因為內容的多寡改變；">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="d:%5CUpdata%5COdy_blog%5Csource_posts%5C20200823-sticky-footer%5C1598199859315.jpg">
+<meta property="og:image" content="d:%5CUpdata%5COdy_blog%5Csource_posts%5C20200823-sticky-footer%5C1598199887805.jpg">
 <meta property="article:published_time" content="2020-08-23T15:21:21.000Z">
-<meta property="article:modified_time" content="2020-08-23T15:56:01.014Z">
+<meta property="article:modified_time" content="2020-08-23T18:14:24.048Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="d:%5CUpdata%5COdy_blog%5Csource_posts%5C20200823-sticky-footer%5C1598199859315.jpg">
   
   <link rel="icon" href="/blog/css/images/favicon.ico">
   
@@ -156,17 +159,30 @@
         <h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>當頁面短時，會因為內容不多而應該保持在頁面最下方頁尾 Footer 區塊向上跑，讓原本每一頁都相同的設計，因為內容的多寡改變；</p>
 <a id="more"></a> 
 
-<p>所以可以用 <strong>Sticky Footer</strong> 的效果，目的是要保持頁尾 <code>footer</code> 的區塊、列，在瀏覽到頁面內容最後時會出現在畫面的最下方，有提示使用者已經看到最後的用意。</p>
-<h1 id="min-height-margin-bottom"><a href="#min-height-margin-bottom" class="headerlink" title="min-height + margin-bottom"></a>min-height + margin-bottom</h1><p>在 HTML 內最少必需要有 <strong>內容</strong> <code>wrapper</code> 和 <strong>頁尾</strong> <code>footer</code> 的區塊</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrapper"</span>&gt;</span></span><br><span class="line">  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus cum, expedita labore modi possimus exercitationem sapiente quae autem fugiat voluptatem repellendus rerum quisquam, architecto, ratione non est eligendi! Quaerat, cum?</span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"footer"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>所以可以用 <strong>Sticky Footer</strong> 的效果，目的是要保持頁尾 <code>footer</code> 的區塊、列，在瀏覽到頁面內容最後時出現在畫面的最下方，也有提示已經看到最後的用意。</p>
+<table>
+<thead>
+<tr>
+<th><img src="D:%5CUpdata%5COdy_blog%5Csource_posts%5C20200823-sticky-footer%5C1598199859315.jpg" alt="1598199859315.jpg"></th>
+<th><img src="D:%5CUpdata%5COdy_blog%5Csource_posts%5C20200823-sticky-footer%5C1598199887805.jpg" alt="1598199859315.jpg"></th>
+</tr>
+</thead>
+<tbody><tr>
+<td>沒效果</td>
+<td>使用效果</td>
+</tr>
+</tbody></table>
+<h1 id="min-height-margin-bottom"><a href="#min-height-margin-bottom" class="headerlink" title="min-height + margin-bottom"></a>min-height + margin-bottom</h1><p>在 HTML 內有 <strong>內容</strong> <code>wrapper</code> 和 <strong>頁尾</strong> <code>footer</code> 的區塊外，還要在內容加上和頁尾同高度的區塊，以避免內容的文字覆蓋在頁尾的區塊上。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrapper"</span>&gt;</span></span><br><span class="line">  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus cum, expedita labore modi possimus exercitationem sapiente quae autem fugiat voluptatem repellendus rerum quisquam, architecto, ratione non est eligendi! Quaerat, cum?</span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fixedFooter"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"footer"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>在 CSS 設定</p>
 <ul>
 <li><code>html</code> 和 <code>body</code> 設定 100% 的高和 <code>.wrapper</code> 的 CSS 屬性 <code>min-height</code> 一起才會有效果</li>
 <li><code>min-height</code> 是要確保最小的高度，會因為內容不夠自動拉至 100% 的高</li>
-<li><code>margin-bottom</code> 的負值是把 <code>.footer</code> 的高減掉才不會超過 100%</li>
+<li><code>margin-bottom</code> 的負值是減掉 <code>.footer</code> 所占的高度，並向上推被減掉的高度，為了總高度不會超過 100%</li>
+<li><code>.fixedFooter</code> 是為了修正內容文字覆蓋到頁尾的部分，所以要高度要是頁尾的高度或更高才能正確呈現觀看的效果。</li>
 </ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span>, <span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.wrapper</span> &#123;</span><br><span class="line">  <span class="attribute">min-height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: -<span class="number">30px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.footer</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#f80</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">30px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span>, <span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.wrapper</span> &#123;</span><br><span class="line">  <span class="attribute">min-height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: -<span class="number">50px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.fixedFooter</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.footer</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#f80</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
