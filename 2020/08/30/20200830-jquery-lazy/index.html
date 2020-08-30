@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Sticky footer 固定頁尾 | 前端筆記</title>
+  <title>jQuery.Lazy() 圖片延遲載入 | 前端筆記</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="w3HexSchool" />
@@ -11,21 +11,18 @@
   
   
   
-  <meta name="description" content="目的當頁面短時，會因為內容不多而應該保持在頁面最下方頁尾 Footer 區塊向上跑，讓原本每一頁都相同的設計，因為內容的多寡改變；">
+  <meta name="description" content="簡介當頁面的圖片檔案又大又多時，就可以考慮用 Lazy 函式庫做到不一次下載，而是當畫面滑到時才開始下載圖片。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Sticky footer 固定頁尾">
-<meta property="og:url" content="https://orandigo.github.io/2020/08/23/20200823-sticky-footer/index.html">
+<meta property="og:title" content="jQuery.Lazy() 圖片延遲載入">
+<meta property="og:url" content="https://orandigo.github.io/2020/08/30/20200830-jquery-lazy/index.html">
 <meta property="og:site_name" content="前端筆記">
-<meta property="og:description" content="目的當頁面短時，會因為內容不多而應該保持在頁面最下方頁尾 Footer 區塊向上跑，讓原本每一頁都相同的設計，因為內容的多寡改變；">
+<meta property="og:description" content="簡介當頁面的圖片檔案又大又多時，就可以考慮用 Lazy 函式庫做到不一次下載，而是當畫面滑到時才開始下載圖片。">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="d:%5CUpdata%5COdy_blog%5Csource_posts%5C20200823-sticky-footer%5C1598199859315.jpg">
-<meta property="og:image" content="d:%5CUpdata%5COdy_blog%5Csource_posts%5C20200823-sticky-footer%5C1598199887805.jpg">
-<meta property="article:published_time" content="2020-08-23T15:21:21.000Z">
-<meta property="article:modified_time" content="2020-08-23T18:14:24.048Z">
+<meta property="article:published_time" content="2020-08-30T05:41:56.000Z">
+<meta property="article:modified_time" content="2020-08-30T15:52:48.909Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="d:%5CUpdata%5COdy_blog%5Csource_posts%5C20200823-sticky-footer%5C1598199859315.jpg">
   
   <link rel="icon" href="/blog/css/images/favicon.ico">
   
@@ -128,7 +125,7 @@
             
       <div id="content" class="outer">
         
-          <section id="main" style="float:none;"><article id="post-20200823-sticky-footer" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+          <section id="main" style="float:none;"><article id="post-20200830-jquery-lazy" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
   <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
     
     
@@ -136,7 +133,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      Sticky footer 固定頁尾
+      jQuery.Lazy() 圖片延遲載入
     </h1>
   
 
@@ -144,45 +141,44 @@
     
     <div class="article-meta">
       
-	<a href="/blog/2020/08/23/20200823-sticky-footer/" class="article-date">
-	  <time datetime="2020-08-23T15:21:21.000Z" itemprop="datePublished">八月 23, 2020</time>
+	<a href="/blog/2020/08/30/20200830-jquery-lazy/" class="article-date">
+	  <time datetime="2020-08-30T05:41:56.000Z" itemprop="datePublished">八月 30, 2020</time>
 	</a>
 
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/blog/categories/CSS/">CSS</a>, <a class="article-category-link" href="/blog/categories/CSS/%E5%AF%A6%E4%BE%8B/">實例</a>
+    <a class="article-category-link" href="/blog/categories/jQuery/">jQuery</a>, <a class="article-category-link" href="/blog/categories/jQuery/library/">library</a>
  
       
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>當頁面短時，會因為內容不多而應該保持在頁面最下方頁尾 Footer 區塊向上跑，讓原本每一頁都相同的設計，因為內容的多寡改變；</p>
+        <h1 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h1><p>當頁面的圖片檔案又大又多時，就可以考慮用 Lazy 函式庫做到不一次下載，而是當畫面滑到時才開始下載圖片。</p>
 <a id="more"></a> 
 
-<p>所以可以用 <strong>Sticky Footer</strong> 的效果，目的是要保持頁尾 <code>footer</code> 的區塊、列，在瀏覽到頁面內容最後時出現在畫面的最下方，也有提示已經看到最後的用意。</p>
-<table>
-<thead>
-<tr>
-<th><img src="D:%5CUpdata%5COdy_blog%5Csource_posts%5C20200823-sticky-footer%5C1598199859315.jpg" alt="1598199859315.jpg"></th>
-<th><img src="D:%5CUpdata%5COdy_blog%5Csource_posts%5C20200823-sticky-footer%5C1598199887805.jpg" alt="1598199859315.jpg"></th>
-</tr>
-</thead>
-<tbody><tr>
-<td>沒效果</td>
-<td>使用效果</td>
-</tr>
-</tbody></table>
-<h1 id="min-height-margin-bottom"><a href="#min-height-margin-bottom" class="headerlink" title="min-height + margin-bottom"></a>min-height + margin-bottom</h1><p>在 HTML 內有 <strong>內容</strong> <code>wrapper</code> 和 <strong>頁尾</strong> <code>footer</code> 的區塊外，還要在內容加上和頁尾同高度的區塊，以避免內容的文字覆蓋在頁尾的區塊上。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"wrapper"</span>&gt;</span></span><br><span class="line">  Lorem ipsum dolor sit, amet consectetur adipisicing elit. Voluptatibus cum, expedita labore modi possimus exercitationem sapiente quae autem fugiat voluptatem repellendus rerum quisquam, architecto, ratione non est eligendi! Quaerat, cum?</span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"fixedFooter"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"footer"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>這個函式庫除了圖片可以延遲載入，背景也可以。</p>
+<p>官網: <a href="http://jquery.eisbehr.de/lazy/" target="_blank" rel="noopener">http://jquery.eisbehr.de/lazy/</a></p>
+<h1 id="起手式"><a href="#起手式" class="headerlink" title="起手式"></a>起手式</h1><p>可到官網提供的下載後在網頁內載入</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"jquery.lazy.min.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p>在 CSS 設定</p>
-<ul>
-<li><code>html</code> 和 <code>body</code> 設定 100% 的高和 <code>.wrapper</code> 的 CSS 屬性 <code>min-height</code> 一起才會有效果</li>
-<li><code>min-height</code> 是要確保最小的高度，會因為內容不夠自動拉至 100% 的高</li>
-<li><code>margin-bottom</code> 的負值是減掉 <code>.footer</code> 所占的高度，並向上推被減掉的高度，為了總高度不會超過 100%</li>
-<li><code>.fixedFooter</code> 是為了修正內容文字覆蓋到頁尾的部分，所以要高度要是頁尾的高度或更高才能正確呈現觀看的效果。</li>
-</ul>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span>, <span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.wrapper</span> &#123;</span><br><span class="line">  <span class="attribute">min-height</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">margin-bottom</span>: -<span class="number">50px</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.fixedFooter</span> &#123;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.footer</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#f80</span>;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">100%</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>或是使用 CDN</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- jsDeliver --&gt;</span><br><span class="line">   &lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;jquery.lazy&#x2F;1.7.9&#x2F;jquery.lazy.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">   &lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#x2F;&#x2F;cdn.jsdelivr.net&#x2F;jquery.lazy&#x2F;1.7.9&#x2F;jquery.lazy.plugins.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line"></span><br><span class="line">   &lt;!-- cdnjs --&gt;</span><br><span class="line">   &lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#x2F;&#x2F;cdnjs.cloudflare.com&#x2F;ajax&#x2F;libs&#x2F;jquery.lazy&#x2F;1.7.9&#x2F;jquery.lazy.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br><span class="line">   &lt;script type&#x3D;&quot;text&#x2F;javascript&quot; src&#x3D;&quot;&#x2F;&#x2F;cdnjs.cloudflare.com&#x2F;ajax&#x2F;libs&#x2F;jquery.lazy&#x2F;1.7.9&#x2F;jquery.lazy.plugins.min.js&quot;&gt;&lt;&#x2F;script&gt;</span><br></pre></td></tr></table></figure>
+
+<p>還是 NPM 下載</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ npm install jquery-lazy</span><br><span class="line">$ bower install jquery-lazy</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="執行"><a href="#執行" class="headerlink" title="執行"></a>執行</h2><p>載入後就可以用基本的程式碼加入功能使用，依照官網提供的作法，在 HTML 在使用功能的標籤加上相同的 Class Name 就會被 JavaScript 內的 <code>$(&#39;.lazy&#39;).Lazy()</code> 抓到並執行。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- load images the lazy way --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">img</span> <span class="attr">class</span>=<span class="string">"lazy"</span> <span class="attr">data-src</span>=<span class="string">"path/to/image.jpg"</span> /&gt;</span></span><br><span class="line"></span><br><span class="line">   <span class="comment">&lt;!-- load background images of other element types --&gt;</span></span><br><span class="line">   <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"lazy"</span> <span class="attr">data-src</span>=<span class="string">"path/to/image.jpg"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    $(<span class="string">'.lazy'</span>).Lazy();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="設定"><a href="#設定" class="headerlink" title="設定"></a>設定</h1><p>可設定圖片延遲的時間、圖片來源的路徑、設定佔位符、圖片尺寸… ，都可以在 <code>Lazy()</code> 內以物件的形式加入。</p>
+<p>預設值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'.lazy'</span>).Lazy(&#123;</span><br><span class="line">  <span class="comment">// 設定屬性值</span></span><br><span class="line">  scrollDirection: <span class="string">'vertical'</span>,</span><br><span class="line">  effect: <span class="string">'fadeIn'</span>,</span><br><span class="line">  visibleOnly: <span class="literal">true</span>,</span><br><span class="line">  onError: <span class="function"><span class="keyword">function</span>(<span class="params">element</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">'error loading '</span> + element.data(<span class="string">'src'</span>));</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 
       
@@ -190,7 +186,7 @@
     <footer class="entry-meta entry-footer">
       
 	<span class="ico-folder"></span>
-    <a class="article-category-link" href="/blog/categories/CSS/">CSS</a>, <a class="article-category-link" href="/blog/categories/CSS/%E5%AF%A6%E4%BE%8B/">實例</a>
+    <a class="article-category-link" href="/blog/categories/jQuery/">jQuery</a>, <a class="article-category-link" href="/blog/categories/jQuery/library/">library</a>
 
       
   <span class="ico-tags"></span>
@@ -204,19 +200,10 @@
     
 <nav id="article-nav">
   
-    <a href="/blog/2020/08/30/20200830-jquery-lazy/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          jQuery.Lazy() 圖片延遲載入
-        
-      </div>
-    </a>
   
-  
-    <a href="/blog/2020/08/09/20200809-english-type/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/blog/2020/08/23/20200823-sticky-footer/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">打字練習</div>
+      <div class="article-nav-title">Sticky footer 固定頁尾</div>
     </a>
   
 </nav>
@@ -230,7 +217,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目錄</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目的"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#min-height-margin-bottom"><span class="nav-number">2.</span> <span class="nav-text">min-height + margin-bottom</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#簡介"><span class="nav-number">1.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#起手式"><span class="nav-number">2.</span> <span class="nav-text">起手式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#執行"><span class="nav-number">2.1.</span> <span class="nav-text">執行</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#設定"><span class="nav-number">3.</span> <span class="nav-text">設定</span></a></li></ol>
     
     </div>
   </aside>
