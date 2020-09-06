@@ -3,25 +3,25 @@
 <head>
   <meta charset="utf-8">
   
-  <title>20200831-css-shadow | 前端筆記</title>
+  <title>box-shadow 、 drop-shadow | 前端筆記</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   
   
   
-  <meta name="description" content="說明">
+  <meta name="description" content="說明利用 CSS 產生陰影效果的呈現方式有以下 2種，">
 <meta property="og:type" content="article">
-<meta property="og:title" content="20200831-css-shadow">
+<meta property="og:title" content="box-shadow 、 drop-shadow">
 <meta property="og:url" content="https://orandigo.github.io/2020/08/31/20200831-css-shadow/index.html">
 <meta property="og:site_name" content="前端筆記">
-<meta property="og:description" content="說明">
+<meta property="og:description" content="說明利用 CSS 產生陰影效果的呈現方式有以下 2種，">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://orandigo.github.io/2020/08/31/20200831-css-shadow/1598809463221.jpg">
 <meta property="og:image" content="https://orandigo.github.io/2020/08/31/20200831-css-shadow/1598809470186.jpg">
 <meta property="og:image" content="https://orandigo.github.io/2020/08/31/20200831-css-shadow/1598810349257.jpg">
 <meta property="og:image" content="https://orandigo.github.io/2020/08/31/20200831-css-shadow/1598810380554.jpg">
 <meta property="article:published_time" content="2020-08-31T07:05:59.000Z">
-<meta property="article:modified_time" content="2020-08-31T07:06:37.469Z">
+<meta property="article:modified_time" content="2020-09-06T18:43:25.344Z">
 <meta property="article:author" content="Orange">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://orandigo.github.io/2020/08/31/20200831-css-shadow/1598809463221.jpg">
@@ -135,7 +135,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      20200831-css-shadow
+      box-shadow 、 drop-shadow
     </h1>
   
 
@@ -155,10 +155,11 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h1><a id="more"></a> 
+        <h1 id="說明"><a href="#說明" class="headerlink" title="說明"></a>說明</h1><p>利用 CSS 產生陰影效果的呈現方式有以下 2種，</p>
+<a id="more"></a> 
 
 <p><code>box-shadow</code> 是 CSS 對 HTML 的標籤做效果的屬性，因為標籤是矩形，所以內容不論是文字或是包含透明背景的圖片，呈現的效果都是矩形的陰影。</p>
-<p><code>drop-shadow()</code> 是 <code>filter</code> 屬性的一種渲染特效。</p>
+<p><code>drop-shadow()</code> 是 <code>filter</code> 屬性的一種濾鏡渲染效果。</p>
 <p><code>filter</code> 的效果可作出類似 photoshop  的亮化、暗化、負片…  的 11 種濾鏡效果。<br>濾鏡效果可參考 <a href="https://orandigo.github.io/blog/2020/05/31/20200531-filter/">filter 變色特效</a> </p>
 <h1 id="文字的陰影"><a href="#文字的陰影" class="headerlink" title="文字的陰影"></a>文字的陰影</h1><p>使用 <code>box-shadow</code> 時，會用 <strong>標籤的外框</strong> 製作陰影，所以當外框有圓角時也會有效果。</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.text1</span> &#123;</span><br><span class="line">  <span class="attribute">border-radius</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">box-shadow</span>: -<span class="number">2px</span> -<span class="number">2px</span> <span class="number">2px</span> <span class="built_in">rgba</span>(<span class="number">180</span>, <span class="number">180</span>, <span class="number">180</span>, .<span class="number">3</span>),</span><br><span class="line">              <span class="number">3px</span> <span class="number">3px</span> <span class="number">5px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, .<span class="number">3</span>),</span><br><span class="line">              <span class="number">10px</span> <span class="number">10px</span> <span class="number">10px</span> <span class="built_in">rgba</span>(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, .<span class="number">2</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
