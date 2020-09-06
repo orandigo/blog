@@ -19,7 +19,7 @@
 <meta property="og:description" content="CSS Clip-Path 圖片裁切clip-path 是 CSS 屬性可以把圖片遮住、隱藏部分不希望被看到，因為載入到網頁的圖片都會是矩形的，所以用 clip-path 裁切簡單的幾何形或是使用SVG 、 path 路徑畫出裁切外框。">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-09-06T15:32:25.000Z">
-<meta property="article:modified_time" content="2020-09-06T15:58:54.108Z">
+<meta property="article:modified_time" content="2020-09-06T18:35:09.331Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
@@ -145,7 +145,10 @@
 	  <time datetime="2020-09-06T15:32:25.000Z" itemprop="datePublished">九月 6, 2020</time>
 	</a>
 
-       
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/CSS/">CSS</a>, <a class="article-category-link" href="/blog/categories/CSS/%E5%B1%AC%E6%80%A7/">屬性</a>
+ 
       
     </div>
     <div class="article-entry" itemprop="articleBody">
@@ -163,7 +166,7 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">clip-path</span>: <span class="selector-tag">inset</span>(100<span class="selector-tag">px</span> 50<span class="selector-tag">px</span>);</span><br><span class="line"><span class="selector-tag">clip-path</span>: <span class="selector-tag">inset</span>(100<span class="selector-tag">px</span> 50<span class="selector-tag">px</span> 100<span class="selector-tag">px</span> 50<span class="selector-tag">px</span>);</span><br></pre></td></tr></table></figure>
 
 <p>還可以設定圓角 ( <code>邊距</code> round <code>圓角</code> )</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">clip-path</span>: <span class="selector-tag">inset</span>(100<span class="selector-tag">px</span> 50<span class="selector-tag">px</span> 100<span class="selector-tag">px</span> 50<span class="selector-tag">px</span> <span class="selector-tag">round</span> 20<span class="selector-tag">px</span> 20<span class="selector-tag">px</span> 20<span class="selector-tag">px</span> 20<span class="selector-tag">px</span>);</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">clip-path</span>: <span class="selector-tag">inset</span>(100<span class="selector-tag">px</span> 50<span class="selector-tag">px</span> 100<span class="selector-tag">px</span> 50<span class="selector-tag">px</span> <span class="selector-tag">round</span> 20<span class="selector-tag">px</span> 10<span class="selector-tag">px</span> 15<span class="selector-tag">px</span> 25<span class="selector-tag">px</span>);</span><br><span class="line"><span class="selector-tag">clip-path</span>: <span class="selector-tag">inset</span>(100<span class="selector-tag">px</span> 50<span class="selector-tag">px</span> 100<span class="selector-tag">px</span> 50<span class="selector-tag">px</span> <span class="selector-tag">round</span> 20<span class="selector-tag">px</span>);</span><br></pre></td></tr></table></figure>
 
 
 
@@ -181,7 +184,23 @@
 
 
 
-<h2 id="polygon-幾何"><a href="#polygon-幾何" class="headerlink" title="polygon 幾何"></a>polygon 幾何</h2><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">clip-path</span>: <span class="selector-tag">polygon</span>(50% 0%, 100% 50%, 50% 100%, 0% 50%);</span><br><span class="line">正三角形 <span class="selector-tag">polygon</span></span><br><span class="line">正方形 <span class="selector-tag">polygon</span></span><br></pre></td></tr></table></figure>
+<h2 id="polygon-多邊形"><a href="#polygon-多邊形" class="headerlink" title="polygon 多邊形"></a>polygon 多邊形</h2><p>polygon 可裁切多邊形，當設定三個點時就會裁切成三角形</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">clip-path</span>: <span class="selector-tag">polygon</span>(50% 0%, 0% 100%, 100% 100%);</span><br></pre></td></tr></table></figure>
+
+<p>四方形就是設定四個點</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">clip-path</span>: <span class="selector-tag">polygon</span>(0 0, 100% 0, 100% 100%, 0% 100%);</span><br></pre></td></tr></table></figure>
+
+<p>五邊形設定五個點</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">clip-path</span>: <span class="selector-tag">polygon</span>(50% 0%, 100% 38%, 82% 100%, 18% 100%, 0% 38%);</span><br></pre></td></tr></table></figure>
+
+<p>六邊形、七邊形… 等，設定點的位置並依順序連成一個範圍後裁切。</p>
+<p>而 polygon 是依照點的順序連線形成範圍，所以可以切出像星星</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">clip-path</span>: <span class="selector-tag">polygon</span>(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);</span><br></pre></td></tr></table></figure>
+
+<p>或愛心</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
 
 
 
@@ -192,12 +211,16 @@
 
 
 
-<h1 id="使用圖片範圍裁切"><a href="#使用圖片範圍裁切" class="headerlink" title="使用圖片範圍裁切"></a>使用圖片範圍裁切</h1><p>可載入圖片範圍製作裁切</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">clip-path</span>: <span class="selector-tag">url</span>(<span class="selector-tag">resources</span><span class="selector-class">.svg</span>);</span><br><span class="line">clip-path: path('M0.5,1 C0.5,1,0,0.7,0,0.3 A0.25,0.25,1,1,1,0.5,0.3 A0.25,0.25,1,1,1,1,0.3 C1,0.7,0.5,1,0.5,1 Z');</span><br></pre></td></tr></table></figure>
+<h1 id="使用圖片範圍裁切"><a href="#使用圖片範圍裁切" class="headerlink" title="使用圖片範圍裁切"></a>使用圖片範圍裁切</h1><h2 id="CSS-載入裁切範圍"><a href="#CSS-載入裁切範圍" class="headerlink" title="CSS 載入裁切範圍"></a>CSS 載入裁切範圍</h2><p>可直接使用 <code>path()</code> 畫出範圍，但這方法目前只能在 Firefox 觀看到效果，在不支援的瀏覽器中只會看到一個正方形。 </p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">clip-path: path('M0.5,1 C0.5,1,0,0.7,0,0.3 A0.25,0.25,1,1,1,0.5,0.3 A0.25,0.25,1,1,1,1,0.3 C1,0.7,0.5,1,0.5,1 Z');</span><br></pre></td></tr></table></figure>
 
 
 
-<h2 id="SVG"><a href="#SVG" class="headerlink" title="SVG"></a>SVG</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">clip-path: url(#myPath)</span><br><span class="line"></span><br><span class="line">Assuming the following clipPath definition:</span><br><span class="line">&lt;svg&gt;</span><br><span class="line">  &lt;clipPath id&#x3D;&quot;myPath&quot; clipPathUnits&#x3D;&quot;objectBoundingBox&quot;&gt;</span><br><span class="line">    &lt;path d&#x3D;&quot;M0.5,1</span><br><span class="line">      C 0.5,1,0,0.7,0,0.3</span><br><span class="line">      A 0.25,0.25,1,1,1,0.5,0.3</span><br><span class="line">      A 0.25,0.25,1,1,1,1,0.3</span><br><span class="line">      C 1,0.7,0.5,1,0.5,1 Z&quot; &#x2F;&gt;</span><br><span class="line">  &lt;&#x2F;clipPath&gt;</span><br><span class="line">&lt;&#x2F;svg&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="HTML-載入-SVG-裁切範圍"><a href="#HTML-載入-SVG-裁切範圍" class="headerlink" title="HTML 載入 SVG 裁切範圍"></a>HTML 載入 SVG 裁切範圍</h2><p>HTML 載入 SVG 的圖作為裁切的範圍</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">svg</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">clipPath</span> <span class="attr">id</span>=<span class="string">"myPath"</span> <span class="attr">clipPathUnits</span>=<span class="string">"objectBoundingBox"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">path</span> <span class="attr">d</span>=<span class="string">"M0.5,1</span></span></span><br><span class="line"><span class="tag"><span class="string">      C 0.5,1,0,0.7,0,0.3</span></span></span><br><span class="line"><span class="tag"><span class="string">      A 0.25,0.25,1,1,1,0.5,0.3</span></span></span><br><span class="line"><span class="tag"><span class="string">      A 0.25,0.25,1,1,1,1,0.3</span></span></span><br><span class="line"><span class="tag"><span class="string">      C 1,0.7,0.5,1,0.5,1 Z"</span> /&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">clipPath</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">svg</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>在 CSS 執行裁切</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">clip-path</span>: <span class="selector-tag">url</span>(<span class="selector-id">#myPath</span>)</span><br></pre></td></tr></table></figure>
 
 
 
@@ -205,15 +228,16 @@
 
 
 
-
-
-<h1 id="線上工具"><a href="#線上工具" class="headerlink" title="線上工具"></a>線上工具</h1><p> <a href="http://bennettfeely.com/clippy/" target="_blank" rel="noopener">Clippy</a> </p>
+<h1 id="線上工具"><a href="#線上工具" class="headerlink" title="線上工具"></a>線上工具</h1><p><a href="http://bennettfeely.com/clippy/" target="_blank" rel="noopener">Clippy</a> </p>
 <p><a href="http://bennettfeely.com/clippy" target="_blank" rel="noopener">CSS clip-path maker</a> </p>
 
       
     </div>
     <footer class="entry-meta entry-footer">
       
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/CSS/">CSS</a>, <a class="article-category-link" href="/blog/categories/CSS/%E5%B1%AC%E6%80%A7/">屬性</a>
+
       
   <span class="ico-tags"></span>
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
@@ -243,7 +267,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目錄</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS-Clip-Path-圖片裁切"><span class="nav-number">1.</span> <span class="nav-text">CSS Clip-Path 圖片裁切</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#裁切線"><span class="nav-number">2.</span> <span class="nav-text">裁切線</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#裁切形狀"><span class="nav-number">3.</span> <span class="nav-text">裁切形狀</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#inset-向內裁切"><span class="nav-number">3.1.</span> <span class="nav-text">inset 向內裁切</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#circle-圓形"><span class="nav-number">3.2.</span> <span class="nav-text">circle 圓形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ellipse-橢圓形"><span class="nav-number">3.3.</span> <span class="nav-text">ellipse 橢圓形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#polygon-幾何"><span class="nav-number">3.4.</span> <span class="nav-text">polygon 幾何</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#組合裁切設定"><span class="nav-number">4.</span> <span class="nav-text">組合裁切設定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用圖片範圍裁切"><span class="nav-number">5.</span> <span class="nav-text">使用圖片範圍裁切</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#SVG"><span class="nav-number">5.1.</span> <span class="nav-text">SVG</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#線上工具"><span class="nav-number">6.</span> <span class="nav-text">線上工具</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS-Clip-Path-圖片裁切"><span class="nav-number">1.</span> <span class="nav-text">CSS Clip-Path 圖片裁切</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#裁切線"><span class="nav-number">2.</span> <span class="nav-text">裁切線</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#裁切形狀"><span class="nav-number">3.</span> <span class="nav-text">裁切形狀</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#inset-向內裁切"><span class="nav-number">3.1.</span> <span class="nav-text">inset 向內裁切</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#circle-圓形"><span class="nav-number">3.2.</span> <span class="nav-text">circle 圓形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ellipse-橢圓形"><span class="nav-number">3.3.</span> <span class="nav-text">ellipse 橢圓形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#polygon-多邊形"><span class="nav-number">3.4.</span> <span class="nav-text">polygon 多邊形</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#組合裁切設定"><span class="nav-number">4.</span> <span class="nav-text">組合裁切設定</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用圖片範圍裁切"><span class="nav-number">5.</span> <span class="nav-text">使用圖片範圍裁切</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#CSS-載入裁切範圍"><span class="nav-number">5.1.</span> <span class="nav-text">CSS 載入裁切範圍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#HTML-載入-SVG-裁切範圍"><span class="nav-number">5.2.</span> <span class="nav-text">HTML 載入 SVG 裁切範圍</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#線上工具"><span class="nav-number">6.</span> <span class="nav-text">線上工具</span></a></li></ol>
     
     </div>
   </aside>
