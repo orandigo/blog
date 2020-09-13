@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>canvas 圖形拖移 | 前端筆記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="w3HexSchool" />
+  
+  
+  
+  
+  <meta name="description" content="前言canvas 可增加圖形、文字到畫板，但當位置想要移動時就要回到 Javascript 內修改，所以找了一下有沒有可以直接拖移圖形的方式，發現可以用 isDragging 打開拖移功能並取得圖形的設定值，在點擊圖形時就執行變更設定達到移動的目的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="canvas 圖形拖移">
+<meta property="og:url" content="https://orandigo.github.io/2020/09/13/20200913-canvas-drag/index.html">
+<meta property="og:site_name" content="前端筆記">
+<meta property="og:description" content="前言canvas 可增加圖形、文字到畫板，但當位置想要移動時就要回到 Javascript 內修改，所以找了一下有沒有可以直接拖移圖形的方式，發現可以用 isDragging 打開拖移功能並取得圖形的設定值，在點擊圖形時就執行變更設定達到移動的目的。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-09-13T12:06:56.000Z">
+<meta property="article:modified_time" content="2020-09-13T15:56:24.651Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="icon" href="/blog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+  
+<script src="/blog/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/blog/css/fashion.css" >
+  <link rel="stylesheet" href="/blog/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/blog/" title="前端筆記" rel="home"> 前端筆記 </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">首頁</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">目錄</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">關於</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-20200913-canvas-drag" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      canvas 圖形拖移
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/09/13/20200913-canvas-drag/" class="article-date">
+	  <time datetime="2020-09-13T12:06:56.000Z" itemprop="datePublished">九月 13, 2020</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>canvas 可增加圖形、文字到畫板，但當位置想要移動時就要回到 Javascript 內修改，所以找了一下有沒有可以直接拖移圖形的方式，發現可以用 <code>isDragging</code> 打開拖移功能並取得圖形的設定值，在點擊圖形時就執行變更設定達到移動的目的。</p>
+ <a id="more"></a> 
+
+
+
+<h1 id="筆記"><a href="#筆記" class="headerlink" title="筆記"></a>筆記</h1><p>初始值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 拖移的變數</span></span><br><span class="line"><span class="keyword">var</span> isDragging = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">var</span> startX, startY;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 存放圖形、圖片 的陣列</span></span><br><span class="line"><span class="keyword">var</span> shapes=[];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 當移動圖形時記錄的變數</span></span><br><span class="line"><span class="keyword">var</span> selectedShapeIndex;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="載入圖形"><a href="#載入圖形" class="headerlink" title="載入圖形"></a>載入圖形</h2><p>因為需要判斷滑鼠是否在圖形上，所以就不是用 canvas 原本的方式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 圓形</span></span><br><span class="line">ctx.fillStyle=<span class="string">"#FF0000"</span>;</span><br><span class="line">ctx.beginPath();</span><br><span class="line">ctx.arc(<span class="number">30</span>, <span class="number">30</span>, <span class="number">15</span>, <span class="number">0</span>, <span class="number">2</span>*<span class="built_in">Math</span>.PI);</span><br><span class="line">ctx.closePath();</span><br><span class="line">ctx.fill();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 矩形</span></span><br><span class="line">ctx.fillStyle = <span class="string">"#0000ff"</span>;</span><br><span class="line">ctx.fillRect(<span class="number">100</span>, <span class="number">-1</span>, <span class="number">75</span>, <span class="number">35</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>而是先建立 <strong>陣列</strong> 和 <strong>物件</strong> 組合的方式</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 建立一個陣列，存放設定圖形的物件</span></span><br><span class="line"><span class="keyword">var</span> shapes=[];</span><br><span class="line"><span class="comment">// 置入 shapes 一個藍色圓形的物件</span></span><br><span class="line">shapes.push( &#123;<span class="attr">x</span>:<span class="number">30</span>, <span class="attr">y</span>:<span class="number">30</span>, <span class="attr">radius</span>:<span class="number">15</span>, <span class="attr">color</span>:<span class="string">'blue'</span>&#125; );</span><br><span class="line"><span class="comment">// 置入 shapes 一個紅色矩形的物件</span></span><br><span class="line">shapes.push( &#123;<span class="attr">x</span>:<span class="number">100</span>, <span class="attr">y</span>:<span class="number">-1</span>, <span class="attr">width</span>:<span class="number">75</span>, <span class="attr">height</span>:<span class="number">35</span>, <span class="attr">color</span>:<span class="string">'red'</span>&#125; );</span><br><span class="line"></span><br><span class="line"><span class="comment">// 滑鼠事件</span></span><br><span class="line">ctx.onmousedown = handleMouseDown;</span><br><span class="line">ctx.onmousemove = handleMouseMove;</span><br><span class="line">ctx.onmouseup = handleMouseUp;</span><br><span class="line">ctx.onmouseout = handleMouseOut;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>再產生圖形</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 把陣列的物件畫到 canvas</span></span><br><span class="line">drawAll();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drawAll</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  ctx.clearRect(<span class="number">0</span>, <span class="number">0</span>, cw, ch);</span><br><span class="line">  <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; shapes.length; i++)&#123;</span><br><span class="line">    <span class="keyword">var</span> shape = shapes[i];</span><br><span class="line">    <span class="keyword">if</span>(shape.radius)&#123;</span><br><span class="line">      <span class="comment">// 當有 radius 的值時，產生圓形</span></span><br><span class="line">      ctx.beginPath();</span><br><span class="line">      ctx.arc(shape.x, shape.y, shape.radius, <span class="number">0</span>, <span class="built_in">Math</span>.PI*<span class="number">2</span>);</span><br><span class="line">      ctx.fillStyle = shape.color;</span><br><span class="line">      ctx.fill();</span><br><span class="line">    &#125;<span class="keyword">else</span> <span class="keyword">if</span>(shape.width)&#123;</span><br><span class="line">      <span class="comment">// 當有 width 的值時，產生矩形</span></span><br><span class="line">      ctx.fillStyle = shape.color;</span><br><span class="line">      ctx.fillRect(shape.x, shape.y, shape.width, shape.height);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="載入文字"><a href="#載入文字" class="headerlink" title="載入文字"></a>載入文字</h2><p>所以也可以載入文字</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 置入文字的物件</span></span><br><span class="line">shapes.push( &#123;<span class="attr">x</span>:<span class="number">50</span>, <span class="attr">y</span>:<span class="number">50</span>, <span class="attr">text</span>:<span class="string">'文字拖移'</span>, <span class="attr">fontSize</span>: <span class="string">'36px'</span>&#125;;</span><br><span class="line">            </span><br><span class="line"><span class="keyword">if</span>(shape.text)&#123;</span><br><span class="line">  <span class="comment">// 當 text 有值時，產生文字</span></span><br><span class="line">	ctx.font = shape.fontSize;</span><br><span class="line">	ctx.fillText(shape.text, shape.x, shape.y);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="載入圖片"><a href="#載入圖片" class="headerlink" title="載入圖片"></a>載入圖片</h2><p>載入圖片也可以置入到陣列中</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> card = <span class="keyword">new</span> Image();</span><br><span class="line">card.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 置入 shapes 一個圖片 的物件</span></span><br><span class="line">  shapes.push( &#123;<span class="attr">x</span>:<span class="number">30</span>, <span class="attr">y</span>:<span class="number">10</span>, <span class="attr">width</span>:<span class="number">127</span>, <span class="attr">height</span>:<span class="number">150</span>, <span class="attr">image</span>:card&#125; );</span><br><span class="line">  <span class="comment">// 載入畫面</span></span><br><span class="line">  drawAll();</span><br><span class="line">  <span class="comment">// 滑鼠事件</span></span><br><span class="line">  ctx.onmousedown = handleMouseDown;</span><br><span class="line">  ctx.onmousemove = handleMouseMove;</span><br><span class="line">  ctx.onmouseup = handleMouseUp;</span><br><span class="line">  ctx.onmouseout = handleMouseOut;</span><br><span class="line">&#125;;</span><br><span class="line">card.src = <span class="string">'card.png'</span>;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="判斷滑鼠是否在範圍"><a href="#判斷滑鼠是否在範圍" class="headerlink" title="判斷滑鼠是否在範圍"></a>判斷滑鼠是否在範圍</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">isMouseInShape</span>(<span class="params">mx, my, shape</span>)</span>&#123;</span><br><span class="line">  <span class="comment">// 圓形範圍</span></span><br><span class="line">  <span class="keyword">if</span>(shape.radius)&#123;</span><br><span class="line">    <span class="keyword">var</span> dx = mx - shape.x;</span><br><span class="line">    <span class="keyword">var</span> dy = my - shape.y;</span><br><span class="line">    <span class="keyword">if</span>(dx*dx + dy*dy &lt; shape.radius*shape.radius)&#123;</span><br><span class="line">      <span class="keyword">return</span>(<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(shape.width)&#123;</span><br><span class="line">    <span class="comment">// 矩形範圍</span></span><br><span class="line">    <span class="keyword">var</span> rLeft = shape.x;</span><br><span class="line">    <span class="keyword">var</span> rRight = shape.x + shape.width;</span><br><span class="line">    <span class="keyword">var</span> rTop = shape.y;</span><br><span class="line">    <span class="keyword">var</span> rBott = shape.y + shape.height;</span><br><span class="line">    <span class="keyword">if</span>( mx &gt; rLeft &amp;&amp; mx &lt; rRight &amp;&amp; my &gt; rTop &amp;&amp; my &lt; rBott)&#123;</span><br><span class="line">      <span class="keyword">return</span>(<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(shape.image)&#123;</span><br><span class="line">    <span class="comment">// 圖片範圍和矩形範圍相同，所以一起使用時要區分使用的變數</span></span><br><span class="line">    <span class="keyword">var</span> rLeft = shape.x;</span><br><span class="line">    <span class="keyword">var</span> rRight = shape.x + shape.imgWidth;</span><br><span class="line">    <span class="keyword">var</span> rTop = shape.y;</span><br><span class="line">    <span class="keyword">var</span> rBott = shape.y + shape.imgHeight;</span><br><span class="line">    <span class="comment">// 判斷滑鼠是否在範圍內</span></span><br><span class="line">    <span class="keyword">if</span>( mx &gt; rLeft &amp;&amp; mx &lt; rRight &amp;&amp; my &gt; rTop &amp;&amp; my &lt; rBott)&#123;</span><br><span class="line">      <span class="keyword">return</span>(<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;<span class="keyword">else</span> <span class="keyword">if</span>(shape.text)&#123;</span><br><span class="line">    <span class="comment">// 文字範圍</span></span><br><span class="line">    <span class="keyword">var</span> tLeft = shape.x;</span><br><span class="line">    <span class="keyword">var</span> tRight = shape.x + ctx.measureText(shape.text).width;</span><br><span class="line">    <span class="keyword">var</span> tTop = shape.y;</span><br><span class="line">    <span class="keyword">var</span> tBott = shape.y + shape.fontSize;</span><br><span class="line">    <span class="comment">// 判斷滑鼠是否在範圍內</span></span><br><span class="line">    <span class="keyword">if</span>( mx &gt; rLeft &amp;&amp; mx &lt; rRight &amp;&amp; my &gt; rTop &amp;&amp; my &lt; rBott)&#123;</span><br><span class="line">      <span class="keyword">return</span>(<span class="literal">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span>(<span class="literal">false</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="圖形拖移"><a href="#圖形拖移" class="headerlink" title="圖形拖移"></a>圖形拖移</h2><ul>
+<li>滑鼠事件<ul>
+<li><a href="https://www.w3schools.com/jsref/event_onmousedown.asp" target="_blank" rel="noopener">onmousedown Event</a> 當滑鼠在元素上按下時觸發的事件</li>
+<li><a href="https://www.w3schools.com/jsref/event_onmousemove.asp" target="_blank" rel="noopener">onmousemove Event</a> 當滑鼠在元素上移動時觸發的事件</li>
+<li><a href="https://www.w3schools.com/jsref/event_onmouseup.asp" target="_blank" rel="noopener">onmouseup</a> 當滑鼠在元素上放開時觸發的事件</li>
+<li><a href="https://www.w3schools.com/jsref/event_onmouseout.asp" target="_blank" rel="noopener">onmouseout</a> 當滑鼠離開元素時觸發的事件</li>
+</ul>
+</li>
+<li>元素重疊時，移動就需要停止 默認事件、冒泡事件<ul>
+<li><strong>默認事件</strong> <code>event.preventDefault()</code></li>
+<li><strong>冒泡事件</strong>  <code>event.stopPropagation()</code></li>
+</ul>
+</li>
+</ul>
+<h2 id="滑鼠在圖形上"><a href="#滑鼠在圖形上" class="headerlink" title="滑鼠在圖形上"></a>滑鼠在圖形上</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 點擊時修改 isDragging 成可移動，計算點擊時滑鼠的位置</span></span><br><span class="line">ctx.onmousedown = handleMouseDown;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleMouseDown</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    e.preventDefault();</span><br><span class="line">    e.stopPropagation();</span><br><span class="line">    <span class="comment">// 滑鼠位置</span></span><br><span class="line">    startX = <span class="built_in">parseInt</span>(e.clientX-offsetX);</span><br><span class="line">    startY = <span class="built_in">parseInt</span>(e.clientY-offsetY);</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">var</span> i = <span class="number">0</span>; i &lt; shapes.length; i++)&#123;</span><br><span class="line">        <span class="keyword">if</span>(isMouseInShape(startX,startY,shapes[i]))&#123;</span><br><span class="line">            selectedShapeIndex=i;</span><br><span class="line">            isDragging=<span class="literal">true</span>;</span><br><span class="line">            <span class="keyword">return</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 移動時修改位置</span></span><br><span class="line">ctx.onmousemove = handleMouseMove;</span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleMouseMove</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(!isDragging)&#123;<span class="keyword">return</span>;&#125;</span><br><span class="line">    e.preventDefault();</span><br><span class="line">    e.stopPropagation();</span><br><span class="line">    <span class="comment">// 滑鼠位置    </span></span><br><span class="line">    mouseX = <span class="built_in">parseInt</span>(e.clientX-offsetX);</span><br><span class="line">    mouseY = <span class="built_in">parseInt</span>(e.clientY-offsetY);</span><br><span class="line">    <span class="comment">// 滑鼠移動後和原本位置的距離</span></span><br><span class="line">    <span class="keyword">var</span> dx = mouseX - startX;</span><br><span class="line">    <span class="keyword">var</span> dy = mouseY - startY;</span><br><span class="line">    <span class="comment">// 移動圖形時修改值</span></span><br><span class="line">    <span class="keyword">var</span> selectedShape=shapes[selectedShapeIndex];</span><br><span class="line">    selectedShape.x += dx;</span><br><span class="line">    selectedShape.y += dy;</span><br><span class="line">  </span><br><span class="line">    drawAll();</span><br><span class="line">    <span class="comment">// update the starting drag position (== the current mouse position)</span></span><br><span class="line">    startX = mouseX;</span><br><span class="line">    startY = mouseY;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="滑鼠在圖形外"><a href="#滑鼠在圖形外" class="headerlink" title="滑鼠在圖形外"></a>滑鼠在圖形外</h2><p>當放開 / 移開滑鼠，目的是一樣的 <strong>不拖移任何一個物件</strong> ，所以 <code>isDragging</code> 就應該要是 <code>false</code> ，若是 <code>true</code> 時就要成 <code>false</code> . </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">ctx.onmouseup = handleMouseUp;</span><br><span class="line">ctx.onmouseout = handleMouseOut;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleMouseUp</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!isDragging)&#123; <span class="keyword">return</span>; &#125;</span><br><span class="line">  e.preventDefault();</span><br><span class="line">  e.stopPropagation();</span><br><span class="line">  isDragging = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">handleMouseOut</span>(<span class="params">e</span>)</span>&#123;</span><br><span class="line">  <span class="keyword">if</span>(!isDragging)&#123;<span class="keyword">return</span>;&#125;</span><br><span class="line">  e.preventDefault();</span><br><span class="line">  e.stopPropagation();</span><br><span class="line">  isDragging = <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p>拖動 -畫布- 內的圖像<br><a href="https://riptutorial.com/zh-TW/html5-canvas/example/18920/在-畫布-周圍拖動圖像" target="_blank" rel="noopener">https://riptutorial.com/zh-TW/html5-canvas/example/18920/在-畫布-周圍拖動圖像</a> </p>
+<p>滑鼠事件<br><a href="https://www.w3schools.com/jsref/obj_mouseevent.asp" target="_blank" rel="noopener">HTML DOM MouseEvent</a> </p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/09/06/20200906-clip-path/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CSS Clip-Path 圖片裁切</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目錄</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#筆記"><span class="nav-number">2.</span> <span class="nav-text">筆記</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#載入圖形"><span class="nav-number">2.1.</span> <span class="nav-text">載入圖形</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#載入文字"><span class="nav-number">2.2.</span> <span class="nav-text">載入文字</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#載入圖片"><span class="nav-number">2.3.</span> <span class="nav-text">載入圖片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#判斷滑鼠是否在範圍"><span class="nav-number">2.4.</span> <span class="nav-text">判斷滑鼠是否在範圍</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#圖形拖移"><span class="nav-number">2.5.</span> <span class="nav-text">圖形拖移</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#滑鼠在圖形上"><span class="nav-number">2.6.</span> <span class="nav-text">滑鼠在圖形上</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#滑鼠在圖形外"><span class="nav-number">2.7.</span> <span class="nav-text">滑鼠在圖形外</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#參考"><span class="nav-number">3.</span> <span class="nav-text">參考</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2020 前端筆記 All Rights Reserved.
+        
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/bootstrap.js"></script>
+
+
+<script src="/blog/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-124626412-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
