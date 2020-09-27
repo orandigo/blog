@@ -18,14 +18,14 @@
 <meta property="og:site_name" content="前端筆記">
 <meta property="og:description" content="前言利用固定圖片 background-attachment: fixed 的方法，讓網頁上下、左右滑動時簡單的產生有前後的效果，或是可以利用各別設定不同的值產生讓每個物件有前後立體變化的錯覺。 background-attachment 是 CSS 的屬性，是設定背景會配合內容或是捲軸作移動，">
 <meta property="og:locale" content="zh_TW">
-<meta property="og:image" content="https://orandigo.github.io/2020/09/27/20200926-css-parallax/20200926-css-parallax/1601219077092.gif">
-<meta property="og:image" content="https://orandigo.github.io/2020/09/27/20200926-css-parallax/20200926-css-parallax/1601220701438.gif">
+<meta property="og:image" content="https://orandigo.github.io/2020/09/27/20200926-css-parallax/1601219077092.gif">
+<meta property="og:image" content="https://orandigo.github.io/2020/09/27/20200926-css-parallax/1601220701438.gif">
 <meta property="article:published_time" content="2020-09-27T14:04:11.000Z">
-<meta property="article:modified_time" content="2020-09-27T19:21:17.194Z">
+<meta property="article:modified_time" content="2020-09-27T19:22:48.259Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://orandigo.github.io/2020/09/27/20200926-css-parallax/20200926-css-parallax/1601219077092.gif">
+<meta name="twitter:image" content="https://orandigo.github.io/2020/09/27/20200926-css-parallax/1601219077092.gif">
   
   <link rel="icon" href="/blog/css/images/favicon.ico">
   
@@ -165,9 +165,9 @@
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parallax</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">"背景圖.jpg"</span>);</span><br><span class="line">  <span class="attribute">background-attachment</span>: fixed; <span class="comment">/* 固定圖像 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在滾動捲軸就可以看到像下圖的效果</p>
-<p><img src="20200926-css-parallax/1601219077092.gif" alt="固定背景"></p>
+<p><img src="1601219077092.gif" alt="固定背景"></p>
 <p>或是把每一個  <code>&lt;div class=&quot;card&quot;&gt;&lt;/div&gt;</code>  設定不同的背景，當滾動時就會改變背景</p>
-<p><img src="20200926-css-parallax/1601220701438.gif" alt="多個 div 並固定背景"></p>
+<p><img src="1601220701438.gif" alt="多個 div 並固定背景"></p>
 <p>範例參考 <a href="https://codepen.io/stefanjudis/pen/nrzHI" target="_blank" rel="noopener">https://codepen.io/stefanjudis/pen/nrzHI</a></p>
 <h1 id="元素變化"><a href="#元素變化" class="headerlink" title="元素變化"></a>元素變化</h1><p>利用 <code>transform-style: preserve-3d;</code> 、 <code>perspective: 1px;</code> 和 <code>overflow</code> 這 3 個屬性</p>
 <p><code>transform</code> 可作出 X、Y 軸的位移和旋轉縮放的效果</p>
