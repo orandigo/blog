@@ -11,17 +11,17 @@
   
   
   
-  <meta name="description" content="前言這是利用 滑鼠滾輪 或是  網頁捲軸 將網頁上下移動或是左右移動滾動產生的效果，還可以利用不同的方向和速度讓每個物件有前後立體的錯覺。">
+  <meta name="description" content="前言利用固定圖片 background-attachment: fixed 的方法，讓網頁上下、左右滑動時簡單的產生有前後的效果，或是可以利用各別設定不同的值產生讓每個物件有前後立體變化的錯覺。 background-attachment 是 CSS 的屬性，是設定背景會配合內容或是捲軸作移動，">
 <meta property="og:type" content="article">
 <meta property="og:title" content="css parallax 視差滾動">
 <meta property="og:url" content="https://orandigo.github.io/2020/09/27/20200926-css-parallax/index.html">
 <meta property="og:site_name" content="前端筆記">
-<meta property="og:description" content="前言這是利用 滑鼠滾輪 或是  網頁捲軸 將網頁上下移動或是左右移動滾動產生的效果，還可以利用不同的方向和速度讓每個物件有前後立體的錯覺。">
+<meta property="og:description" content="前言利用固定圖片 background-attachment: fixed 的方法，讓網頁上下、左右滑動時簡單的產生有前後的效果，或是可以利用各別設定不同的值產生讓每個物件有前後立體變化的錯覺。 background-attachment 是 CSS 的屬性，是設定背景會配合內容或是捲軸作移動，">
 <meta property="og:locale" content="zh_TW">
 <meta property="og:image" content="https://orandigo.github.io/2020/09/27/20200926-css-parallax/20200926-css-parallax/1601219077092.gif">
 <meta property="og:image" content="https://orandigo.github.io/2020/09/27/20200926-css-parallax/20200926-css-parallax/1601220701438.gif">
 <meta property="article:published_time" content="2020-09-27T14:04:11.000Z">
-<meta property="article:modified_time" content="2020-09-27T15:52:40.846Z">
+<meta property="article:modified_time" content="2020-09-27T19:21:17.194Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
@@ -153,23 +153,56 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>這是利用 <strong>滑鼠滾輪</strong> 或是  <strong>網頁捲軸</strong> 將網頁上下移動或是左右移動滾動產生的效果，還可以利用不同的方向和速度讓每個物件有前後立體的錯覺。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>利用固定圖片 <code>background-attachment: fixed</code> 的方法，讓網頁上下、左右滑動時簡單的產生有前後的效果，或是可以利用各別設定不同的值產生讓每個物件有前後立體變化的錯覺。</p>
+<p><code>background-attachment</code> 是 CSS 的屬性，是設定背景會配合內容或是捲軸作移動，</p>
  <a id="more"></a>
-
-
 
 
 
 <h1 id="固定背景"><a href="#固定背景" class="headerlink" title="固定背景"></a>固定背景</h1><p>把背景固定，當滾動網頁時就會看到背景外的標籤元素會和背景有前後感覺</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"parallax"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"card"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"card"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">"card"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.warp</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">"背景圖.jpg"</span>);</span><br><span class="line">  <span class="attribute">background-attachment</span>: fixed; <span class="comment">/* 固定圖像 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parallax</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">url</span>(<span class="string">"背景圖.jpg"</span>);</span><br><span class="line">  <span class="attribute">background-attachment</span>: fixed; <span class="comment">/* 固定圖像 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 <p>在滾動捲軸就可以看到像下圖的效果</p>
 <p><img src="20200926-css-parallax/1601219077092.gif" alt="固定背景"></p>
-<p>或是也可以用多個 div 並排在一起，當滾動時改變背景</p>
+<p>或是把每一個  <code>&lt;div class=&quot;card&quot;&gt;&lt;/div&gt;</code>  設定不同的背景，當滾動時就會改變背景</p>
 <p><img src="20200926-css-parallax/1601220701438.gif" alt="多個 div 並固定背景"></p>
 <p>範例參考 <a href="https://codepen.io/stefanjudis/pen/nrzHI" target="_blank" rel="noopener">https://codepen.io/stefanjudis/pen/nrzHI</a></p>
+<h1 id="元素變化"><a href="#元素變化" class="headerlink" title="元素變化"></a>元素變化</h1><p>利用 <code>transform-style: preserve-3d;</code> 、 <code>perspective: 1px;</code> 和 <code>overflow</code> 這 3 個屬性</p>
+<p><code>transform</code> 可作出 X、Y 軸的位移和旋轉縮放的效果</p>
+<p><code>perspective</code> 可作 3 D 透視的效果，值愈大效果愈不明顯，而值愈小效果就愈大</p>
+<p><code>overflow</code> 設定元素是否可見。<code>overflow-x</code> 和 <code>overflow-y</code> 可設定 X 、 Y 軸超出畫面的部分是否要隱藏的 <code>hidden</code> ，或是設定可滾動的捲軸 <code>scroll</code> 。</p>
+<p>首先先固定畫面的高，以及隱藏超出畫面的元素</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">html</span> &#123;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>然後在 body 加上透視效果，讓 body 內的元素都具有透視效果</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">   <span class="comment">/* 若是效果沒出現可加上前綴詞再試試看 */</span></span><br><span class="line">	<span class="attribute">-webkit-perspective</span>: <span class="number">1px</span>;</span><br><span class="line">	<span class="attribute">-webkit-transform-style</span>: preserve-<span class="number">3</span>d;</span><br><span class="line">  </span><br><span class="line">  <span class="attribute">perspective</span>: <span class="number">1px</span>;</span><br><span class="line">  <span class="attribute">transform-style</span>: preserve-<span class="number">3</span>d;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">  <span class="attribute">overflow-y</span>: scroll;</span><br><span class="line">  <span class="attribute">overflow-x</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在內層的元素加上屬性 <code>transform</code> 的位移、旋轉 … 等就可看到變化</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.card</span> &#123;</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translateZ</span>(-<span class="number">1px</span>);</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">2</span>);</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">translateZ</span>(-<span class="number">1px</span>) <span class="built_in">scale</span>(<span class="number">2</span>);</span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">69deg</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>上面範例是用 body 作為外層容器，或是指定一個外層容器也是可以</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parallax</span> &#123; <span class="comment">/* 外層容器 */</span></span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.parallax__group</span> &#123;  <span class="comment">/* 第 二 層加上透視效果 */</span></span><br><span class="line">  <span class="attribute">height</span>: <span class="number">100vh</span>;</span><br><span class="line">  <span class="attribute">overflow-x</span>: hidden;</span><br><span class="line">  <span class="attribute">overflow-y</span>: auto;</span><br><span class="line">  <span class="attribute">perspective</span>: <span class="number">1px</span>;  </span><br><span class="line">  <span class="attribute">transform-style</span>: preserve-<span class="number">3</span>d;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-class">.parallax__layer--base</span> &#123; <span class="comment">/* 內容設定要變化的效果 */</span></span><br><span class="line">  <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">69deg</span>);</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="用-jQuery-作視差滾動"><a href="#用-jQuery-作視差滾動" class="headerlink" title="用 jQuery 作視差滾動"></a>用 jQuery 作視差滾動</h1><p>要先導入需要的檔案  jQuery 及 <a href="http://dev.jonraasch.com/scrolling-parallax/" target="_blank" rel="noopener">Scrolling Parallax jQuery Plugin</a> </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"jquery.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/javascript"</span> <span class="attr">src</span>=<span class="string">"jquery.scrolling-parallax.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>執行時只要載入圖片，插件就會自動把圖片拉伸到填滿容量的大小</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 載入要有效果的圖片</span></span><br><span class="line">$.scrollingParallax(<span class="string">'img/background-parallax.jpg'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 設定其他參數</span></span><br><span class="line">$.scrollingParallax(<span class="string">'img/background-parallax.jpg'</span>, &#123; </span><br><span class="line">    bgWidth : <span class="string">'200%'</span>, </span><br><span class="line">    enableHorizontal : <span class="literal">true</span> </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>或者是利用選擇器選取要使用效果的標籤元素</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">'div.parallax'</span>).scrollingParallax();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 設定其他參數</span></span><br><span class="line">$(<span class="string">'div.parallax-div'</span>).scrollingParallax(&#123; </span><br><span class="line">    staticSpeed : <span class="number">3</span>, </span><br><span class="line">    loopIt : <span class="literal">true</span> </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>使用選擇器選取時要注意標籤元素的 CSS 要設定  <code>position:  fixed</code> ，官方文件有提到建議要設定，才不會出現奇怪的錯誤</p>
+<p>設定參數是用物件的方式，可以設定的屬性有基本的圖片尺寸、滾動的速度、方向</p>
+<p>參數設定可到 <a href="http://dev.jonraasch.com/scrolling-parallax/docs#.X3C6CWgzaUk" target="_blank" rel="noopener">文件</a> 看看</p>
+<h2 id="參考文件"><a href="#參考文件" class="headerlink" title="參考文件"></a>參考文件</h2><p><a href="http://jonraasch.com/blog/scrolling-parallax-jquery-plugin" target="_blank" rel="noopener">Scrolling Parallax: A jQuery Plugin</a></p>
+<p><a href="http://dev.jonraasch.com/scrolling-parallax/docs#.X3C6CWgzaUk" target="_blank" rel="noopener">設定參數屬性值文件</a></p>
 
       
     </div>
@@ -204,7 +237,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目錄</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#固定背景"><span class="nav-number">2.</span> <span class="nav-text">固定背景</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#固定背景"><span class="nav-number">2.</span> <span class="nav-text">固定背景</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#元素變化"><span class="nav-number">3.</span> <span class="nav-text">元素變化</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#用-jQuery-作視差滾動"><span class="nav-number">4.</span> <span class="nav-text">用 jQuery 作視差滾動</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#參考文件"><span class="nav-number">4.1.</span> <span class="nav-text">參考文件</span></a></li></ol></li></ol>
     
     </div>
   </aside>
