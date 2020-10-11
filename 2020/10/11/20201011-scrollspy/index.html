@@ -19,7 +19,7 @@
 <meta property="og:description" content="前言當網頁內有需要快速移動到的位置，或是需要用到選單提示使用者捲軸移動到的位置時，這功能還滿方便的，所以筆記記錄下來。">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-10-11T15:19:59.000Z">
-<meta property="article:modified_time" content="2020-10-11T15:53:28.808Z">
+<meta property="article:modified_time" content="2020-10-11T15:56:49.088Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
@@ -61,10 +61,32 @@
 
 
   
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
 
 
 <header id="allheader" class="site-header" role="banner" 
-   >
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
   <div class="clearfix container">
       <div class="site-branding">
 
@@ -138,9 +160,10 @@
 <p>接著是使用 CSS 的 <code>:hover</code> 的功能</p>
 <p><code>:hover</code> 是當滑鼠滑到標籤元素上時，才會觸發套用樣式</p>
 <p>相反的也可以當網頁移動到網頁內容的時候，改變選單的樣式。</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>,</span><br><span class="line"><span class="selector-tag">section</span><span class="selector-id">#one</span><span class="selector-pseudo">:hover</span> ~ <span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-attr">[href=<span class="string">"one"</span>]</span>,</span><br><span class="line"><span class="selector-tag">section</span><span class="selector-id">#two</span><span class="selector-pseudo">:hover</span> ~ <span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-attr">[href=<span class="string">"two"</span>]</span>,</span><br><span class="line"><span class="selector-tag">section</span><span class="selector-id">#three</span><span class="selector-pseudo">:hover</span> ~ <span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-attr">[href=<span class="string">"three"</span>]</span>,</span><br><span class="line"><span class="selector-tag">section</span><span class="selector-id">#four</span><span class="selector-pseudo">:hover</span> ~ <span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-attr">[href=<span class="string">"four"</span>]</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>,</span><br><span class="line"><span class="selector-tag">section</span><span class="selector-id">#one</span><span class="selector-pseudo">:hover</span> ~ <span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-attr">[href=<span class="string">"#one"</span>]</span>,</span><br><span class="line"><span class="selector-tag">section</span><span class="selector-id">#two</span><span class="selector-pseudo">:hover</span> ~ <span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-attr">[href=<span class="string">"#two"</span>]</span>,</span><br><span class="line"><span class="selector-tag">section</span><span class="selector-id">#three</span><span class="selector-pseudo">:hover</span> ~ <span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-attr">[href=<span class="string">"#three"</span>]</span>,</span><br><span class="line"><span class="selector-tag">section</span><span class="selector-id">#four</span><span class="selector-pseudo">:hover</span> ~ <span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-attr">[href=<span class="string">"#four"</span>]</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-
+<p>最後再隱藏捲軸</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">::-webkit-scrollbar</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
 
       
@@ -220,6 +243,9 @@
 
 
     <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
     
     
 </script>
