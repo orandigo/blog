@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Scrollspy 捲軸位置提示選單 | 前端筆記</title>
+  <title>Scrollspy 滾動監控 | 前端筆記</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
   <meta name="keywords" content="w3HexSchool" />
@@ -13,13 +13,13 @@
   
   <meta name="description" content="前言當網頁內有需要快速移動到的位置，或是需要用到選單提示使用者捲軸移動到的位置時，這功能還滿方便的，所以筆記記錄下來。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Scrollspy 捲軸位置提示選單">
+<meta property="og:title" content="Scrollspy 滾動監控">
 <meta property="og:url" content="https://orandigo.github.io/2020/10/11/20201011-scrollspy/index.html">
 <meta property="og:site_name" content="前端筆記">
 <meta property="og:description" content="前言當網頁內有需要快速移動到的位置，或是需要用到選單提示使用者捲軸移動到的位置時，這功能還滿方便的，所以筆記記錄下來。">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-10-11T15:19:59.000Z">
-<meta property="article:modified_time" content="2020-10-11T15:56:49.088Z">
+<meta property="article:modified_time" content="2020-10-11T17:26:06.641Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
@@ -133,7 +133,7 @@
         
   
     <h1 class="thumb" class="article-title" itemprop="name">
-      Scrollspy 捲軸位置提示選單
+      Scrollspy 滾動監控
     </h1>
   
 
@@ -165,6 +165,41 @@
 <p>最後再隱藏捲軸</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">::-webkit-scrollbar</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
+<p>另外要注意，這作法如果只用滑鼠滾輪滾動時是會沒有反應的！<br>因為是使用 <code>:hover</code> 作的效果，所以也需要移動滑鼠到在元素上時才會觸發。</p>
+<h1 id="JS-Scrollspy"><a href="#JS-Scrollspy" class="headerlink" title="JS Scrollspy"></a>JS Scrollspy</h1><p>產生的效果會根據移動到的位置 <strong>自動更新選單連結樣式</strong> 變化。</p>
+<p>在指定要監聽的元素作為使用者在滾動網頁時監聽的範圍，通常會是整個網頁的內容 <code>&lt;body&gt;</code>  ，加上 <code>data-spy=&quot;scroll</code> 屬性值，以及可以讓 JavaScript 取用的 <code>data-target</code>  屬性，屬性的值需要和選單內的 <code>a</code> 連結元素的 <code>id</code> 或 <code>class</code> 名稱一致，還有一個偏移值的屬性 <code>data-offset</code> 預設是 10 ( px 省略 ) ，當點擊 <code>a</code> 連結元素時跳到指定的位置的偏移值</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 監聽的範圍 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">data-spy</span>=<span class="string">"scroll"</span> <span class="attr">data-target</span>=<span class="string">".navbar"</span> <span class="attr">data-offset</span>=<span class="string">"50"</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 內容 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>內容的元素可和前一個的範例一樣使用 <code>&lt;section&gt;</code> 和 <code>&lt;nav&gt;</code> 標籤，或是只使用 <code>&lt;div&gt;</code> </p>
+<p>在 CSS 要對監聽的元素使用 <code>position: relative;</code> </p>
+<p> JavaScript 作法是參考至 <a href="http://w3schools-fa.ir/bootstrap4/bootstrap_ref_js_scrollspy.html" target="_blank" rel="noopener">Bootstrap JS Scrollspy</a> 和 <a href="https://bootstrap.hexschool.com/docs/4.2/components/scrollspy/" target="_blank" rel="noopener"> Bootstrap  滾動監控 (Scrollspy)</a>，需事先載入  <a href="https://materializecss.com/scrollspy.html" target="_blank" rel="noopener">Scrollspy.js</a> </p>
+<ul>
+<li>初始化</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// javascript</span></span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'DOMContentLoaded'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> elems = <span class="built_in">document</span>.querySelectorAll(<span class="string">'.scrollspy'</span>);</span><br><span class="line">  <span class="keyword">var</span> instances = M.ScrollSpy.init(elems, options);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// jQuery </span></span><br><span class="line">$(<span class="built_in">document</span>).ready(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  $(<span class="string">'body'</span>).scrollspy(&#123;<span class="attr">target</span>: <span class="string">".navbar"</span>&#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>scrollspy 可用的方法</p>
+<ul>
+<li><p><code>.scrollspy(&#39;refresh&#39;)</code></p>
+<p>加入或刪除元素使用滾動監控時刷新方式</p>
+</li>
+<li><p><code>.scrollspy(&#39;dispose&#39;)</code><br>刪除滾動監控</p>
+<ul>
+<li>關於 <strong>刪除滾動監控</strong> 會應用到的情況可參考 <a href="https://stackoverflow.com/questions/47979661/bootstrap-scrollspy-remove-fixed-menu-when-last-section-scrolled-to-view" target="_blank" rel="noopener">Bootstrap Scrollspy remove fixed menu when last section scrolled to view</a></li>
+</ul>
+</li>
+<li><p><code>.destroy()</code><br>Javascript 移除的方法</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 尋找目標元素</span></span><br><span class="line">  <span class="keyword">var</span> instance = M.ScrollSpy.getInstance(elem);</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 移除插件的功能</span></span><br><span class="line">  instance.destroy();</span><br></pre></td></tr></table></figure>
+
+<p><code>getInstance(elem)</code> 是使用預設 <strong>尋找目標元素</strong> <code>getActiveElement</code> 的方法 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="string">'a[href="#'</span> + id + <span class="string">'"]'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>而目標元素必需有 <code>id</code> 的名稱</p>
+</li>
+</ul>
 
       
     </div>
@@ -199,7 +234,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目錄</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#純-CSS-的-Scrollspy"><span class="nav-number">2.</span> <span class="nav-text">純 CSS 的 Scrollspy</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#純-CSS-的-Scrollspy"><span class="nav-number">2.</span> <span class="nav-text">純 CSS 的 Scrollspy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JS-Scrollspy"><span class="nav-number">3.</span> <span class="nav-text">JS Scrollspy</span></a></li></ol>
     
     </div>
   </aside>
