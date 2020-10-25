@@ -19,7 +19,7 @@
 <meta property="og:description" content="前言想要在網頁播放音樂並要有播放、暫停和音量的功能，HTML 就有提供 &lt;audio&gt; 的標籤使用，">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-10-25T14:55:38.000Z">
-<meta property="article:modified_time" content="2020-10-25T15:54:42.941Z">
+<meta property="article:modified_time" content="2020-10-25T18:48:20.685Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
@@ -187,14 +187,60 @@
 </ul>
 </li>
 </ul>
-<h1 id="音樂播放"><a href="#音樂播放" class="headerlink" title="音樂播放"></a>音樂播放</h1><p>建立播放器的 <a href="https://www.w3schools.com/html/html5_audio.asp" target="_blank" rel="noopener">HTML Audio</a> ，在類型要使用 audio ，就可以產生播放工具</p>
+<h1 id="音樂類"><a href="#音樂類" class="headerlink" title="音樂類"></a>音樂類</h1><p>建立播放器的 <a href="https://www.w3schools.com/html/html5_audio.asp" target="_blank" rel="noopener">HTML Audio</a> ，在類型要使用 audio ，就可以產生播放工具</p>
 <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">audio</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"horse.mp3"</span> <span class="attr">type</span>=<span class="string">"audio/mpeg"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">audio</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 
 
-<h1 id="影片"><a href="#影片" class="headerlink" title="影片"></a>影片</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">width</span>=<span class="string">"320"</span> <span class="attr">height</span>=<span class="string">"240"</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"movie.mp4"</span> <span class="attr">type</span>=<span class="string">"video/mp4"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h1 id="影片類"><a href="#影片類" class="headerlink" title="影片類"></a>影片類</h1><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">width</span>=<span class="string">"320"</span> <span class="attr">height</span>=<span class="string">"240"</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"movie.mp4"</span> <span class="attr">type</span>=<span class="string">"video/mp4"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
-<p><code>&lt;video&gt;</code> 內的 width 和 height 是設定影片尺寸，當尺寸不足時會呈現透明留空。</p>
+<p><code>&lt;video&gt;</code> 內的 width 和 height 是設定影片尺寸，當縮放尺寸到符合寬或高後，另一個尺寸不足的部分會使用置中並透明保留空位，不會因為影片尺寸小於設定的尺寸縮小範圍或是強制符合。</p>
+<p>另一個好用的功能是看影片時的字幕設定</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span> <span class="attr">width</span>=<span class="string">"320"</span> <span class="attr">height</span>=<span class="string">"240"</span> <span class="attr">controls</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">source</span> <span class="attr">src</span>=<span class="string">"movie.mp4"</span> <span class="attr">type</span>=<span class="string">"video/mp4"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">track</span> <span class="attr">src</span>=<span class="string">"movie_en.vtt"</span> </span></span><br><span class="line"><span class="tag">         <span class="attr">kind</span>=<span class="string">"subtitles"</span> </span></span><br><span class="line"><span class="tag">         <span class="attr">srclang</span>=<span class="string">"en"</span> </span></span><br><span class="line"><span class="tag">         <span class="attr">label</span>=<span class="string">"English"</span> </span></span><br><span class="line"><span class="tag">         <span class="attr">default</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>利用 <code>&lt;track&gt;</code> 標籤，載入 vtt 字幕檔案，vtt 是指 WebVTT 字幕格式，這個格式在 HTML video 使用時可以正確的呈現內容。 </p>
+<ul>
+<li>在 <code>&lt;track&gt;</code> 標籤內的屬性<ul>
+<li>kind 為設定字幕類型。</li>
+<li>srclang 是語系/地區碼， zh 是中文、 zh-tw 是台灣的正體中文、zh-cn 大陸的簡體中文 。</li>
+<li>label 在選擇字幕時會看到的名稱。</li>
+<li>default 作為影片預設的字幕檔開啟，沒使用時字幕預設是關閉。</li>
+</ul>
+</li>
+</ul>
+<h2 id="vtt-字幕檔"><a href="#vtt-字幕檔" class="headerlink" title="vtt 字幕檔"></a>vtt 字幕檔</h2><p>可利用  <a href="http://www.nikse.dk/SubtitleEdit/Online" target="_blank" rel="noopener">SubtitleEdit 線上字幕編輯器</a> 工具製作，或是自已刻一個，製作方法是建立一個 <strong>文字文件.txt</strong> 後，加上下方的內容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">WEBVTT</span><br><span class="line"></span><br><span class="line">00:01.000 --&gt; 00:04.000</span><br><span class="line">- Never drink liquid nitrogen.</span><br><span class="line"></span><br><span class="line">00:05.000 --&gt; 00:09.000</span><br><span class="line">- It will perforate your stomach.</span><br><span class="line">- You could die.</span><br></pre></td></tr></table></figure>
+
+<p>時間戳記有固定格式是使用 <code>mm:ss.ttt</code> 和 <code>hh:mm:ss.ttt</code> ，開始和結束的時間中間加上字符串 <code>--&gt;</code>  ，字符串和時間要保留一個空格</p>
+<p>儲存檔案時使用 UTF-8 編碼 存檔，再修改副檔名為 .vtt 就完成了。</p>
+<h3 id="設定字幕樣式"><a href="#設定字幕樣式" class="headerlink" title="設定字幕樣式"></a>設定字幕樣式</h3><p>設定樣式有 2 種方式，一個是在 .vtt 檔內加上 CSS 設定</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">WEBVTT</span><br><span class="line"></span><br><span class="line">STYLE</span><br><span class="line">::cue &#123;   /* 全部使用的樣式 */</span><br><span class="line">  background-image: linear-gradient(to bottom, dimgray, lightgray);</span><br><span class="line">  color: papayawhip;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">STYLE</span><br><span class="line">::cue(b) &#123;   /* 指定 <span class="tag">&lt;<span class="name">b</span>&gt;</span><span class="tag">&lt;/<span class="name">b</span>&gt;</span> 內使用的樣式 */</span><br><span class="line">  color: peachpuff;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">00:00:00.000 --&gt; 00:00:10.000</span><br><span class="line">- Hello <span class="tag">&lt;<span class="name">b</span>&gt;</span>world<span class="tag">&lt;/<span class="name">b</span>&gt;</span>.</span><br></pre></td></tr></table></figure>
+
+<p>另一個就是在 CSS 設定</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">::cue</span> &#123;</span><br><span class="line">  <span class="attribute">background-image</span>: <span class="built_in">linear-gradient</span>(to bottom, dimgray, lightgray);</span><br><span class="line">  <span class="attribute">color</span>: papayawhip;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="selector-pseudo">::cue(b)</span> &#123;</span><br><span class="line">  <span class="attribute">color</span>: peachpuff;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>不管設定在哪裡，使用上方便管理就行了。</p>
+<p>參考資料：</p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/WebVTT_API</a></p>
+<p><a href="https://w3c.github.io/webvtt/" target="_blank" rel="noopener">https://w3c.github.io/webvtt/</a></p>
+<h2 id="YouTube-影片"><a href="#YouTube-影片" class="headerlink" title="YouTube 影片"></a>YouTube 影片</h2><p><a href="https://www.w3schools.com/html/html_youtube.asp" target="_blank" rel="noopener">使用 YouTube 影片</a> 載入到網頁，可用 <code>&lt;iframe&gt;</code> 標籤就可以</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">width</span>=<span class="string">"420"</span> <span class="attr">height</span>=<span class="string">"315"</span> <span class="attr">src</span>=<span class="string">"https://www.youtube.com/embed/影片ID"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>這作法也等於是在 YouTube 影片按分享的嵌入產生的 code</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">iframe</span> <span class="attr">width</span>=<span class="string">"420"</span> <span class="attr">height</span>=<span class="string">"315"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">src</span>=<span class="string">"https://www.youtube.com/embed/ 影片ID "</span></span></span><br><span class="line"><span class="tag">        <span class="attr">frameborder</span>=<span class="string">"0"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">allow</span>=<span class="string">"accelerometer;</span></span></span><br><span class="line"><span class="tag"><span class="string">               autoplay;</span></span></span><br><span class="line"><span class="tag"><span class="string">               clipboard-write;</span></span></span><br><span class="line"><span class="tag"><span class="string">               encrypted-media;</span></span></span><br><span class="line"><span class="tag"><span class="string">               gyroscope;</span></span></span><br><span class="line"><span class="tag"><span class="string">               picture-in-picture"</span></span></span><br><span class="line"><span class="tag">        <span class="attr">allowfullscreen</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">iframe</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>設定除了有上方基本的之外，還有提供可自訂的樣式</p>
+<p>以下自訂的部分都是要加到影片 ID 的 ? 之後</p>
+<ul>
+<li>color=white ： 設定播放進度條的已播放顏色，但也只能修改成預設的 <code>red</code> 和 <code>white</code> 兩種顏色。</li>
+<li>disablekb=0 ： 預設為 0，設定為 1 時會停止鍵盤控制。</li>
+<li>controls=0  ： 設定進度條的顯示。預設 1 會有可按暫停/播放、進度條、聲音控制，設定為 0 時就會隱藏。</li>
+<li>start ： 從 n 秒處開始。</li>
+<li>end ： 在 n 秒處停止播放。</li>
+<li>loop=1 ： 重複播放，預設為 0 不重複。</li>
+<li>rel=0 ：預設 1 是當影片結束會出現相關類似的推薦影片，如果希望是推薦相同頻道的影片可以設為 0  就不會看到別人了。</li>
+</ul>
+<p>參考來源：<a href="https://developers.google.com/youtube/player_parameters" target="_blank" rel="noopener">https://developers.google.com/youtube/player_parameters</a></p>
 
       
     </div>
@@ -229,7 +275,7 @@
     <div id="toc" class="toc-article">
     <strong class="toc-title">文章目錄</strong>
     
-      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#音樂播放"><span class="nav-number">2.</span> <span class="nav-text">音樂播放</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#影片"><span class="nav-number">3.</span> <span class="nav-text">影片</span></a></li></ol>
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#前言"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#音樂類"><span class="nav-number">2.</span> <span class="nav-text">音樂類</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#影片類"><span class="nav-number">3.</span> <span class="nav-text">影片類</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#vtt-字幕檔"><span class="nav-number">3.1.</span> <span class="nav-text">vtt 字幕檔</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#設定字幕樣式"><span class="nav-number">3.1.1.</span> <span class="nav-text">設定字幕樣式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#YouTube-影片"><span class="nav-number">3.2.</span> <span class="nav-text">YouTube 影片</span></a></li></ol></li></ol>
     
     </div>
   </aside>
