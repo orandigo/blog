@@ -19,7 +19,7 @@
 <meta property="og:description" content="介紹框架  是 Utility Framework 工具型的 CSS 框架">
 <meta property="og:locale" content="zh_TW">
 <meta property="article:published_time" content="2020-11-08T15:46:52.000Z">
-<meta property="article:modified_time" content="2020-11-08T15:48:42.303Z">
+<meta property="article:modified_time" content="2020-11-08T15:53:03.560Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
@@ -61,10 +61,32 @@
 
 
   
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
 
 
 <header id="allheader" class="site-header" role="banner" 
-   >
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
   <div class="clearfix container">
       <div class="site-branding">
 
@@ -154,6 +176,8 @@
 <ul>
 <li><a href="https://tailwindcss.com/docs/installation" target="_blank" rel="noopener">Installation 安裝文件</a> </li>
 <li><a href="https://tailwindcss.com/course" target="_blank" rel="noopener">screencasts 教學</a> </li>
+<li><a href="https://www.youtube.com/results?search_query=tailwind+css&page=&utm_source=opensearch" target="_blank" rel="noopener">Youtube 教學</a> </li>
+<li><a href="https://tailwindcomponents.com/" target="_blank" rel="noopener">Tailwind Component </a></li>
 </ul>
 
       
@@ -233,6 +257,9 @@
 
 
     <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
     
     
 </script>
