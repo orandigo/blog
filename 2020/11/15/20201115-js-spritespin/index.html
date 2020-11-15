@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>用圖片組成 360 度效果 | 前端筆記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="w3HexSchool" />
+  
+  
+  
+  
+  <meta name="description" content="簡介spritespin.js 是 jQuery 的插件">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用圖片組成 360 度效果">
+<meta property="og:url" content="https://orandigo.github.io/2020/11/15/20201115-js-spritespin/index.html">
+<meta property="og:site_name" content="前端筆記">
+<meta property="og:description" content="簡介spritespin.js 是 jQuery 的插件">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-11-15T15:52:49.000Z">
+<meta property="article:modified_time" content="2020-11-15T15:56:04.880Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="icon" href="/blog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+  
+<script src="/blog/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/blog/css/fashion.css" >
+  <link rel="stylesheet" href="/blog/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+
+
+<header id="allheader" class="site-header" role="banner" 
+   >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/blog/" title="前端筆記" rel="home"> 前端筆記 </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">首頁</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">目錄</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">關於</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-20201115-js-spritespin" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      用圖片組成 360 度效果
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/11/15/20201115-js-spritespin/" class="article-date">
+	  <time datetime="2020-11-15T15:52:49.000Z" itemprop="datePublished">十一月 15, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/jQuery/">jQuery</a>, <a class="article-category-link" href="/blog/categories/jQuery/library/">library</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="簡介"><a href="#簡介" class="headerlink" title="簡介"></a>簡介</h1><p>spritespin.js 是 jQuery 的插件<a id="more"></a>，是會依照圖片順序輪播圖片造成像是物品 360 度轉動的動畫效果，呈現的樣子可到 <a href="http://spritespin.ginie.eu/" target="_blank" rel="noopener">官網</a> 看看</p>
+<p>或是加上可互動的按鈕，像是這一個例子 <a href="http://jsfiddle.net/giniedp/Xaqw5/" target="_blank" rel="noopener">http://jsfiddle.net/giniedp/Xaqw5/</a> </p>
+<h1 id="下載"><a href="#下載" class="headerlink" title="下載"></a>下載</h1><p>從 NPM 下載 <a href="https://www.npmjs.com/package/spritespin" target="_blank" rel="noopener">https://www.npmjs.com/package/spritespin</a></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install spritespin</span><br></pre></td></tr></table></figure>
+
+<p>載入到 javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> SpriteSpin <span class="keyword">from</span> <span class="string">'spritespin'</span>;</span><br><span class="line"><span class="keyword">var</span> SpriteSpin = <span class="built_in">require</span>(<span class="string">"spritespin"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>或是使用 CDN</p>
+<p>載入前還需要連同 jQuery 一起載入才有作用</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://code.jquery.com/jquery-3.3.1.min.js"</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/spritespin@x.x.x/release/spritespin.js"</span> <span class="attr">type</span>=<span class="string">'text/javascript'</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> <a href="http://spritespin.ginie.eu/samples/#/api-fullscreen" target="_blank" rel="noopener">http://spritespin.ginie.eu/samples/#/api-fullscreen</a> </p>
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>在 HTML 建立一個要應用到 SpriteSpin 元素</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">'mySpriteSpin'</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>簡單的初始化要產生 360 度動畫的圖像</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="string">"#mySpriteSpin"</span>).spritespin(&#123;</span><br><span class="line">  <span class="comment">// path to the source images.</span></span><br><span class="line">  source: [</span><br><span class="line">  <span class="string">"path/to/frame_001.jpg"</span>,</span><br><span class="line">  <span class="string">"path/to/frame_002.jpg"</span>,</span><br><span class="line">  <span class="string">"path/to/frame_003.jpg"</span>,</span><br><span class="line">  <span class="string">"path/to/frame_004.jpg"</span>,</span><br><span class="line">  <span class="string">"path/to/frame_005.jpg"</span>,</span><br><span class="line">  <span class="string">"path/to/frame_006.jpg"</span>,</span><br><span class="line">  <span class="string">"path/to/frame_007.jpg"</span>,</span><br><span class="line">  <span class="string">"path/to/frame_008.jpg"</span>,</span><br><span class="line">  <span class="string">"path/to/frame_009.jpg"</span>,</span><br><span class="line">  <span class="string">"path/to/frame_010.jpg"</span>,</span><br><span class="line">  ],</span><br><span class="line">  width   : <span class="number">480</span>,</span><br><span class="line">  height  : <span class="number">327</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>基本上這就會看到動畫</p>
+<p><a href="http://spritespin.ginie.eu/howto/" target="_blank" rel="noopener">http://spritespin.ginie.eu/howto/</a></p>
+<h2 id="用陣列載入圖片"><a href="#用陣列載入圖片" class="headerlink" title="用陣列載入圖片"></a>用陣列載入圖片</h2><p>SpriteSpin.sourceArray 是 SpriteSpin 提供的圖片陣列寫法，引用他來節省圖片一張張帶入的步驟，也可以指定初始的圖片要使用哪一張喔！ </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SpriteSpin.sourceArray(<span class="string">'/images/rad_zoom_&#123;frame&#125;.jpg'</span>, &#123;  <span class="comment">// &#123;frame&#125; 是配合下一行要套陣列內的值的地方</span></span><br><span class="line">  frame: [<span class="number">1</span>,<span class="number">34</span>],   <span class="comment">// 設定圖片的第一張和最後一張</span></span><br><span class="line">  digits: <span class="number">3</span></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://spritespin.ginie.eu/samples/#/basics-source-array" target="_blank" rel="noopener">http://spritespin.ginie.eu/samples/#/basics-source-array</a></p>
+<h2 id="用-sprite-變換"><a href="#用-sprite-變換" class="headerlink" title="用 sprite 變換"></a>用 sprite 變換</h2><p>sprite 圖又稱是 <strong>雪碧圖</strong> 或 <strong>合拼圖</strong>  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  $(<span class="string">'.spritespin'</span>).spritespin(&#123;</span><br><span class="line">    </span><br><span class="line">    source: <span class="string">'/images/bike6x6_big.jpg'</span>,  <span class="comment">// 圖片</span></span><br><span class="line">    width: <span class="number">480</span>,</span><br><span class="line">    height: <span class="number">327</span>,</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// sprite 圖的設定</span></span><br><span class="line">    frames: <span class="number">34</span>,  <span class="comment">// 圖片內的總圖像數量</span></span><br><span class="line">    framesX: <span class="number">6</span>,  <span class="comment">// 水平的圖像數量</span></span><br><span class="line">    sense: <span class="number">-1</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<p><a href="http://spritespin.ginie.eu/samples/#/basics-spritesheet" target="_blank" rel="noopener">http://spritespin.ginie.eu/samples/#/basics-spritesheet</a></p>
+<h2 id="3D-效果"><a href="#3D-效果" class="headerlink" title="3D 效果"></a>3D 效果</h2><p><a href="http://spritespin.ginie.eu/samples/#/basics-3d" target="_blank" rel="noopener">http://spritespin.ginie.eu/samples/#/basics-3d</a></p>
+<p>除了有物品水平的 360 度轉動的動畫外，還可以再加上一個上下的轉動</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">$(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">  $(<span class="string">'.spritespin'</span>).spritespin(&#123;</span><br><span class="line">    source: SpriteSpin.sourceArray(<span class="string">'/images/3d/sample-&#123;lane&#125;-&#123;frame&#125;.jpg'</span>, &#123;</span><br><span class="line">      lane: [<span class="number">0</span>,<span class="number">11</span>],  <span class="comment">// 加上垂直於原本轉動方向另一個 360 度旋轉</span></span><br><span class="line">      frame: [<span class="number">0</span>,<span class="number">23</span>],</span><br><span class="line">      digits: <span class="number">2</span></span><br><span class="line">    &#125;),</span><br><span class="line">    width: <span class="number">400</span>,</span><br><span class="line">    height: <span class="number">225</span>,</span><br><span class="line">    </span><br><span class="line">    lanes: <span class="number">12</span>,   <span class="comment">// 垂直於原本轉動方向的 360 度圖片數量</span></span><br><span class="line">    frames: <span class="number">24</span>,  <span class="comment">// 水平轉動方向的 360 度圖片數量</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 動畫靈敏度</span></span><br><span class="line">    sense: <span class="number">1</span>,       <span class="comment">// 水平方向</span></span><br><span class="line">    senseLane: <span class="number">-2</span>,  <span class="comment">// 垂直方向</span></span><br><span class="line"></span><br><span class="line">    <span class="comment">// 位置初始</span></span><br><span class="line">    lane: <span class="number">6</span>,</span><br><span class="line">    frame: <span class="number">0</span>,</span><br><span class="line">    animate: <span class="literal">false</span>,</span><br><span class="line"></span><br><span class="line">    plugins: [</span><br><span class="line">      <span class="string">'360'</span>,</span><br><span class="line">      <span class="string">'drag'</span>  <span class="comment">// 這是可用滑鼠托拉產生動畫，還有依滑鼠滑動產生動畫的 'move' 和滾輪滾動的 'wheel'</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="加入互動按鈕"><a href="#加入互動按鈕" class="headerlink" title="加入互動按鈕"></a>加入互動按鈕</h2><p><a href="http://spritespin.ginie.eu/samples/#/basics-source-array" target="_blank" rel="noopener">http://spritespin.ginie.eu/samples/#/basics-source-array</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">'spritespin'</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'prev'</span>&gt;</span>Prev<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'toggle'</span>&gt;</span>Toggle<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'reverse'</span>&gt;</span>Reverse<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">button</span> <span class="attr">id</span>=<span class="string">'next'</span>&gt;</span>Next<span class="tag">&lt;/<span class="name">button</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> frames = SpriteSpin.sourceArray(<span class="string">'/images/rad_zoom_&#123;frame&#125;.jpg'</span>, &#123; </span><br><span class="line">    frame: [<span class="number">1</span>, <span class="number">34</span>], </span><br><span class="line">    digits: <span class="number">3</span> </span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> spin = $(<span class="string">'#spritespin'</span>);</span><br><span class="line">spin.spritespin(&#123;</span><br><span class="line">    source: frames,</span><br><span class="line">    width: <span class="number">480</span>,</span><br><span class="line">    sense: <span class="number">-1</span>,</span><br><span class="line">    height: <span class="number">327</span>,</span><br><span class="line">    animate: <span class="literal">false</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> api = spin.spritespin(<span class="string">"api"</span>);</span><br><span class="line"></span><br><span class="line">$(<span class="string">'#prev'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    api.stopAnimation();</span><br><span class="line">    api.prevFrame();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="string">'#next'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    api.stopAnimation();</span><br><span class="line">    api.nextFrame();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="string">'#toggle'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    api.toggleAnimation();</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">$(<span class="string">'#reverse'</span>).click(<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    api.data.reverse = !api.data.reverse;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="刪除動畫"><a href="#刪除動畫" class="headerlink" title="刪除動畫"></a>刪除動畫</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 刪除功能</span></span><br><span class="line">$(<span class="string">"#mySpriteSpin"</span>).spritespin(<span class="string">"destroy"</span>)</span><br><span class="line"><span class="comment">// remove HTML leftovers</span></span><br><span class="line">$(<span class="string">"#mySpriteSpin"</span>).html(<span class="string">""</span>)</span><br><span class="line"><span class="comment">// remove any Style leftovers</span></span><br><span class="line">$(<span class="string">"#mySpriteSpin"</span>).attr(<span class="string">"style"</span>, <span class="string">""</span>)</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/jQuery/">jQuery</a>, <a class="article-category-link" href="/blog/categories/jQuery/library/">library</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/11/08/20201108-tailwind/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Tailwind 筆記</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目錄</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#簡介"><span class="nav-number">1.</span> <span class="nav-text">簡介</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#下載"><span class="nav-number">2.</span> <span class="nav-text">下載</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">3.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#用陣列載入圖片"><span class="nav-number">3.1.</span> <span class="nav-text">用陣列載入圖片</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#用-sprite-變換"><span class="nav-number">3.2.</span> <span class="nav-text">用 sprite 變換</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3D-效果"><span class="nav-number">3.3.</span> <span class="nav-text">3D 效果</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#加入互動按鈕"><span class="nav-number">3.4.</span> <span class="nav-text">加入互動按鈕</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#刪除動畫"><span class="nav-number">3.5.</span> <span class="nav-text">刪除動畫</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2020 前端筆記 All Rights Reserved.
+        
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/bootstrap.js"></script>
+
+
+<script src="/blog/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-124626412-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
