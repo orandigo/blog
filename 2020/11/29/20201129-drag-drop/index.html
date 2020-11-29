@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>用滑鼠拖曳元素來移動位置 | 前端筆記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="w3HexSchool" />
+  
+  
+  
+  
+  <meta name="description" content="目的之前有作過利用 HTML 拖曳功能建立 TODO-List 清單，但當時只是大約了解一下並不是十分了解，現在又有需要製作有拖曳功能的表單列表，卻忘了當時的作法，所以再來研究一下。 建立可拖曳的元素要讓在 HTML 的元素具有拖曳的功能，只需要在元素加上 draggable&#x3D;&quot;true&quot; 就開啟功能，例： 12&lt;img src&#x3D;&quot;main.png&quot; draggabl">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用滑鼠拖曳元素來移動位置">
+<meta property="og:url" content="https://orandigo.github.io/2020/11/29/20201129-drag-drop/index.html">
+<meta property="og:site_name" content="前端筆記">
+<meta property="og:description" content="目的之前有作過利用 HTML 拖曳功能建立 TODO-List 清單，但當時只是大約了解一下並不是十分了解，現在又有需要製作有拖曳功能的表單列表，卻忘了當時的作法，所以再來研究一下。 建立可拖曳的元素要讓在 HTML 的元素具有拖曳的功能，只需要在元素加上 draggable&#x3D;&quot;true&quot; 就開啟功能，例： 12&lt;img src&#x3D;&quot;main.png&quot; draggabl">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-11-29T15:35:54.000Z">
+<meta property="article:modified_time" content="2020-11-29T15:59:12.547Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="icon" href="/blog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+  
+<script src="/blog/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/blog/css/fashion.css" >
+  <link rel="stylesheet" href="/blog/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
+
+
+<header id="allheader" class="site-header" role="banner" 
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/blog/" title="前端筆記" rel="home"> 前端筆記 </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">首頁</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">目錄</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">關於</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-20201129-drag-drop" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      用滑鼠拖曳元素來移動位置
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/11/29/20201129-drag-drop/" class="article-date">
+	  <time datetime="2020-11-29T15:35:54.000Z" itemprop="datePublished">十一月 29, 2020</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a>
+
+<h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>之前有作過利用 HTML 拖曳功能建立 TODO-List 清單，但當時只是大約了解一下並不是十分了解，現在又有需要製作有拖曳功能的表單列表，卻忘了當時的作法，所以再來研究一下。</p>
+<h1 id="建立可拖曳的元素"><a href="#建立可拖曳的元素" class="headerlink" title="建立可拖曳的元素"></a>建立可拖曳的元素</h1><p>要讓在 HTML 的元素具有拖曳的功能，只需要在元素加上 <code>draggable=&quot;true&quot;</code> 就開啟功能，例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"main.png"</span> <span class="attr">draggable</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"book0011"</span> <span class="attr">draggable</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="建立元素的屬性"><a href="#建立元素的屬性" class="headerlink" title="建立元素的屬性"></a>建立元素的屬性</h1><p>可使用的屬性除了可以在 HTML 也有 Javascript 可用的屬性，在 HTML 的是 <strong>事件處理器屬性</strong> 、Javascript 的是 <strong>事件</strong> ，記的時候只需記一種就行了，因為 HTML 和 Javascript 的寫法差別就只差有沒有加 on 在前方。</p>
+<p>可用的屬性</p>
+<ul>
+<li><ul>
+<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondrag" target="_blank" rel="noopener">ondrag</a> 、<a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/drag" target="_blank" rel="noopener">drag</a><br> 當一個可被拖曳的 元素 / 區塊 被點擊時觸發的事件執行</p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondragend" target="_blank" rel="noopener">ondragend</a> 、 <a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/dragend" target="_blank" rel="noopener">dragend</a><br>點擊放開、放開滑鼠或按下 Esc 鍵時觸發的事件執行<br><a href="https://developer.mozilla.org/en-US/docs/DragDrop/Drag_Operations#dragend" target="_blank" rel="noopener">結束拖曳</a> </p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondragenter" target="_blank" rel="noopener">ondragenter</a> 、 <a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/dragenter" target="_blank" rel="noopener">dragenter</a><br>當被拖曳的 元素 / 區塊 移到作為目標的容器 ( 元素 / 區塊 ) 之上時，在元素移入容器的範圍內時觸發的事件執行<br>這裡執行的是作為 <strong>容器</strong> 的元素 / 區塊，不是被拖移的元素 / 區塊 </p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondragexit" target="_blank" rel="noopener">ondragexit</a> 、 <a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/dragexit" target="_blank" rel="noopener">dragexit</a><br>當元素拖曳被放開後觸發的事件執行</p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondragleave" target="_blank" rel="noopener">ondragleave</a> 、 <a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/dragleave" target="_blank" rel="noopener">dragleave</a><br>當元素被拖曳到容器範圍內之後離開容器範圍時所觸發的事件執行<br>這裡事件執行的是作為 <strong>容器</strong> 的元素 / 區塊，不是被拖移的元素 / 區塊 </p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondragover" target="_blank" rel="noopener">ondragover</a> 、 <a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/dragover" target="_blank" rel="noopener">dragover</a> </p>
+<p>當元素被拖曳到容器範圍內時觸發的事件執行<br>這裡事件執行的是作為 <strong>容器</strong> 的元素 / 區塊，不是被拖移的元素 / 區塊 </p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondragstart" target="_blank" rel="noopener">ondragstart</a> 、 <a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/dragstart" target="_blank" rel="noopener">dragstart</a><br>當元素被拖曳時觸發的事件執行</p>
+</li>
+<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondrop" target="_blank" rel="noopener">ondrop</a> 、 <a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/drop" target="_blank" rel="noopener">drop</a><br>當被拖曳的 元素 / 區塊 被移到作為目標的容器內後結束點擊時觸發的事件執行</p>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h1><ul>
+<li><p>HTML</p>
+<ul>
+<li>屬性是要寫在被拖移的元素上</li>
+</ul>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondrop</span>=<span class="string">"drop(event)"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondragover</span>=<span class="string">"allowDrop(event)"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"main.png"</span> </span></span><br><span class="line"><span class="tag">       <span class="attr">draggable</span>=<span class="string">"true"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">ondragstart</span>=<span class="string">"drag(event)"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">id</span>=<span class="string">"drag1"</span> /&gt;</span>  <span class="comment">&lt;!-- 啟用拖放功能 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div2"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondrop</span>=<span class="string">"drop(event)"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondragover</span>=<span class="string">"allowDrop(event)"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>JS </p>
+<ul>
+<li><p>[點擊時] - 設定當元素可被拖動時 ondragstart 和 取得的資料 setData()<br>ondragstart 屬性調用了一個函數， drag( <em>event</em> )，它規定了被拖動的數據。<br>dataTransfer.setData() 方法設置被拖數據的數據類型和值</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drag</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">  ev.dataTransfer.setData(<span class="string">"Text"</span>,ev.target.id);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 這個例子中，數據類型是"Text"，值是可拖動元素的id</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>[按住不放] - 拖移元素 - ondragover<br>ondragover 事件規定在何處放置被拖動的數據<br>預設是無法將數據 / 元素放置到其他元素中<br>如果需要設定可被置入的話，就必須要變更元素的預設值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">event.preventDefault()</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>[放開時] - 進行放置-   ondrop屬性調用了一個函數，drop( <em>event</em> )<br>當被拖移的元素被放開後就會執行 drop 事件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drop</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">	ev.preventDefault();</span><br><span class="line">	<span class="keyword">var</span> data=ev.dataTransfer.getData(<span class="string">"Text"</span>);</span><br><span class="line">	ev.target.appendChild(<span class="built_in">document</span>.getElementById(data));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+</li>
+</ul>
+<p>實際例子</p>
+<p>樣式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#div1</span>, <span class="selector-id">#div2</span> &#123;</span><br><span class="line">  <span class="attribute">float</span>:left;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">240px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">240px</span>;</span><br><span class="line">  <span class="attribute">padding</span>:<span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">border</span>:<span class="number">1px</span> solid <span class="number">#aaaaaa</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>功能設定</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">allowDrop</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">  ev.preventDefault();</span><br><span class="line">  <span class="comment">// 這是要配合 HTML 的 ondragover 一起使用，目的是要移除元素預設行為</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drag</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">  ev.dataTransfer.setData(<span class="string">"Text"</span>,ev.target.id);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drop</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">  ev.preventDefault();   <span class="comment">// 移除預設行為</span></span><br><span class="line">  <span class="keyword">var</span> data = ev.dataTransfer.getData(<span class="string">"Text"</span>);   <span class="comment">// 存取資料</span></span><br><span class="line">  ev.target.appendChild(<span class="built_in">document</span>.getElementById(data));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/setData" target="_blank" rel="noopener">dataTransfer.getData()</a></p>
+<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer" target="_blank" rel="noopener">DataTransfer</a> object’s <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/getData" target="_blank" rel="noopener"><code>getData()</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/setData" target="_blank" rel="noopener"><code>setData()</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/clearData" target="_blank" rel="noopener"><code>clearData()</code></a> methods. </p>
+<p>畫面</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondrop</span>=<span class="string">"drop(event)"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondragover</span>=<span class="string">"allowDrop(event)"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"main.png"</span> </span></span><br><span class="line"><span class="tag">       <span class="attr">draggable</span>=<span class="string">"true"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">ondragstart</span>=<span class="string">"drag(event)"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">id</span>=<span class="string">"drag1"</span> /&gt;</span>  <span class="comment">&lt;!-- 啟用拖放功能 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div2"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondrop</span>=<span class="string">"drop(event)"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondragover</span>=<span class="string">"allowDrop(event)"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>作為容器的屬性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id &#x3D; &quot;div1&quot;     &#x2F;&#x2F; 作為容器必要的固定名稱</span><br><span class="line">ondrop &#x3D; &quot;drop(event)&quot;     &#x2F;&#x2F; 放開時 &#x3D; 將取得的資料置入</span><br><span class="line">ondragover &#x3D; &quot;allowDrop(event)&quot;     &#x2F;&#x2F; 在按住拖移期間 &#x3D; 移除這個元素的預設行為</span><br></pre></td></tr></table></figure>
+
+<p>HTML 拖放 API 參考文件<br><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API" target="_blank" rel="noopener">HTML_Drag_and_Drop_API</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/11/15/20201115-js-spritespin/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">用圖片組成 360 度效果</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目錄</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目的"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建立可拖曳的元素"><span class="nav-number">2.</span> <span class="nav-text">建立可拖曳的元素</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建立元素的屬性"><span class="nav-number">3.</span> <span class="nav-text">建立元素的屬性</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用方式"><span class="nav-number">4.</span> <span class="nav-text">使用方式</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2020 前端筆記 All Rights Reserved.
+        
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/bootstrap.js"></script>
+
+
+<script src="/blog/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-124626412-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
