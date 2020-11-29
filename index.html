@@ -145,86 +145,17 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <a id="more"></a>
+        
 
-<h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>之前有作過利用 HTML 拖曳功能建立 TODO-List 清單，但當時只是大約了解一下並不是十分了解，現在又有需要製作有拖曳功能的表單列表，卻忘了當時的作法，所以再來研究一下。</p>
-<h1 id="建立可拖曳的元素"><a href="#建立可拖曳的元素" class="headerlink" title="建立可拖曳的元素"></a>建立可拖曳的元素</h1><p>要讓在 HTML 的元素具有拖曳的功能，只需要在元素加上 <code>draggable=&quot;true&quot;</code> 就開啟功能，例：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"main.png"</span> <span class="attr">draggable</span>=<span class="string">"true"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"book0011"</span> <span class="attr">draggable</span>=<span class="string">"true"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+          
+          <div class="entry-summary">
+          目的之前有作過利用 HTML 拖曳功能建立 TODO-List 清單，但當時只是大約了解一下並不是十分了解，現在又有需要製作有拖曳功能的表單列表，卻忘了當時的作法，所以再來研究一下。
 
-
-
-
-
-<h1 id="建立元素的屬性"><a href="#建立元素的屬性" class="headerlink" title="建立元素的屬性"></a>建立元素的屬性</h1><p>可使用的屬性除了可以在 HTML 也有 Javascript 可用的屬性，在 HTML 的是 <strong>事件處理器屬性</strong> 、Javascript 的是 <strong>事件</strong> ，記的時候只需記一種就行了，因為 HTML 和 Javascript 的寫法差別就只差有沒有加 on 在前方。</p>
-<p>可用的屬性</p>
-<ul>
-<li><ul>
-<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondrag" target="_blank" rel="noopener">ondrag</a> 、<a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/drag" target="_blank" rel="noopener">drag</a><br> 當一個可被拖曳的 元素 / 區塊 被點擊時觸發的事件執行</p>
-</li>
-<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondragend" target="_blank" rel="noopener">ondragend</a> 、 <a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/dragend" target="_blank" rel="noopener">dragend</a><br>點擊放開、放開滑鼠或按下 Esc 鍵時觸發的事件執行<br><a href="https://developer.mozilla.org/en-US/docs/DragDrop/Drag_Operations#dragend" target="_blank" rel="noopener">結束拖曳</a> </p>
-</li>
-<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondragenter" target="_blank" rel="noopener">ondragenter</a> 、 <a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/dragenter" target="_blank" rel="noopener">dragenter</a><br>當被拖曳的 元素 / 區塊 移到作為目標的容器 ( 元素 / 區塊 ) 之上時，在元素移入容器的範圍內時觸發的事件執行<br>這裡執行的是作為 <strong>容器</strong> 的元素 / 區塊，不是被拖移的元素 / 區塊 </p>
-</li>
-<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondragexit" target="_blank" rel="noopener">ondragexit</a> 、 <a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/dragexit" target="_blank" rel="noopener">dragexit</a><br>當元素拖曳被放開後觸發的事件執行</p>
-</li>
-<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondragleave" target="_blank" rel="noopener">ondragleave</a> 、 <a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/dragleave" target="_blank" rel="noopener">dragleave</a><br>當元素被拖曳到容器範圍內之後離開容器範圍時所觸發的事件執行<br>這裡事件執行的是作為 <strong>容器</strong> 的元素 / 區塊，不是被拖移的元素 / 區塊 </p>
-</li>
-<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondragover" target="_blank" rel="noopener">ondragover</a> 、 <a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/dragover" target="_blank" rel="noopener">dragover</a> </p>
-<p>當元素被拖曳到容器範圍內時觸發的事件執行<br>這裡事件執行的是作為 <strong>容器</strong> 的元素 / 區塊，不是被拖移的元素 / 區塊 </p>
-</li>
-<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondragstart" target="_blank" rel="noopener">ondragstart</a> 、 <a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/dragstart" target="_blank" rel="noopener">dragstart</a><br>當元素被拖曳時觸發的事件執行</p>
-</li>
-<li><p><a href="https://developer.mozilla.org/zh-TW/docs/Web/API/GlobalEventHandlers/ondrop" target="_blank" rel="noopener">ondrop</a> 、 <a href="https://developer.mozilla.org/zh-TW/docs/Web/Reference/Events/drop" target="_blank" rel="noopener">drop</a><br>當被拖曳的 元素 / 區塊 被移到作為目標的容器內後結束點擊時觸發的事件執行</p>
-</li>
-</ul>
-</li>
-</ul>
-<h1 id="使用方式"><a href="#使用方式" class="headerlink" title="使用方式"></a>使用方式</h1><ul>
-<li><p>HTML</p>
-<ul>
-<li>屬性是要寫在被拖移的元素上</li>
-</ul>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondrop</span>=<span class="string">"drop(event)"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondragover</span>=<span class="string">"allowDrop(event)"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"main.png"</span> </span></span><br><span class="line"><span class="tag">       <span class="attr">draggable</span>=<span class="string">"true"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">ondragstart</span>=<span class="string">"drag(event)"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">id</span>=<span class="string">"drag1"</span> /&gt;</span>  <span class="comment">&lt;!-- 啟用拖放功能 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div2"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondrop</span>=<span class="string">"drop(event)"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondragover</span>=<span class="string">"allowDrop(event)"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-
-
-</li>
-</ul>
-<ul>
-<li><p>JS </p>
-<ul>
-<li><p>[點擊時] - 設定當元素可被拖動時 ondragstart 和 取得的資料 setData()<br>ondragstart 屬性調用了一個函數， drag( <em>event</em> )，它規定了被拖動的數據。<br>dataTransfer.setData() 方法設置被拖數據的數據類型和值</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drag</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">  ev.dataTransfer.setData(<span class="string">"Text"</span>,ev.target.id);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 這個例子中，數據類型是"Text"，值是可拖動元素的id</span></span><br></pre></td></tr></table></figure>
-</li>
-<li><p>[按住不放] - 拖移元素 - ondragover<br>ondragover 事件規定在何處放置被拖動的數據<br>預設是無法將數據 / 元素放置到其他元素中<br>如果需要設定可被置入的話，就必須要變更元素的預設值。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">event.preventDefault()</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>[放開時] - 進行放置-   ondrop屬性調用了一個函數，drop( <em>event</em> )<br>當被拖移的元素被放開後就會執行 drop 事件</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drop</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">	ev.preventDefault();</span><br><span class="line">	<span class="keyword">var</span> data=ev.dataTransfer.getData(<span class="string">"Text"</span>);</span><br><span class="line">	ev.target.appendChild(<span class="built_in">document</span>.getElementById(data));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-</li>
-</ul>
-</li>
-</ul>
-<p>實際例子</p>
-<p>樣式</p>
-<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-id">#div1</span>, <span class="selector-id">#div2</span> &#123;</span><br><span class="line">  <span class="attribute">float</span>:left;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">240px</span>;</span><br><span class="line">  <span class="attribute">height</span>: <span class="number">240px</span>;</span><br><span class="line">  <span class="attribute">padding</span>:<span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">margin</span>: <span class="number">10px</span>;</span><br><span class="line">  <span class="attribute">border</span>:<span class="number">1px</span> solid <span class="number">#aaaaaa</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-
-
-<p>功能設定</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">allowDrop</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">  ev.preventDefault();</span><br><span class="line">  <span class="comment">// 這是要配合 HTML 的 ondragover 一起使用，目的是要移除元素預設行為</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drag</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">  ev.dataTransfer.setData(<span class="string">"Text"</span>,ev.target.id);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">drop</span> (<span class="params">ev</span>) </span>&#123;</span><br><span class="line">  ev.preventDefault();   <span class="comment">// 移除預設行為</span></span><br><span class="line">  <span class="keyword">var</span> data = ev.dataTransfer.getData(<span class="string">"Text"</span>);   <span class="comment">// 存取資料</span></span><br><span class="line">  ev.target.appendChild(<span class="built_in">document</span>.getElementById(data));</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/setData" target="_blank" rel="noopener">dataTransfer.getData()</a></p>
-<p><a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer" target="_blank" rel="noopener">DataTransfer</a> object’s <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/getData" target="_blank" rel="noopener"><code>getData()</code></a>, <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/setData" target="_blank" rel="noopener"><code>setData()</code></a> and <a href="https://developer.mozilla.org/en-US/docs/Web/API/DataTransfer/clearData" target="_blank" rel="noopener"><code>clearData()</code></a> methods. </p>
-<p>畫面</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div1"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondrop</span>=<span class="string">"drop(event)"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondragover</span>=<span class="string">"allowDrop(event)"</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">"main.png"</span> </span></span><br><span class="line"><span class="tag">       <span class="attr">draggable</span>=<span class="string">"true"</span>  </span></span><br><span class="line"><span class="tag">       <span class="attr">ondragstart</span>=<span class="string">"drag(event)"</span></span></span><br><span class="line"><span class="tag">       <span class="attr">id</span>=<span class="string">"drag1"</span> /&gt;</span>  <span class="comment">&lt;!-- 啟用拖放功能 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"div2"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondrop</span>=<span class="string">"drop(event)"</span></span></span><br><span class="line"><span class="tag">     <span class="attr">ondragover</span>=<span class="string">"allowDrop(event)"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
-
-<p>作為容器的屬性</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">id &#x3D; &quot;div1&quot;     &#x2F;&#x2F; 作為容器必要的固定名稱</span><br><span class="line">ondrop &#x3D; &quot;drop(event)&quot;     &#x2F;&#x2F; 放開時 &#x3D; 將取得的資料置入</span><br><span class="line">ondragover &#x3D; &quot;allowDrop(event)&quot;     &#x2F;&#x2F; 在按住拖移期間 &#x3D; 移除這個元素的預設行為</span><br></pre></td></tr></table></figure>
-
-<p>HTML 拖放 API 參考文件<br><a href="https://developer.mozilla.org/en-US/docs/Web/API/HTML_Drag_and_Drop_API" target="_blank" rel="noopener">HTML_Drag_and_Drop_API</a></p>
-
+        
+          <p class="article-more-link">
+            <a href="/blog/2020/11/29/20201129-drag-drop/#more">閱讀全文</a>
+          </p>
+        </div>
       
     </div>
     <footer class="entry-meta entry-footer">
