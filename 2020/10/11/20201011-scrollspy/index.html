@@ -11,18 +11,20 @@
   
   
   
-  <meta name="description" content="前言當網頁內有需要快速移動到的位置，或是需要用到選單提示使用者捲軸移動到的位置時，這功能還滿方便的，所以筆記記錄下來。">
+  <meta name="description" content="前言當網頁內有需要快速移動到的位置，或是需要用到選單提示使用者捲軸移動到的位置時，為了不會影響到效能，找到一個使用 CSS 就能達到的方法，所以筆記記錄下來。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Scrollspy 滾動監控">
 <meta property="og:url" content="https://orandigo.github.io/2020/10/11/20201011-scrollspy/index.html">
 <meta property="og:site_name" content="前端筆記">
-<meta property="og:description" content="前言當網頁內有需要快速移動到的位置，或是需要用到選單提示使用者捲軸移動到的位置時，這功能還滿方便的，所以筆記記錄下來。">
+<meta property="og:description" content="前言當網頁內有需要快速移動到的位置，或是需要用到選單提示使用者捲軸移動到的位置時，為了不會影響到效能，找到一個使用 CSS 就能達到的方法，所以筆記記錄下來。">
 <meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://orandigo.github.io/2020/10/11/20201011-scrollspy/1607797438042.gif">
 <meta property="article:published_time" content="2020-10-11T15:19:59.000Z">
-<meta property="article:modified_time" content="2020-10-11T18:48:07.294Z">
+<meta property="article:modified_time" content="2020-12-12T19:21:37.371Z">
 <meta property="article:author" content="Orange">
 <meta property="article:tag" content="w3HexSchool">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://orandigo.github.io/2020/10/11/20201011-scrollspy/1607797438042.gif">
   
   <link rel="icon" href="/blog/css/images/favicon.ico">
   
@@ -61,32 +63,10 @@
 
 
   
-  
-  <div class="site-header-image">
-    <img id="originBg" width="100%" alt="Hike News" src="">
-  </div>
-
-  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
-    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
-  </div>
-
-  <script>
-        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
-        var random = Math.floor((Math.random() * imgUrls.length ));
-        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
-          document.getElementById("originBg").src=imgUrls[random];
-          document.getElementById("blurBg").src=imgUrls[random];
-        } else {
-          document.getElementById("originBg").src='/blog/' + imgUrls[random];
-          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
-        }
-    </script>
-
-
 
 
 <header id="allheader" class="site-header" role="banner" 
-   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
+   >
   <div class="clearfix container">
       <div class="site-branding">
 
@@ -150,7 +130,7 @@
     </div>
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>當網頁內有需要快速移動到的位置，或是需要用到選單提示使用者捲軸移動到的位置時，這功能還滿方便的，所以筆記記錄下來。</p>
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>當網頁內有需要快速移動到的位置，或是需要用到選單提示使用者捲軸移動到的位置時，為了不會影響到效能，找到一個使用 CSS 就能達到的方法，所以筆記記錄下來。</p>
  <a id="more"></a>
 
 <h1 id="CSS-Scrollspy"><a href="#CSS-Scrollspy" class="headerlink" title="CSS Scrollspy"></a>CSS Scrollspy</h1><p>在 HTML 內放入網頁內容的每個 <code>section</code> 都要給予一個 <code>id</code> ，不使用 <code>class</code> 是因為 <code>id</code> 可以利用 <code>a</code> 連結快速跳轉到網頁 <code>id</code> 所在位置的功能。</p>
@@ -165,9 +145,20 @@
 <p>最後再隱藏捲軸</p>
 <figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-pseudo">::-webkit-scrollbar</span> &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>另外要注意，這作法如果只用滑鼠滾輪滾動時是會沒有反應的！<br>因為是使用 <code>:hover</code> 作的效果，所以也需要移動滑鼠到在元素上時才會觸發。</p>
-<h1 id="JavaScript-Scrollspy"><a href="#JavaScript-Scrollspy" class="headerlink" title="JavaScript Scrollspy"></a>JavaScript Scrollspy</h1><p><a href="https://codepen.io/bramus/pen/ExaEqMJ" target="_blank" rel="noopener">Smooth Scrolling Sticky ScrollSpy Navigation</a> </p>
-<p><a href="https://codepen.io/zchee/pen/ogzvZZ" target="_blank" rel="noopener">Vanilla js ScrollSpy</a></p>
+<p>就大功告成了 ！效果就會像這樣</p>
+<p><img src="1607797438042.gif" alt="意示圖"></p>
+<p>還有要注意，這作法如果只用滑鼠滾輪滾動時是會沒有反應的！<br>因為是使用 <code>:hover</code> 作的效果，所以也需要移動滑鼠到在元素上時才會觸發。</p>
+<h1 id="JavaScript-Scrollspy"><a href="#JavaScript-Scrollspy" class="headerlink" title="JavaScript Scrollspy"></a>JavaScript Scrollspy</h1><p>HTML 和 CSS 的樣式一樣是上方的，但這裡不是使用 <code>:hover</code> 做變化，而是會在捲軸滑到的元素相對的連結加上一個新的 class 名稱，讓連結的樣式有變化</p>
+<p>所以 CSS 只需把 <code>:hover</code> 改成是 <code>.active</code> 就可以了，所以 <code>::-webkit-scrollbar</code> 也可以刪除</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.active &#123;</span><br><span class="line">  background-color: #fff;</span><br><span class="line">  color: #000;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 HTML 的選單 <code>&lt;a href=&quot;#one&quot;&gt;one&lt;/a&gt;</code> 需先加上<code>class=&quot;active&quot;</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line"><span class="meta">  'use strict'</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> section = <span class="built_in">document</span>.querySelectorAll(<span class="string">".section"</span>);</span><br><span class="line">  <span class="keyword">var</span> sections = &#123;&#125;;   <span class="comment">// 要存元素的資料</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 一一取出元素的 id 和元素上緣的位置值</span></span><br><span class="line">  <span class="built_in">Array</span>.prototype.forEach.call(section, <span class="function"><span class="keyword">function</span>(<span class="params">e</span>) </span>&#123;</span><br><span class="line">    sections[e.id] = e.offsetTop;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 當滑動捲軸時</span></span><br><span class="line">  <span class="built_in">window</span>.onscroll = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="comment">// 取捲軸上緣的位置值，不然就取 body 上緣的位置值</span></span><br><span class="line">    <span class="keyword">var</span> scrollPosition = <span class="built_in">document</span>.documentElement.scrollTop || <span class="built_in">document</span>.body.scrollTop;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判斷每一個元素的位置，當捲軸捲到時</span></span><br><span class="line">    <span class="comment">// 移除 classname 是 active 的，並在目前位置的相對 A 連結加上 active 的 classname</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> sections) &#123;</span><br><span class="line">      <span class="keyword">if</span> (sections[i] &lt;= scrollPosition) &#123;</span><br><span class="line">        <span class="built_in">document</span>.querySelector(<span class="string">'.active'</span>).setAttribute(<span class="string">'class'</span>, <span class="string">' '</span>);</span><br><span class="line">        <span class="built_in">document</span>.querySelector(<span class="string">'a[href*='</span> + i + <span class="string">']'</span>).setAttribute(<span class="string">'class'</span>, <span class="string">'active'</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+
+
+<p>參考： <a href="https://codepen.io/zchee/pen/ogzvZZ" target="_blank" rel="noopener">Vanilla js ScrollSpy</a> </p>
+<p>但這也只可以用在連結的元素不多時，若是有幾十個連結在需要跳到目的地時，就可能會影響效能，這就可以使用相關的插件使用。</p>
 <h1 id="Scrollspy-js"><a href="#Scrollspy-js" class="headerlink" title="Scrollspy.js"></a>Scrollspy.js</h1><p>產生的效果會根據移動到的位置 <strong>自動更新選單連結樣式</strong> 變化。</p>
 <ul>
 <li>參考文件<ul>
@@ -201,14 +192,14 @@
 <li><p><code>.destroy()</code><br>Javascript 移除的方法</p>
 </li>
 </ul>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">  <span class="comment">// 尋找目標元素</span></span><br><span class="line">  <span class="keyword">var</span> instance = M.ScrollSpy.getInstance(elem);</span><br><span class="line">  </span><br><span class="line"><span class="comment">// 移除插件的功能</span></span><br><span class="line">  instance.destroy();</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 尋找目標元素</span></span><br><span class="line"><span class="keyword">var</span> instance = M.ScrollSpy.getInstance(elem);</span><br></pre></td></tr></table></figure>
 
-<p><code>getInstance(elem)</code> 是使用預設 <strong>尋找目標元素</strong> <code>getActiveElement</code> 的方法 </p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span>(<span class="params">id</span>) </span>&#123;</span><br><span class="line"><span class="keyword">return</span> <span class="string">'a[href="#'</span> + id + <span class="string">'"]'</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
-<p>而目標元素必需有 <code>id</code> 的名稱</p>
 </li>
 </ul>
+<p>// 移除插件的功能<br>  instance.destroy();</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">&#96;getInstance(elem)&#96; 是使用預設 **尋找目標元素** &#96;getActiveElement&#96; 的方法 </span><br><span class="line"></span><br><span class="line">&#96;&#96;&#96;javascript</span><br><span class="line">function(id) &#123;</span><br><span class="line">return &#39;a[href&#x3D;&quot;#&#39; + id + &#39;&quot;]&#39;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  而目標元素必需有 <code>id</code> 的名稱</p>
 <h2 id="側邊選單"><a href="#側邊選單" class="headerlink" title="側邊選單"></a>側邊選單</h2><p>這是參考 <a href="https://github.com/makotot" target="_blank" rel="noopener">makotot</a>/<strong><a href="https://github.com/makotot/scrollspy" target="_blank" rel="noopener">scrollspy</a></strong> </p>
 <p>Scrollspy.js 除了直接下載也可以用 NPM</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --save scrollspy-js</span><br></pre></td></tr></table></figure>
@@ -315,9 +306,6 @@
 
 
     <!-- headerblur min height -->
-    
-      var headerblur = document.getElementById("header-blur");
-      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
     
     
 </script>
