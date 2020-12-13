@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Scroll Activate 捲軸滾動的動態效果 | 前端筆記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="w3HexSchool" />
+  
+  
+  
+  
+  <meta name="description" content="目的為了讓網頁有吸引力，所以在捲軸滾動畫面時做到監聽捲軸和元素之間的距離，以及觸發的事件或效果。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scroll Activate 捲軸滾動的動態效果">
+<meta property="og:url" content="https://orandigo.github.io/2020/12/13/20201213-scroll-activate/index.html">
+<meta property="og:site_name" content="前端筆記">
+<meta property="og:description" content="目的為了讓網頁有吸引力，所以在捲軸滾動畫面時做到監聽捲軸和元素之間的距離，以及觸發的事件或效果。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-12-13T04:34:13.000Z">
+<meta property="article:modified_time" content="2020-12-13T12:53:49.510Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="icon" href="/blog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+  
+<script src="/blog/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/blog/css/fashion.css" >
+  <link rel="stylesheet" href="/blog/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
+
+
+<header id="allheader" class="site-header" role="banner" 
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/blog/" title="前端筆記" rel="home"> 前端筆記 </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">首頁</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">目錄</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">關於</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-20201213-scroll-activate" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Scroll Activate 捲軸滾動的動態效果
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/12/13/20201213-scroll-activate/" class="article-date">
+	  <time datetime="2020-12-13T04:34:13.000Z" itemprop="datePublished">十二月 13, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/JavaScript/">JavaScript</a>, <a class="article-category-link" href="/blog/categories/JavaScript/%E5%87%BD%E5%BC%8F/">函式</a>, <a class="article-category-link" href="/blog/categories/jQuery/">jQuery</a>, <a class="article-category-link" href="/blog/categories/jQuery/library/">library</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>為了讓網頁有吸引力，所以在捲軸滾動畫面時做到監聽捲軸和元素之間的距離，以及觸發的事件或效果。</p>
+<a id="more"></a>
+
+<p>觸發事件需要用要 JavaScript 或 jQuery 在每次滾動時都要檢查和每個元件的距離，為了不影響效能，在使用上還是要注意監聽的數量。</p>
+<p>這裡要做的和之前寫的文章 <a href="https://orandigo.github.io/blog/2020/10/11/20201011-scrollspy/">Scrollspy 滾動監控</a> 類似，但在前一篇寫的文章主要是以滑鼠滑到的區塊作出類似 <strong>提示當前滑到的元素名稱</strong> 的效果，現在要作的是監聽捲軸和新增動畫效果。</p>
+<h1 id="CSS-JavaScript"><a href="#CSS-JavaScript" class="headerlink" title="CSS + JavaScript"></a>CSS + JavaScript</h1><p>使用套件製作效果既方便又快速，但是要作 1、2 個效果而去下載套件，套件需要先載入到網頁，其實用不到這麼多功能、檔案也會變大，所以可以試試自已作效果。</p>
+<p>主要是靠 JavaScript 在捲軸滾動時被觸發和新增、移除設計好的 CSS 動畫樣式。</p>
+<p>在 CSS 的動畫樣式可參考  <a href="https://developer.mozilla.org/zh-TW/docs/Web/CSS/CSS_Animations/Using_CSS_animations" target="_blank" rel="noopener">CSS 動畫- CSS | MDN</a> </p>
+<p>JavaScript 是使用事件監聽的 <code>scroll</code> 觸發執行</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> el = <span class="built_in">document</span>.body;</span><br><span class="line">el.addEventListener(<span class="string">"scroll"</span>, myScript);</span><br></pre></td></tr></table></figure>
+
+
+
+<p>或是改成在 HTML 加上 <code>onscroll=&quot;myfunction()&quot;</code> 來執行函式也可以，但要注意 <strong>執行的區域</strong> ，只有在加上 <code>onscroll</code> 元件內的捲軸才有作用，之外的捲軸是不會觸發的。</p>
+<p>所以要監聽整個畫面的捲軸時，區域就要設定在 <code>body</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">onscroll</span>=<span class="string">"myFunction()"</span>&gt;</span><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>再來就要判斷捲軸和元件是不是要達到要作動畫的條件，所以就要取得捲軸和元件的位置，這在 JavaScript 有提供可以取值也可以設定的方法</p>
+<ul>
+<li>水平位置的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollLeft" target="_blank" rel="noopener">Element.scrollLeft</a> 和畫面寬度的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/element/scrollWidth" target="_blank" rel="noopener">Element.scrollWidth</a> </li>
+<li>垂直位置的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollTop" target="_blank" rel="noopener">Element.scrollTop</a> 和畫面高度的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/Element/scrollHeight" target="_blank" rel="noopener">Element.scrollHeight</a> </li>
+</ul>
+<p>所以就可以作判斷條件</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">Onscrollfnction</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> bodyBottom = <span class="built_in">window</span>.scrollY + <span class="built_in">window</span>.innerHeight; <span class="comment">// 視窗最底</span></span><br><span class="line">  <span class="keyword">let</span> box = <span class="built_in">document</span>.getElementById(<span class="string">'content'</span>);</span><br><span class="line">  (box.offsetTop &lt; bodyBottom) ? <span class="built_in">console</span>.log(<span class="string">'See box'</span>) : <span class="built_in">console</span>.log(<span class="string">'Cant see'</span>) </span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<p>接下來只要再加上已經有動畫效果樣式的 class</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"content"</span>).classList.add(<span class="string">"active"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>當往回滾動就移除</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.getElementById(<span class="string">"content"</span>).classList.remove(<span class="string">"active"</span>);</span><br></pre></td></tr></table></figure>
+
+<p>這就完成了一個動畫效果。</p>
+<p>如果要作效果的元件很多的話，還是別一個一個刻了，可以參考下方的套件，只要套用就會有效果。</p>
+<h1 id="AOS-套件"><a href="#AOS-套件" class="headerlink" title="AOS 套件"></a>AOS 套件</h1><p><a href="https://michalsnik.github.io/aos/" target="_blank" rel="noopener">https://michalsnik.github.io/aos/</a></p>
+<p>這是當捲軸滾動時產生動畫的資料庫，只要在 HTML 要加上 <code>data-aos</code> 和要套用的動畫名稱，就會像官網內卡片所產生的效果，這一個套件很有趣的是向下滾動會產生動態效果，向上滾就會收回效果。</p>
+<h2 id="載入"><a href="#載入" class="headerlink" title="載入"></a>載入</h2><p>可直接在官網內下載 Zip 檔，或是用指令下載</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yarn add aos</span><br><span class="line">npm install aos --save</span><br><span class="line">bower install aos --save</span><br></pre></td></tr></table></figure>
+
+<p>也可以用 CDN</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">href</span>=<span class="string">"https://unpkg.com/aos@2.3.1/dist/aos.css"</span> <span class="attr">rel</span>=<span class="string">"stylesheet"</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"https://unpkg.com/aos@2.3.1/dist/aos.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>在 JavaScript 執行初始化</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AOS.init();</span><br></pre></td></tr></table></figure>
+
+<p>在初始化時，也可以預先作 基本 / 全域 的效果設定</p>
+<h2 id="重整畫面"><a href="#重整畫面" class="headerlink" title="重整畫面"></a>重整畫面</h2><p>當畫面大小有變改時可作的重整，這會重新計算尺寸、位置、距離</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">AOS.refresh();</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="自訂-JS-事件"><a href="#自訂-JS-事件" class="headerlink" title="自訂 JS 事件"></a>自訂 JS 事件</h2><p>AOS 還提供了當元件滑入滑出時的事件監聽可用，這在要在執行時再加上其他的功能的其他活用</p>
+<p>在 JS 加入</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'aos:in'</span>, (&#123; detail &#125;) =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'animated in'</span>, detail);</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="built_in">document</span>.addEventListener(<span class="string">'aos:out'</span>, (&#123; detail &#125;) =&gt; &#123;</span><br><span class="line">  <span class="built_in">console</span>.log(<span class="string">'animated out'</span>, detail);</span><br><span class="line">  <span class="comment">// ...</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在要監聽的元件上加 <code>data-aos-id</code></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">data-aos</span>=<span class="string">"fade-in"</span> <span class="attr">data-aos-id</span>=<span class="string">"super-duper"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>就可以取得元件執行的內容</p>
+<h2 id="自訂-CSS-樣式"><a href="#自訂-CSS-樣式" class="headerlink" title="自訂 CSS 樣式"></a>自訂 CSS 樣式</h2><p>基本的動畫效果不適合時，這就需要修改 CSS 的樣式，在 <a href="https://github.com/michalsnik/aos#adding-custom-animations" target="_blank" rel="noopener">文件</a> 中也有提供方法可以新增、修改，因為目前的效果就很夠使用了，所以就不多作研究，日後若有用到再來補充會使用到的例子。</p>
+<h2 id="直接在-HTML-套用效果"><a href="#直接在-HTML-套用效果" class="headerlink" title="直接在 HTML 套用效果"></a>直接在 HTML 套用效果</h2><p>要在 HTML 加入要使用的效果，例如 <code>fade-up</code> 向上淡入</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">data-aos</span>=<span class="string">"fade-up"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>進場效果還有 FADE 淡出淡入、FLIP 翻轉、ZOOM 放大縮小，可以 <a href="https://github.com/michalsnik/aos#predefined-options" target="_blank" rel="noopener">參考文件</a> 看看</p>
+<ul>
+<li><p>還可以作自訂效果</p>
+<ul>
+<li><code>data-aos-duration</code> 持續時間，1000 = 1 秒</li>
+<li><code>data-aos-easing</code> 動畫速度曲線</li>
+<li><code>data-aos-offset</code> 捲軸和元件上的差距，達到時執行效果</li>
+<li><code>data-aos-anchor</code> 當碰到錨點元件時執行</li>
+<li><code>data-aos-delay</code> 延遲執行時間</li>
+<li><code>data-aos-anchor-placement</code> 滾動到元件外框的 top 上、 bottom 下、 center 中央 時執行<ul>
+<li>值  top-bottom 分別是指 <strong>元件的位置 - 畫面的位置</strong> ，當 <strong>元件的位置 &gt; 畫面的位置</strong> 時就會執行</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>在 <a href="https://github.com/michalsnik/aos" target="_blank" rel="noopener">AOS - Github</a> 也有提供範例，如果還是不清楚可以參考看看喔</p>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/JavaScript/">JavaScript</a>, <a class="article-category-link" href="/blog/categories/JavaScript/%E5%87%BD%E5%BC%8F/">函式</a>, <a class="article-category-link" href="/blog/categories/jQuery/">jQuery</a>, <a class="article-category-link" href="/blog/categories/jQuery/library/">library</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/12/06/20201206-json-server/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">JSON 與 Json-server 的基本使用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目錄</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目的"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS-JavaScript"><span class="nav-number">2.</span> <span class="nav-text">CSS + JavaScript</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#AOS-套件"><span class="nav-number">3.</span> <span class="nav-text">AOS 套件</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#載入"><span class="nav-number">3.1.</span> <span class="nav-text">載入</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重整畫面"><span class="nav-number">3.2.</span> <span class="nav-text">重整畫面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自訂-JS-事件"><span class="nav-number">3.3.</span> <span class="nav-text">自訂 JS 事件</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#自訂-CSS-樣式"><span class="nav-number">3.4.</span> <span class="nav-text">自訂 CSS 樣式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#直接在-HTML-套用效果"><span class="nav-number">3.5.</span> <span class="nav-text">直接在 HTML 套用效果</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2020 前端筆記 All Rights Reserved.
+        
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/bootstrap.js"></script>
+
+
+<script src="/blog/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-124626412-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
