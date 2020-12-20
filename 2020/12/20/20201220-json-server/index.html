@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>用 Json-server 作簡易的試題測驗 | 前端筆記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="w3HexSchool" />
+  
+  
+  
+  
+  <meta name="description" content="目的最近一直在準備只剩半個月就要到的考試，實在是因為電子檔的題目和答案是放在一起所以很難知道有沒有記熟，加上題目太多要印成紙本大約會有快百頁的量，所以就想到用 json-server 來製作簡易的答題網頁。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用 Json-server 作簡易的試題測驗">
+<meta property="og:url" content="https://orandigo.github.io/2020/12/20/20201220-json-server/index.html">
+<meta property="og:site_name" content="前端筆記">
+<meta property="og:description" content="目的最近一直在準備只剩半個月就要到的考試，實在是因為電子檔的題目和答案是放在一起所以很難知道有沒有記熟，加上題目太多要印成紙本大約會有快百頁的量，所以就想到用 json-server 來製作簡易的答題網頁。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-12-20T08:36:21.000Z">
+<meta property="article:modified_time" content="2020-12-20T15:37:29.966Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="icon" href="/blog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+  
+<script src="/blog/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/blog/css/fashion.css" >
+  <link rel="stylesheet" href="/blog/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
+
+
+<header id="allheader" class="site-header" role="banner" 
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/blog/" title="前端筆記" rel="home"> 前端筆記 </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">首頁</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">目錄</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">關於</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-20201220-json-server" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      用 Json-server 作簡易的試題測驗
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/12/20/20201220-json-server/" class="article-date">
+	  <time datetime="2020-12-20T08:36:21.000Z" itemprop="datePublished">十二月 20, 2020</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h1><p>最近一直在準備只剩半個月就要到的考試，實在是因為電子檔的題目和答案是放在一起所以很難知道有沒有記熟，加上題目太多要印成紙本大約會有快百頁的量，所以就想到用 json-server 來製作簡易的答題網頁。</p>
+<a id="more"></a>
+
+
+
+<h1 id="建立"><a href="#建立" class="headerlink" title="建立"></a>建立</h1><p>需要先準備</p>
+<ul>
+<li>Json 資料庫：有考題、選項、答案</li>
+<li>HTML 頁面</li>
+</ul>
+<h2 id="Json-資料庫"><a href="#Json-資料庫" class="headerlink" title="Json 資料庫"></a>Json 資料庫</h2><p>套件安裝可參考 <a href="https://orandigo.github.io/blog/2020/12/06/20201206-json-server/#Json-server-%E5%A5%97%E4%BB%B6">Json-server 套件</a> </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npm install -g json-server</span><br><span class="line"><span class="comment"># 開啟 server</span></span><br><span class="line">json-server --watch db.json</span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="頁面"><a href="#頁面" class="headerlink" title="頁面"></a>頁面</h2><p>在 HTML 要準備 2 個部分，一個要放題目的，另一個是點擊答案後提示答對或答錯</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"text"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"answer"</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="AJAX"><a href="#AJAX" class="headerlink" title="AJAX"></a>AJAX</h2><p>發出 request  取得 json-server 的資料</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> xhr = <span class="keyword">new</span> XMLHttpRequest();</span><br><span class="line">xhr.open(<span class="string">'get'</span>, <span class="string">'http://localhost:3000/math/'</span>, <span class="literal">true</span>);</span><br><span class="line">xhr.send(<span class="literal">null</span>);</span><br></pre></td></tr></table></figure>
+
+<p>接收回傳</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> callback = <span class="built_in">JSON</span>.parse(xhr.responseText);</span><br></pre></td></tr></table></figure>
+
+<p>到這裡就可以用 <code>console.log(callback)</code>  看是不是有資料，若是沒有就可能是資料太多，要確保等待資料在回傳前不執行之後的網頁渲染，可以使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">  <span class="comment">// 當資料回傳後要執行 ...</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>這作用是在當資料還在回傳的路上時，會先等待資料取得後才開始執行之後的部分</p>
+<p>在 Json 我是使用陣列把選項放在一起，所以看起來會是這樣</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"math"</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"id"</span>: <span class="number">1</span>,</span><br><span class="line">      <span class="attr">"text"</span>: <span class="string">"1 + 1 ="</span>,</span><br><span class="line">      <span class="attr">"select"</span>: [<span class="string">"2"</span>, <span class="string">"A"</span>, <span class="string">"11"</span>],</span><br><span class="line">      <span class="attr">"answer"</span>: <span class="number">0</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="attr">"id"</span>: <span class="number">2</span>,</span><br><span class="line">      <span class="attr">"text"</span>: <span class="string">"1萬 * 1萬 ="</span>,</span><br><span class="line">      <span class="attr">"select"</span>: [<span class="string">"1萬"</span>, <span class="string">"2萬"</span>, <span class="string">"1億"</span>],</span><br><span class="line">      <span class="attr">"answer"</span>: <span class="number">2</span></span><br><span class="line">    &#125;</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>完成 !  </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> xhr = <span class="keyword">new</span> XMLHttpRequest(),</span><br><span class="line">    _url = <span class="string">'http://localhost:3000/math/'</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">loadTest</span>(<span class="params">test_num</span>) </span>&#123;</span><br><span class="line">  xhr.open(<span class="string">'get'</span>, _url + test_num, <span class="literal">true</span>);</span><br><span class="line">  xhr.send(<span class="literal">null</span>);</span><br><span class="line">  xhr.onload = <span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span><br><span class="line">    <span class="keyword">let</span> text_box = <span class="built_in">document</span>.getElementById(<span class="string">'text'</span>);</span><br><span class="line">    <span class="built_in">document</span>.getElementById(<span class="string">'answer'</span>).innerHTML = <span class="string">''</span>;</span><br><span class="line">    <span class="keyword">let</span> callback = <span class="built_in">JSON</span>.parse(xhr.responseText);</span><br><span class="line">    <span class="keyword">let</span> innerHTML_str = <span class="string">''</span>,</span><br><span class="line">        _ans = callback.answer,</span><br><span class="line">        _select = callback.select,</span><br><span class="line">        _selectAry = [<span class="string">'A'</span>, <span class="string">'B'</span>, <span class="string">'C'</span>];</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (callback.id == test_num) &#123;</span><br><span class="line">      str = <span class="string">`&lt;span&gt;<span class="subst">$&#123;test_num&#125;</span> . <span class="subst">$&#123;callback.text&#125;</span>&lt;/span&gt;`</span></span><br><span class="line">      <span class="keyword">for</span>(<span class="keyword">let</span> i <span class="keyword">in</span> _select) &#123;</span><br><span class="line">        <span class="keyword">if</span> ( i == _ans ) &#123;</span><br><span class="line">          str += <span class="string">`&lt;button onclick="selectAns('<span class="subst">$&#123;_select[i]&#125;</span>', <span class="subst">$&#123;test_num&#125;</span>)"&gt;(<span class="subst">$&#123;_selectAry[i]&#125;</span>) <span class="subst">$&#123;_select[i]&#125;</span>&lt;/button&gt;`</span></span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">          str += <span class="string">`&lt;button onclick="selectAns(false, <span class="subst">$&#123;test_num&#125;</span>)"&gt;(<span class="subst">$&#123;_selectAry[i]&#125;</span>) <span class="subst">$&#123;_select[i]&#125;</span>&lt;/button&gt;`</span></span><br><span class="line">        &#125;</span><br><span class="line">      &#125;</span><br><span class="line">      text_box.innerHTML = str;</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">      text_box.innerHTML = <span class="string">`</span></span><br><span class="line"><span class="string">      &lt;span&gt;題目結束 !&lt;/spna&gt;</span></span><br><span class="line"><span class="string">      &lt;button onclick="loadTest(1)"&gt;回到第一題 ? &lt;/button&gt;`</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 選出答案</span></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">selectAns</span>(<span class="params">ans, test_num</span>) </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> ans_box = <span class="built_in">document</span>.getElementById(<span class="string">'answer'</span>);</span><br><span class="line">  <span class="keyword">let</span> str = <span class="string">''</span>;</span><br><span class="line">  <span class="keyword">if</span>(ans == <span class="literal">false</span>) &#123;</span><br><span class="line">    ans_box.innerHTML = <span class="string">`&lt;p&gt;答案錯誤 ! 請重新選擇 !&lt;/p&gt;`</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    ans_box.innerHTML = <span class="string">`&lt;p&gt;答案正確 !&lt;/p&gt;&lt;button onclick="loadTest(<span class="subst">$&#123;test_num+<span class="number">1</span>&#125;</span>)"&gt;下一題 &gt;&gt; <span class="subst">$&#123;test_num+<span class="number">1</span>&#125;</span>&lt;/button&gt;`</span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>大約是這樣，之後如果還有想到什麼功能再補上。</p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/12/13/20201213-scroll-activate/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Scroll Activate 捲軸滾動的動態效果</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目錄</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#目的"><span class="nav-number">1.</span> <span class="nav-text">目的</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#建立"><span class="nav-number">2.</span> <span class="nav-text">建立</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Json-資料庫"><span class="nav-number">2.1.</span> <span class="nav-text">Json 資料庫</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#頁面"><span class="nav-number">2.2.</span> <span class="nav-text">頁面</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#AJAX"><span class="nav-number">2.3.</span> <span class="nav-text">AJAX</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2020 前端筆記 All Rights Reserved.
+        
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/bootstrap.js"></script>
+
+
+<script src="/blog/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-124626412-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
