@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>pug 筆記 | 前端筆記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="w3HexSchool" />
+  
+  
+  
+  
+  <meta name="description" content="pug在學習 node.js 時，利用 pug 可以使用像 JavaScript 設定變數、判斷式、Loop 的功能，再加上只需要在 Render 設定要套到到 pug 內的資料，就可以作到使用相同的一個 pug 頁面呈現多個不同內容的頁面，加上因為覺得十分的方便，所以筆記起來。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="pug 筆記">
+<meta property="og:url" content="https://orandigo.github.io/2020/12/27/20201227-pug-note/index.html">
+<meta property="og:site_name" content="前端筆記">
+<meta property="og:description" content="pug在學習 node.js 時，利用 pug 可以使用像 JavaScript 設定變數、判斷式、Loop 的功能，再加上只需要在 Render 設定要套到到 pug 內的資料，就可以作到使用相同的一個 pug 頁面呈現多個不同內容的頁面，加上因為覺得十分的方便，所以筆記起來。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-12-27T09:27:20.000Z">
+<meta property="article:modified_time" content="2020-12-27T14:01:12.734Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="icon" href="/blog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+  
+<script src="/blog/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/blog/css/fashion.css" >
+  <link rel="stylesheet" href="/blog/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 4.2.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg,https://source.unsplash.com/collection/954550/1920x1080,https://source.unsplash.com/collection/954550/1920x1081".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
+
+
+<header id="allheader" class="site-header" role="banner" 
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/blog/" title="前端筆記" rel="home"> 前端筆記 </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">首頁</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">目錄</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">關於</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-20201227-pug-note" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      pug 筆記
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/12/27/20201227-pug-note/" class="article-date">
+	  <time datetime="2020-12-27T09:27:20.000Z" itemprop="datePublished">十二月 27, 2020</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="pug"><a href="#pug" class="headerlink" title="pug"></a>pug</h1><p>在學習 node.js 時，利用 pug 可以使用像 JavaScript 設定變數、判斷式、Loop 的功能，再加上只需要在 Render 設定要套到到 pug 內的資料，就可以作到使用相同的一個 pug 頁面呈現多個不同內容的頁面，加上因為覺得十分的方便，所以筆記起來。</p>
+<a id="more"></a>
+
+<p>使用手冊：<a href="https://pugjs.org/api/getting-started.html" target="_blank" rel="noopener">https://pugjs.org/api/getting-started.html</a></p>
+<p>線上練習：<a href="https://pughtml.com/" target="_blank" rel="noopener">PugHtml</a> </p>
+<p>用 NPM 安裝</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install pug --save</span><br></pre></td></tr></table></figure>
+
+
+
+<h1 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h1><p>編寫的方式和 HTML 差別不大，主要有：</p>
+<ul>
+<li><p>不用在標籤名稱外加 <code>&lt;&gt;</code> 括號</p>
+</li>
+<li><p>只要寫標籤名稱加上一格半形的空格就是一個元件</p>
+</li>
+<li><p>內容文字要在空格後，和標籤名稱同行</p>
+</li>
+<li><p><code>|</code>  有切開、單獨成一個字串的意思，可以用在內容文字換行，以及文字與標籤的分隔使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在 p 標籤內的換行</span></span><br><span class="line">p</span><br><span class="line">  | abc</span><br><span class="line">  | de</span><br><span class="line"><span class="comment">//</span></span><br></pre></td></tr></table></figure>
+
+
+
+</li>
+</ul>
+<ul>
+<li><p>要在標籤內加上第二個標籤時，要在第二個標籤名稱前加上一格 <code>Tab</code> </p>
+</li>
+<li><p>有 Class 時在 ClassName 前加 <code>.</code> ，有 Id 時在 IdName 前加上 <code>#</code> ，和 CSS 選取器一樣</p>
+</li>
+</ul>
+<h2 id="載入-pug"><a href="#載入-pug" class="headerlink" title="載入 pug"></a>載入 pug</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> pug = <span class="built_in">require</span>(<span class="string">'pug'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>還需要設定 <code>view engine</code> 屬性，讓 node 在執行時知道網頁是用 pug 檔</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.set(<span class="string">'view engine'</span>, <span class="string">'pug'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>這不是必要的設定，沒設定時只要在檔名後加副檔名就可以了。</p>
+<h2 id="路徑"><a href="#路徑" class="headerlink" title="路徑"></a>路徑</h2><p>設定尋找檔案時要從哪一個資料夾開始向內尋找</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">app.set(<span class="string">'views'</span>, <span class="string">'path/views'</span>);</span><br></pre></td></tr></table></figure>
+
+<p>在設定網頁呈現時，就會到 <code>path/views</code> 內找檔名是 <code>index</code> 的 pug 檔 </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">'/'</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  res.render(<span class="string">'index'</span>, &#123;</span><br><span class="line">    name: <span class="string">'Bob'</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="If…-Else…"><a href="#If…-Else…" class="headerlink" title="If… Else…"></a>If… Else…</h2><p>在 node 內是可以事先設定變數，之後再使用</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> authorized = <span class="literal">true</span></span><br><span class="line">res.render(<span class="string">"index"</span>, &#123;</span><br><span class="line"> authorized: authorized</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>在 pug 時也是一樣，所以加上 <code>If... Else...</code> 時，就可以作判斷</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- <span class="keyword">var</span> authorized = <span class="literal">true</span>;</span><br><span class="line"><span class="keyword">if</span> authorized == <span class="literal">true</span></span><br><span class="line"> .authed 登入</span><br><span class="line"><span class="keyword">else</span></span><br><span class="line"> .anon 訪客</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="case-判斷"><a href="#case-判斷" class="headerlink" title="case 判斷"></a>case 判斷</h2><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">- <span class="keyword">var</span> Num = <span class="number">2</span></span><br><span class="line"><span class="keyword">case</span> Num</span><br><span class="line">  when <span class="number">0</span></span><br><span class="line">    p 變數的值為 <span class="number">0</span></span><br><span class="line">  when <span class="number">1</span></span><br><span class="line">    p 變數的值為 <span class="number">1</span></span><br><span class="line">  <span class="keyword">default</span></span><br><span class="line">    p 變數的值為 #&#123;Num&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="變數"><a href="#變數" class="headerlink" title="變數"></a>變數</h2><ul>
+<li>變數可以是取得從 node 後端傳來的資料，也可以是在 pug 作設定</li>
+<li>純文字的變數可以用 <code>#{變數名稱}</code> </li>
+<li>HTML 的屬性加變數是用 <code>${變數名稱}</code></li>
+<li>在 pug 要設定變數使用就要在前面加上 <code>-</code></li>
+</ul>
+<p>要知道有沒有正確取得資料，pug 有 <a href="https://pugjs.org/api/reference.html#pugcompilesource-options" target="_blank" rel="noopener">pug.compile()</a> 可以在傳到 pug 前先在 JavaScript 內做測試</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// index.pug 檔內容</span></span><br><span class="line">p #&#123;name&#125;'s Pug source code!</span><br></pre></td></tr></table></figure>
+
+<p>要檢查呈現的樣子</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> compiledFunction = pug.compileFile(<span class="string">'template.pug'</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// Render a set of data</span></span><br><span class="line"><span class="built_in">console</span>.log(compiledFunction(&#123;</span><br><span class="line">  name: <span class="string">'Timothy'</span></span><br><span class="line">&#125;));</span><br><span class="line"><span class="comment">// "&lt;p&gt;Timothy's Pug source code!&lt;/p&gt;"</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Render another set of data</span></span><br><span class="line"><span class="built_in">console</span>.log(compiledFunction(&#123;</span><br><span class="line">  name: <span class="string">'Forbes'</span></span><br><span class="line">&#125;));</span><br><span class="line"><span class="comment">// "&lt;p&gt;Forbes's Pug source code!&lt;/p&gt;"</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h2 id="each-loop"><a href="#each-loop" class="headerlink" title="each loop"></a>each loop</h2><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">"/bookstore"</span>, <span class="function"><span class="keyword">function</span> (<span class="params">req, res, next</span>) </span>&#123;</span><br><span class="line">  <span class="comment">// Your route data</span></span><br><span class="line">  <span class="keyword">var</span> bookStore = [</span><br><span class="line">    &#123;</span><br><span class="line">      title: <span class="string">"Templating with Pug"</span>,</span><br><span class="line">      author: <span class="string">"Winston Smith"</span>,</span><br><span class="line">      pages: <span class="number">143</span>,</span><br><span class="line">      year: <span class="number">2017</span></span><br><span class="line">    &#125;,</span><br><span class="line">    &#123;</span><br><span class="line">      title: <span class="string">"Node.js will help"</span>,</span><br><span class="line">      author: <span class="string">"Guy Fake"</span>,</span><br><span class="line">      pages: <span class="number">879</span>,</span><br><span class="line">      year: <span class="number">2015</span></span><br><span class="line">    &#125;</span><br><span class="line">  ];</span><br><span class="line">  res.render(<span class="string">"index"</span>, &#123;</span><br><span class="line">    bookStore: bookStore</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>要用 <code>index</code> 內的廻圈取出物件的值時，就可以使用 <code>each 變數名 in 物件</code> 的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">each book <span class="keyword">in</span> bookStore</span><br><span class="line">  ul</span><br><span class="line">    li= book.title</span><br><span class="line">    li= book.author</span><br><span class="line">    li= book.pages</span><br><span class="line">    li= book.year</span><br></pre></td></tr></table></figure>
+
+<p><code>each</code> and <code>while</code> 使用例子<a href="https://pugjs.org/language/iteration.html" target="_blank" rel="noopener">參考</a></p>
+<h2 id="script-標籤"><a href="#script-標籤" class="headerlink" title="script 標籤"></a>script 標籤</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">script.</span><br><span class="line">  if (usingPug)</span><br><span class="line">    console.log(&#39;you are awesome&#39;)</span><br><span class="line">  else</span><br><span class="line">    console.log(&#39;use pug&#39;)</span><br></pre></td></tr></table></figure>
+
+<p>在 <code>script</code> 後要加 <code>.</code> ，沒加時全部都會被轉成 HTML 格式使用</p>
+<h2 id="block-extends-include"><a href="#block-extends-include" class="headerlink" title="block / extends / include"></a>block / extends / include</h2><ul>
+<li><code>block</code> 在樣版 pug 內保留可加入內容的區塊</li>
+<li><code>extends</code> 把內容加入到指定的樣版之中</li>
+<li><code>include</code> 會完整的把指定的網頁加入到目前的位置</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//- layout.pug</span></span><br><span class="line">html</span><br><span class="line">  head</span><br><span class="line">    block scripts</span><br><span class="line">  body</span><br><span class="line">    block content</span><br></pre></td></tr></table></figure>
+
+<p>要加入的 pug</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//- page.pug</span></span><br><span class="line">extends layout.pug</span><br><span class="line"></span><br><span class="line">block scripts</span><br><span class="line">  script(src=<span class="string">'/all.js'</span>)</span><br><span class="line"></span><br><span class="line">block content</span><br><span class="line">  h1 title</span><br><span class="line">    include footer.pug</span><br></pre></td></tr></table></figure>
+
+<p>再利用 <code>include</code> 加入 footer.pug 的內容</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//- footer.pug</span></span><br><span class="line">p Company©<span class="number">2020</span></span><br></pre></td></tr></table></figure>
+
+<p>就可以合併完成一個網頁</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">"/all.js"</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">h1</span>&gt;</span>title<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Company©2020<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2020/12/20/20201220-json-server/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">用 Json-server 作簡易的試題測驗</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目錄</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#pug"><span class="nav-number">1.</span> <span class="nav-text">pug</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用"><span class="nav-number">2.</span> <span class="nav-text">使用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#載入-pug"><span class="nav-number">2.1.</span> <span class="nav-text">載入 pug</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路徑"><span class="nav-number">2.2.</span> <span class="nav-text">路徑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#If…-Else…"><span class="nav-number">2.3.</span> <span class="nav-text">If… Else…</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#case-判斷"><span class="nav-number">2.4.</span> <span class="nav-text">case 判斷</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#變數"><span class="nav-number">2.5.</span> <span class="nav-text">變數</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#each-loop"><span class="nav-number">2.6.</span> <span class="nav-text">each loop</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#script-標籤"><span class="nav-number">2.7.</span> <span class="nav-text">script 標籤</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#block-extends-include"><span class="nav-number">2.8.</span> <span class="nav-text">block &#x2F; extends &#x2F; include</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2020 前端筆記 All Rights Reserved.
+        
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  
+<link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+
+  
+<script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/bootstrap.js"></script>
+
+
+<script src="/blog/js/main.js"></script>
+
+
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-124626412-1', 'auto');
+ga('send', 'pageview');
+
+</script>
+<!-- End Google Analytics -->
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
