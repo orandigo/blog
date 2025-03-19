@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Chart.js 圖表繪製 | 練習筆記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="w3HexSchool" />
+  
+  
+  
+  
+
+  <meta name="google-adsense-account" content="ca-pub-2463890194844907">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2463890194844907"
+     crossorigin="anonymous"></script>
+
+  <meta name="description" content="這是使用 &lt;canvas&gt;  tag 繪製的圖表 JavaScript library  簡單又容易應用，也支援動畫的效果">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Chart.js 圖表繪製">
+<meta property="og:url" content="https://orandigo.github.io/2020/02/16/20200216-chartjs/index.html">
+<meta property="og:site_name" content="練習筆記">
+<meta property="og:description" content="這是使用 &lt;canvas&gt;  tag 繪製的圖表 JavaScript library  簡單又容易應用，也支援動畫的效果">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-02-16T15:23:47.000Z">
+<meta property="article:modified_time" content="2020-03-15T14:41:53.062Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="icon" href="/blog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+  
+<script src="/blog/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/blog/css/fashion.css" >
+  <link rel="stylesheet" href="/blog/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
+
+
+<header id="allheader" class="site-header" role="banner" 
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/blog/" title="練習筆記" rel="home"> 練習筆記 </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">首頁</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">目錄</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">關於</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-20200216-chartjs" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Chart.js 圖表繪製
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/02/16/20200216-chartjs/" class="article-date">
+	  <time datetime="2020-02-16T15:23:47.000Z" itemprop="datePublished">二月 16, 2020</time>
+	</a>
+
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/JavaScript/">JavaScript</a>, <a class="article-category-link" href="/blog/categories/JavaScript/library/">library</a>, <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/">類型</a>, <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/%E5%9C%96%E8%A1%A8%E9%A1%9E/">圖表類</a>
+ 
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>這是使用 <code>&lt;canvas&gt;</code>  tag 繪製的圖表 JavaScript library </p>
+<p>簡單又容易應用，也支援動畫的效果</p>
+</blockquote>
+ <span id="more"></span> 
+
+<h1 id="載入-Chart-js"><a href="#載入-Chart-js" class="headerlink" title="載入 Chart.js"></a>載入 Chart.js</h1><ul>
+<li><p>下載 </p>
+<ul>
+<li>到 <a target="_blank" rel="noopener" href="http://www.chartjs.org/">Chart.js </a> 下載 </li>
+<li><a target="_blank" rel="noopener" href="https://github.com/chartjs/Chart.js/releases/latest"> GitHub 下載</a></li>
+</ul>
+</li>
+<li><p><a target="_blank" rel="noopener" href="https://cdnjs.com/libraries/Chart.js">CDNJS</a></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">type</span>=<span class="string">&quot;text/css&quot;</span> <span class="attr">href</span>=<span class="string">&quot;path/to/chartjs/dist/Chart.min.css&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">src</span>=<span class="string">&quot;https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.3/Chart.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+</li>
+<li><p>npm</p>
+</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install chart.js --save</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li>Bower</li>
+</ul>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bower install chart.js --save</span><br></pre></td></tr></table></figure>
+
+
+
+
+<ul>
+<li><p>載入的模組有 2 種</p>
+<ul>
+<li>Stand-Alone Build : 不包括 Moment.js，若是會使用到時間軸就必需額外再下載</li>
+<li>Bundled Build : 包括 Chart.js 專用的 Moment.js<ul>
+<li>若是先前已經載入過 Moment.js ，為了避免衝突出錯就不建議使用 Bundled Build</li>
+<li>會在圖表以外使用時間軸功能，建議是用 Stand-Alone Build 再另外載入 Moment.js</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="基本的-Chart-圖表"><a href="#基本的-Chart-圖表" class="headerlink" title="基本的 Chart 圖表"></a>基本的 Chart 圖表</h1><p>在 HTML 建立 <code>&lt;canvas&gt;</code> </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">canvas</span> <span class="attr">id</span>=<span class="string">&quot;myChart&quot;</span> <span class="attr">width</span>=<span class="string">&quot;400&quot;</span> <span class="attr">height</span>=<span class="string">&quot;300&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">canvas</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> ctx = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;myChart&#x27;</span>).<span class="title function_">getContext</span>(<span class="string">&#x27;2d&#x27;</span>);</span><br><span class="line"><span class="keyword">var</span> myChart = <span class="keyword">new</span> <span class="title class_">Chart</span>(ctx, &#123;</span><br><span class="line">  </span><br><span class="line">    <span class="comment">// 各式圖表的屬性設定</span></span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;bar&#x27;</span>,</span><br><span class="line">    <span class="attr">data</span>: &#123;</span><br><span class="line">        <span class="attr">labels</span>: [<span class="string">&#x27;Red&#x27;</span>, <span class="string">&#x27;Blue&#x27;</span>, <span class="string">&#x27;Yellow&#x27;</span>, <span class="string">&#x27;Green&#x27;</span>, <span class="string">&#x27;Purple&#x27;</span>, <span class="string">&#x27;Orange&#x27;</span>],</span><br><span class="line">        <span class="attr">datasets</span>: [&#123;</span><br><span class="line">            <span class="attr">label</span>: <span class="string">&#x27;# of Votes&#x27;</span>,</span><br><span class="line">            <span class="attr">data</span>: [<span class="number">12</span>, <span class="number">19</span>, <span class="number">3</span>, <span class="number">5</span>, <span class="number">2</span>, <span class="number">3</span>],</span><br><span class="line">            <span class="attr">backgroundColor</span>: [</span><br><span class="line">                <span class="string">&#x27;rgba(255, 99, 132, 0.2)&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;rgba(54, 162, 235, 0.2)&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;rgba(255, 206, 86, 0.2)&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;rgba(75, 192, 192, 0.2)&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;rgba(153, 102, 255, 0.2)&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;rgba(255, 159, 64, 0.2)&#x27;</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">borderColor</span>: [</span><br><span class="line">                <span class="string">&#x27;rgba(255, 99, 132, 1)&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;rgba(54, 162, 235, 1)&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;rgba(255, 206, 86, 1)&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;rgba(75, 192, 192, 1)&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;rgba(153, 102, 255, 1)&#x27;</span>,</span><br><span class="line">                <span class="string">&#x27;rgba(255, 159, 64, 1)&#x27;</span></span><br><span class="line">            ],</span><br><span class="line">            <span class="attr">borderWidth</span>: <span class="number">1</span></span><br><span class="line">        &#125;]</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">options</span>: &#123;</span><br><span class="line">        <span class="attr">scales</span>: &#123;</span><br><span class="line">            <span class="attr">yAxes</span>: [&#123;</span><br><span class="line">                <span class="attr">ticks</span>: &#123;</span><br><span class="line">                    <span class="attr">beginAtZero</span>: <span class="literal">true</span></span><br><span class="line">                &#125;</span><br><span class="line">            &#125;]</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p>參數設定 </p>
+<ul>
+<li><p>可設定視覺樣式、觸發事件、互動效果，關於參數設定可參考 <a target="_blank" rel="noopener" href="http://www.chartjs.org/docs/">文件</a> </p>
+</li>
+<li><p>Web Accessibility 無障礙輔助功能 :  </p>
+<ul>
+<li>可在 HTML 標籤內加入 role、aria-label 的輔助功能</li>
+<li><a target="_blank" rel="noopener" href="http://pauljadam.com/demos/canvas.html">HTML <code>&lt;canvas&gt;</code> Accessibility </a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h1 id="相關連接"><a href="#相關連接" class="headerlink" title="相關連接"></a>相關連接</h1><ul>
+<li>Chart.js: <a target="_blank" rel="noopener" href="https://www.chartjs.org/">https://www.chartjs.org/</a> </li>
+<li>GitHub: <a target="_blank" rel="noopener" href="https://github.com/chartjs/Chart.js">https://github.com/chartjs/Chart.js</a></li>
+<li>使用說明<ul>
+<li><a target="_blank" rel="noopener" href="https://www.chartjs.org/docs/latest/">https://www.chartjs.org/docs/latest/</a></li>
+<li>GitBook 簡體中文: <a target="_blank" rel="noopener" href="https://chartjs-doc.abingoal.com/">https://chartjs-doc.abingoal.com/</a></li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+	<span class="ico-folder"></span>
+    <a class="article-category-link" href="/blog/categories/JavaScript/">JavaScript</a>, <a class="article-category-link" href="/blog/categories/JavaScript/library/">library</a>, <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/">類型</a>, <a class="article-category-link" href="/blog/categories/%E9%A1%9E%E5%9E%8B/%E5%9C%96%E8%A1%A8%E9%A1%9E/">圖表類</a>
+
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2020/02/23/20200223-chartjs/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Chart.js 自訂設計
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目錄</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E8%BC%89%E5%85%A5-Chart-js"><span class="nav-number">1.</span> <span class="nav-text">載入 Chart.js</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%9A%84-Chart-%E5%9C%96%E8%A1%A8"><span class="nav-number">2.</span> <span class="nav-text">基本的 Chart 圖表</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E7%9B%B8%E9%97%9C%E9%80%A3%E6%8E%A5"><span class="nav-number">3.</span> <span class="nav-text">相關連接</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 練習筆記 All Rights Reserved.
+        
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/bootstrap.js"></script>
+
+
+<script src="/blog/js/main.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

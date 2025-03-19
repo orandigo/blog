@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>JSON 與 Json-server 的基本使用 | 練習筆記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="w3HexSchool" />
+  
+  
+  
+  
+
+  <meta name="google-adsense-account" content="ca-pub-2463890194844907">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2463890194844907"
+     crossorigin="anonymous"></script>
+
+  <meta name="description" content="JSONJSON (  JavaScript Object Notation  ) 以簡單的物件和文字架構出來的資料，所以在瀏覽、使用、編輯修改都是比較容易的。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JSON 與 Json-server 的基本使用">
+<meta property="og:url" content="https://orandigo.github.io/2020/12/06/20201206-json-server/index.html">
+<meta property="og:site_name" content="練習筆記">
+<meta property="og:description" content="JSONJSON (  JavaScript Object Notation  ) 以簡單的物件和文字架構出來的資料，所以在瀏覽、使用、編輯修改都是比較容易的。">
+<meta property="og:locale" content="zh_TW">
+<meta property="article:published_time" content="2020-12-06T09:34:22.000Z">
+<meta property="article:modified_time" content="2020-12-06T15:34:37.421Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+  
+  <link rel="icon" href="/blog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+  
+<script src="/blog/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/blog/css/fashion.css" >
+  <link rel="stylesheet" href="/blog/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
+
+
+<header id="allheader" class="site-header" role="banner" 
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/blog/" title="練習筆記" rel="home"> 練習筆記 </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">首頁</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">目錄</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">關於</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-20201206-json-server" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      JSON 與 Json-server 的基本使用
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/12/06/20201206-json-server/" class="article-date">
+	  <time datetime="2020-12-06T09:34:22.000Z" itemprop="datePublished">十二月 6, 2020</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JSON"><a href="#JSON" class="headerlink" title="JSON"></a>JSON</h1><p>JSON (  JavaScript Object Notation  ) 以簡單的物件和文字架構出來的資料，所以在瀏覽、使用、編輯修改都是比較容易的。</p>
+<span id="more"></span>
+
+<ul>
+<li>維基百科對 JSON 作的說明<ul>
+<li>JSON 資料格式與語言無關 </li>
+<li>以易於讓人閱讀的文字為基礎</li>
+<li>用來傳輸由屬性值或者序列性的值組成的資料物件 </li>
+<li>NoSQL 資料庫</li>
+<li>MIME 類型是 <code>application/json</code></li>
+<li>編碼 UTF-8</li>
+<li>副檔名是 <code>.json</code> </li>
+<li>說明取至：<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/JSON">JSON - 維基百科，自由的百科全書 - Wikipedia</a></li>
+</ul>
+</li>
+</ul>
+<h1 id="JSON-格式"><a href="#JSON-格式" class="headerlink" title="JSON 格式"></a>JSON 格式</h1><ul>
+<li><p>資料類型</p>
+<ul>
+<li>數字：除了數字不可在前面多加 0 ，也不能是數字以外的符號、文字之外，小數點、負數是可以的。</li>
+<li>字串</li>
+<li>布林值</li>
+<li>陣列</li>
+<li>物件</li>
+<li>也可加入 <a target="_blank" rel="noopener" href="https://zh.wikipedia.org/wiki/Emoji">Emoji</a> 字元</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span> <span class="attr">&quot;face&quot;</span><span class="punctuation">:</span> <span class="string">&quot;😂&quot;</span> <span class="punctuation">&#125;</span></span><br><span class="line"><span class="comment">// or</span></span><br><span class="line"><span class="punctuation">&#123;</span> <span class="attr">&quot;face&quot;</span><span class="punctuation">:</span> <span class="string">&quot;\uD83D\uDE02&quot;</span> <span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>JSON 的組成可以看作是一個群體、團體，舉例來說的話， JSON 是一個家庭，家庭裡有多少成員，每個成員的個人資料 … 等</p>
+</li>
+<li><p>寫成 JSON 的話就是</p>
+</li>
+</ul>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;home&quot;</span><span class="punctuation">:</span> <span class="string">&quot;阿花家&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;tel&quot;</span><span class="punctuation">:</span> <span class="string">&quot;04-23456789&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;address&quot;</span><span class="punctuation">:</span> <span class="string">&quot;台中市台灣大道1號&quot;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;member&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;阿花&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;part&quot;</span><span class="punctuation">:</span> <span class="string">&quot;主人&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span> <span class="number">20</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span><span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;忠犬&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;part&quot;</span><span class="punctuation">:</span> <span class="string">&quot;狗&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span> <span class="number">3</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span><span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;花貓&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;part&quot;</span><span class="punctuation">:</span> <span class="string">&quot;貓&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span> <span class="number">5</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="基本編輯-Json-方式"><a href="#基本編輯-Json-方式" class="headerlink" title="基本編輯 Json 方式"></a>基本編輯 Json 方式</h1><p>當 JSON 資料取得後，發現要更新修改某一個值時就可用到</p>
+<p>以下用 <strong>阿花家</strong> 為例</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> aFlower = &#123;</span><br><span class="line">  <span class="string">&quot;home&quot;</span>: <span class="string">&quot;阿花家&quot;</span>,</span><br><span class="line">  <span class="string">&quot;tel&quot;</span>: <span class="string">&quot;04-23456789&quot;</span>,</span><br><span class="line">  <span class="string">&quot;address&quot;</span>: <span class="string">&quot;台中市台灣大道1號&quot;</span>,</span><br><span class="line">  <span class="string">&quot;member&quot;</span>: <span class="number">3</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>修改值的方式</strong>，就是找到屬性位置後賦予新的值<ul>
+<li>下方就以阿花家生了 5 隻小狗為例，所以成員就會從原本的 3 個升級到了 8 個，可喜可賀。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> aFlower = &#123;</span><br><span class="line">  <span class="string">&quot;home&quot;</span>: <span class="string">&quot;阿花家&quot;</span>,</span><br><span class="line">  <span class="string">&quot;tel&quot;</span>: <span class="string">&quot;04-23456789&quot;</span>,</span><br><span class="line">  <span class="string">&quot;address&quot;</span>: <span class="string">&quot;台中市台灣大道1號&quot;</span>,</span><br><span class="line">  <span class="string">&quot;member&quot;</span>: <span class="number">3</span></span><br><span class="line">&#125;</span><br><span class="line">aFlower.<span class="property">member</span> =  <span class="number">8</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//   ...</span></span><br><span class="line"><span class="comment">//   member: 8</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>增加新的屬性和值</strong>，其實就是新增之前所沒有的屬性後並賦予值，若是之前就有屬性的話，這值就只是在作修改。<ul>
+<li>以下方阿花家多了傳真，所以要新增傳真號碼</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> aFlower = &#123;</span><br><span class="line">  <span class="string">&quot;home&quot;</span>: <span class="string">&quot;阿花家&quot;</span>,</span><br><span class="line">  <span class="string">&quot;tel&quot;</span>: <span class="string">&quot;04-23456789&quot;</span>,</span><br><span class="line">  <span class="string">&quot;address&quot;</span>: <span class="string">&quot;台中市台灣大道1號&quot;</span>,</span><br><span class="line">  <span class="string">&quot;member&quot;</span>: <span class="number">8</span></span><br><span class="line">&#125;</span><br><span class="line">aFlower.<span class="property">fax</span> =  <span class="string">&quot;04-98765432&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//   ...</span></span><br><span class="line"><span class="comment">//   fax: &quot;04-98765432&quot;,</span></span><br><span class="line"><span class="comment">//   tel: &quot;04-23456789&quot;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>如果覺得傳真不過也是電話，所以就想說 JSON 一定知道這是要多加一筆的啦~</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> aFlower = &#123;</span><br><span class="line">  <span class="string">&quot;home&quot;</span>: <span class="string">&quot;阿花家&quot;</span>,</span><br><span class="line">  <span class="string">&quot;tel&quot;</span>: <span class="string">&quot;04-23456789&quot;</span>,</span><br><span class="line">  <span class="string">&quot;address&quot;</span>: <span class="string">&quot;台中市台灣大道1號&quot;</span>,</span><br><span class="line">  <span class="string">&quot;member&quot;</span>: <span class="number">8</span></span><br><span class="line">&#125;</span><br><span class="line">aFlower.<span class="property">tel</span> =  <span class="string">&quot;04-98765432&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//   &quot;address&quot;: &quot;台中市台灣大道1號&quot;,</span></span><br><span class="line"><span class="comment">//   &quot;home&quot;: &quot;阿花家&quot;,</span></span><br><span class="line"><span class="comment">//   &quot;member&quot;: 8,</span></span><br><span class="line"><span class="comment">//   &quot;tel&quot;: &quot;04-98765432&quot;</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>結果就是電話被更新了</p>
+<ul>
+<li><strong>刪除屬性和值</strong><ul>
+<li>這時阿花覺得太丟臉了又想不起來原本的電話是幾號時，只好先刪除有電話這回事。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> aFlower = &#123;</span><br><span class="line">  <span class="string">&quot;home&quot;</span>: <span class="string">&quot;阿花家&quot;</span>,</span><br><span class="line">  <span class="string">&quot;tel&quot;</span>: <span class="string">&quot;04-98765432&quot;</span>,</span><br><span class="line">  <span class="string">&quot;address&quot;</span>: <span class="string">&quot;台中市台灣大道1號&quot;</span>,</span><br><span class="line">  <span class="string">&quot;member&quot;</span>: <span class="number">8</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">delete</span> aFlower.<span class="property">tel</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// Object &#123;</span></span><br><span class="line"><span class="comment">//   &quot;address&quot;: &quot;台中市台灣大道1號&quot;,</span></span><br><span class="line"><span class="comment">//   &quot;home&quot;: &quot;阿花家&quot;,</span></span><br><span class="line"><span class="comment">//   &quot;member&quot;: 8</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>心想：看來阿花的記性不大好啊！</p>
+<hr>
+<ul>
+<li><strong>物件轉字串</strong><ul>
+<li>有些時侯傳送資料時，會需要將原本是物件格式的 JSON 資料轉成字串，這時就可以用 <code> JSON.stringify()</code></li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> json = &#123;</span><br><span class="line">  <span class="string">&quot;home&quot;</span>: <span class="string">&quot;台中市台灣大道1號&quot;</span>,</span><br><span class="line">  <span class="string">&quot;home&quot;</span>: <span class="string">&quot;阿花家&quot;</span>,</span><br><span class="line">  <span class="string">&quot;member&quot;</span>: <span class="number">8</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">let</span> json_str = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(json)</span><br><span class="line"></span><br><span class="line"><span class="comment">// &quot;&#123;&#x27;address&#x27;:&#x27;台中市台灣大道1號&#x27;,&#x27;home&#x27;:&#x27;阿花家&#x27;,&#x27;member&#x27;:8&#125;&quot;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>字串轉物件</strong><ul>
+<li>當收到是 JSON 寫法的字串時就可用 <code> JSON.parse()</code> 轉成物件格式使用，若真的是字串時就會出錯</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> json_str = <span class="string">&#x27;&#123;&quot;address&quot;:&quot;台中市台灣大道1號&quot;,&quot;home&quot;:&quot;阿花家&quot;,&quot;member&quot;:8&#125;&#x27;</span>;</span><br><span class="line"><span class="keyword">let</span> json = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(json_str);</span><br><span class="line"></span><br><span class="line"><span class="comment">// &#123;</span></span><br><span class="line"><span class="comment">//   &quot;home&quot;: &quot;台中市台灣大道1號&quot;,</span></span><br><span class="line"><span class="comment">//   &quot;home&quot;: &quot;阿花家&quot;,</span></span><br><span class="line"><span class="comment">//   &quot;member&quot;: 8</span></span><br><span class="line"><span class="comment">// &#125;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<p>JSON 檔除了可以匯入到 JavaScript 練習使用外，也可以使用套件作練習測試</p>
+<h1 id="Json-server-套件"><a href="#Json-server-套件" class="headerlink" title="Json-server 套件"></a>Json-server 套件</h1><p>這個套件會用 npm 下載，需要安裝在全域，也是可以只裝在資料夾內，只是可能會有部分功能是沒效果，這點需要注意，還是以使用情形安裝為主。</p>
+<p>安裝</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install -g json-server</span><br></pre></td></tr></table></figure>
+
+<p>開啟 server</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">json-server --watch db.json</span><br></pre></td></tr></table></figure>
+
+<p>接著就可以用瀏覽器開啟 <a target="_blank" rel="noopener" href="http://localhost:3000/">http://localhost:3000/</a> 就可以來連線測試</p>
+<p>用阿花家的練習</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;family&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;home&quot;</span><span class="punctuation">:</span> <span class="string">&quot;阿花家&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;tel&quot;</span><span class="punctuation">:</span> <span class="string">&quot;04-23456789&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;address&quot;</span><span class="punctuation">:</span> <span class="string">&quot;台中市台灣大道1號&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;member&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;阿花&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;part&quot;</span><span class="punctuation">:</span> <span class="string">&quot;主人&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span> <span class="number">20</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span><span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;忠犬&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;part&quot;</span><span class="punctuation">:</span> <span class="string">&quot;狗&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span> <span class="number">3</span></span><br><span class="line">    <span class="punctuation">&#125;</span><span class="punctuation">,</span><span class="punctuation">&#123;</span></span><br><span class="line">      <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;花貓&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;part&quot;</span><span class="punctuation">:</span> <span class="string">&quot;貓&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="attr">&quot;age&quot;</span><span class="punctuation">:</span> <span class="number">5</span></span><br><span class="line">    <span class="punctuation">&#125;</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+
+<p>在大括號 <code>&#123;&#125;</code> 內的屬性，都可以作為取值的依據使用</p>
+<p>例如要看屬性 family 的值時，就連線到</p>
+<p>打開 <a target="_blank" rel="noopener" href="http://localhost:3000/family">http://localhost:3000/family</a> 就會出現</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  &quot;home&quot;: &quot;阿花家&quot;,</span><br><span class="line">  &quot;tel&quot;: &quot;04-23456789&quot;,</span><br><span class="line">  &quot;address&quot;: &quot;台中市台灣大道1號&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>換成 <a target="_blank" rel="noopener" href="http://localhost:3000/member">http://localhost:3000/member</a> 就會出現</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;name&quot;: &quot;阿花&quot;,</span><br><span class="line">    &quot;part&quot;: &quot;主人&quot;,</span><br><span class="line">    &quot;age&quot;: 20</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;name&quot;: &quot;忠犬&quot;,</span><br><span class="line">    &quot;part&quot;: &quot;狗&quot;,</span><br><span class="line">    &quot;age&quot;: 3</span><br><span class="line">  &#125;,</span><br><span class="line">  &#123;</span><br><span class="line">    &quot;name&quot;: &quot;花貓&quot;,</span><br><span class="line">    &quot;part&quot;: &quot;貓&quot;,</span><br><span class="line">    &quot;age&quot;: 5</span><br><span class="line">  &#125;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+
+
+
+
+<h1 id="參考"><a href="#參考" class="headerlink" title="參考"></a>參考</h1><p><a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-tw/JSON">JSON - 維基百科，自由的百科全書 - Wikipedia</a></p>
+<p><a target="_blank" rel="noopener" href="https://jsonformatter.org/json-editor">線上編輯工具 - JSON Editor</a></p>
+<p><a target="_blank" rel="noopener" href="http://www.json.org/json-zh.html">JSON中文說明</a></p>
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2020/12/13/20201213-scroll-activate/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          Scroll Activate 捲軸滾動的動態效果
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2020/11/29/20201129-drag-drop/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">用滑鼠拖曳元素來移動位置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目錄</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#JSON"><span class="nav-number">1.</span> <span class="nav-text">JSON</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JSON-%E6%A0%BC%E5%BC%8F"><span class="nav-number">2.</span> <span class="nav-text">JSON 格式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%9F%BA%E6%9C%AC%E7%B7%A8%E8%BC%AF-Json-%E6%96%B9%E5%BC%8F"><span class="nav-number">3.</span> <span class="nav-text">基本編輯 Json 方式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Json-server-%E5%A5%97%E4%BB%B6"><span class="nav-number">4.</span> <span class="nav-text">Json-server 套件</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%8F%83%E8%80%83"><span class="nav-number">5.</span> <span class="nav-text">參考</span></a></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 練習筆記 All Rights Reserved.
+        
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/bootstrap.js"></script>
+
+
+<script src="/blog/js/main.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>

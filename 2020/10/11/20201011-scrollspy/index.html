@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Scrollspy 滾動監控 | 練習筆記</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="keywords" content="w3HexSchool" />
+  
+  
+  
+  
+
+  <meta name="google-adsense-account" content="ca-pub-2463890194844907">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2463890194844907"
+     crossorigin="anonymous"></script>
+
+  <meta name="description" content="前言當網頁內有需要快速移動到的位置，或是需要用到選單提示使用者捲軸移動到的位置時，為了不會影響到效能，找到一個使用 CSS 就能達到的方法，所以筆記記錄下來。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Scrollspy 滾動監控">
+<meta property="og:url" content="https://orandigo.github.io/2020/10/11/20201011-scrollspy/index.html">
+<meta property="og:site_name" content="練習筆記">
+<meta property="og:description" content="前言當網頁內有需要快速移動到的位置，或是需要用到選單提示使用者捲軸移動到的位置時，為了不會影響到效能，找到一個使用 CSS 就能達到的方法，所以筆記記錄下來。">
+<meta property="og:locale" content="zh_TW">
+<meta property="og:image" content="https://orandigo.github.io/blog/1607797438042.gif">
+<meta property="article:published_time" content="2020-10-11T15:19:59.000Z">
+<meta property="article:modified_time" content="2020-12-12T19:21:37.371Z">
+<meta property="article:author" content="Orange">
+<meta property="article:tag" content="w3HexSchool">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://orandigo.github.io/blog/1607797438042.gif">
+  
+  <link rel="icon" href="/blog/css/images/favicon.ico">
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Montserrat:700" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,300,300italic,400italic" rel="stylesheet" type="text/css">
+  <link href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+  <style type="text/css">
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/9749f0/00000000000000000001008f/27/l?subset_id=2&fvd=n5) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/90cf9f/000000000000000000010091/27/l?subset_id=2&fvd=n7) format("woff2");font-weight:500;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/8a5494/000000000000000000013365/27/l?subset_id=2&fvd=n4) format("woff2");font-weight:lighter;font-style:normal;}
+    @font-face{font-family:futura-pt;src:url(https://use.typekit.net/af/d337d8/000000000000000000010095/27/l?subset_id=2&fvd=i4) format("woff2");font-weight:400;font-style:italic;}</style>
+    
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Yanone+Kaffeesatz%3A200%2C300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+
+  <link rel="stylesheet" id="athemes-headings-fonts-css" href="//fonts.googleapis.com/css?family=Oswald%3A300%2C400%2C700&amp;ver=4.6.1" type="text/css" media="all">
+  
+<link rel="stylesheet" href="/blog/css/style.css">
+
+
+  
+<script src="/blog/js/jquery-3.1.1.min.js"></script>
+
+
+  <!-- Bootstrap core CSS -->
+  <link rel="stylesheet" href="/blog/css/bootstrap.css" >
+  <link rel="stylesheet" href="/blog/css/fashion.css" >
+  <link rel="stylesheet" href="/blog/css/glyphs.css" >
+
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+
+  <body data-spy="scroll" data-target="#toc" data-offset="50">
+
+
+  
+  
+  <div class="site-header-image">
+    <img id="originBg" width="100%" alt="Hike News" src="">
+  </div>
+
+  <div id="header-blur" class="site-header-image blur" style="position: absolute; top:0; height: 207px; min-height: 207px; min-width: 100%;">
+    <img id="blurBg" width="100%" style="top: 96%" alt="Hike News" src="">
+  </div>
+
+  <script>
+        var imgUrls = "css/images/pose01.jpg".split(",");
+        var random = Math.floor((Math.random() * imgUrls.length ));
+        if (imgUrls[random].startsWith('http') || imgUrls[random].indexOf('://') >= 0) {
+          document.getElementById("originBg").src=imgUrls[random];
+          document.getElementById("blurBg").src=imgUrls[random];
+        } else {
+          document.getElementById("originBg").src='/blog/' + imgUrls[random];
+          document.getElementById("blurBg").src='/blog/' + imgUrls[random];
+        }
+    </script>
+
+
+
+
+<header id="allheader" class="site-header" role="banner" 
+   style="width: 100%; position: absolute; top:0; background: rgba(255,255,255,.8);"  >
+  <div class="clearfix container">
+      <div class="site-branding">
+
+          <h1 class="site-title">
+            
+              <a href="/blog/" title="練習筆記" rel="home"> 練習筆記 </a>
+            
+          </h1>
+          
+          
+            
+          <nav id="main-navigation" class="main-navigation" role="navigation">
+            <a class="nav-open">Menu</a>
+            <a class="nav-close">Close</a>
+
+            <div class="clearfix sf-menu">
+              <ul id="main-nav" class="menu sf-js-enabled sf-arrows"  style="touch-action: pan-y;">
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/">首頁</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/archives">目錄</a> </li>
+                    
+                      <li class="menu-item menu-item-type-custom menu-item-object-custom menu-item-home menu-item-1663"> <a class="" href="/blog/about">關於</a> </li>
+                    
+              </ul>
+            </div>
+          </nav>
+
+      </div>
+  </div>
+</header>
+
+
+  <div id="container">
+    <div id="wrap">
+            
+      <div id="content" class="outer">
+        
+          <section id="main" style="float:none;"><article id="post-20201011-scrollspy" style="width: 66%; float:left;" class="article article-type-post" itemscope itemprop="blogPost" >
+  <div id="articleInner" class="clearfix post-1016 post type-post status-publish format-standard has-post-thumbnail hentry category-template-2 category-uncategorized tag-codex tag-edge-case tag-featured-image tag-image tag-template">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="thumb" class="article-title" itemprop="name">
+      Scrollspy 滾動監控
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-meta">
+      
+	<a href="/blog/2020/10/11/20201011-scrollspy/" class="article-date">
+	  <time datetime="2020-10-11T15:19:59.000Z" itemprop="datePublished">十月 11, 2020</time>
+	</a>
+
+       
+      
+    </div>
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>當網頁內有需要快速移動到的位置，或是需要用到選單提示使用者捲軸移動到的位置時，為了不會影響到效能，找到一個使用 CSS 就能達到的方法，所以筆記記錄下來。</p>
+ <span id="more"></span>
+
+<h1 id="CSS-Scrollspy"><a href="#CSS-Scrollspy" class="headerlink" title="CSS Scrollspy"></a>CSS Scrollspy</h1><p>在 HTML 內放入網頁內容的每個 <code>section</code> 都要給予一個 <code>id</code> ，不使用 <code>class</code> 是因為 <code>id</code> 可以利用 <code>a</code> 連結快速跳轉到網頁 <code>id</code> 所在位置的功能。</p>
+<p>選單 <code>nav</code> 的部分是使用 <code>a</code> 連結</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 網頁內容 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">id</span>=<span class="string">&quot;one&quot;</span>&gt;</span>section one<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">id</span>=<span class="string">&quot;two&quot;</span>&gt;</span>section two<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">id</span>=<span class="string">&quot;three&quot;</span>&gt;</span>section three<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">section</span> <span class="attr">id</span>=<span class="string">&quot;four&quot;</span>&gt;</span>section four<span class="tag">&lt;/<span class="name">section</span>&gt;</span></span><br><span class="line"><span class="comment">&lt;!-- 選單 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">nav</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#one&quot;</span>&gt;</span>one<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#two&quot;</span>&gt;</span>two<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#three&quot;</span>&gt;</span>three<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#four&quot;</span>&gt;</span>four<span class="tag">&lt;/<span class="name">a</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>接著是使用 CSS 的 <code>:hover</code> 的功能</p>
+<p><code>:hover</code> 是當滑鼠滑到標籤元素上時，才會觸發套用樣式</p>
+<p>相反的也可以當網頁移動到網頁內容的時候，改變選單的樣式。</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-pseudo">:hover</span>,</span><br><span class="line"><span class="selector-tag">section</span><span class="selector-id">#one</span><span class="selector-pseudo">:hover</span> ~ <span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-attr">[href=<span class="string">&quot;#one&quot;</span>]</span>,</span><br><span class="line"><span class="selector-tag">section</span><span class="selector-id">#two</span><span class="selector-pseudo">:hover</span> ~ <span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-attr">[href=<span class="string">&quot;#two&quot;</span>]</span>,</span><br><span class="line"><span class="selector-tag">section</span><span class="selector-id">#three</span><span class="selector-pseudo">:hover</span> ~ <span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-attr">[href=<span class="string">&quot;#three&quot;</span>]</span>,</span><br><span class="line"><span class="selector-tag">section</span><span class="selector-id">#four</span><span class="selector-pseudo">:hover</span> ~ <span class="selector-tag">nav</span> <span class="selector-tag">a</span><span class="selector-attr">[href=<span class="string">&quot;#four&quot;</span>]</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#fff</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>最後再隱藏捲軸</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">::-webkit-scrollbar &#123;</span><br><span class="line">  <span class="attribute">width</span>: <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>就大功告成了 ！效果就會像這樣</p>
+<p><img src="/blog/1607797438042.gif" alt="意示圖"></p>
+<p>還有要注意，這作法如果只用滑鼠滾輪滾動時是會沒有反應的！<br>因為是使用 <code>:hover</code> 作的效果，所以也需要移動滑鼠到在元素上時才會觸發。</p>
+<h1 id="JavaScript-Scrollspy"><a href="#JavaScript-Scrollspy" class="headerlink" title="JavaScript Scrollspy"></a>JavaScript Scrollspy</h1><p>HTML 和 CSS 的樣式一樣是上方的，但這裡不是使用 <code>:hover</code> 做變化，而是會在捲軸滑到的元素相對的連結加上一個新的 class 名稱，讓連結的樣式有變化</p>
+<p>所以 CSS 只需把 <code>:hover</code> 改成是 <code>.active</code> 就可以了，所以 <code>::-webkit-scrollbar</code> 也可以刪除</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.<span class="property">active</span> &#123;</span><br><span class="line">  background-<span class="attr">color</span>: #fff;</span><br><span class="line">  <span class="attr">color</span>: #<span class="number">000</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在 HTML 的選單 <code>&lt;a href=&quot;#one&quot;&gt;one&lt;/a&gt;</code> 需先加上<code>class=&quot;active&quot;</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">(<span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="string">&#x27;use strict&#x27;</span>;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">var</span> section = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&quot;.section&quot;</span>);</span><br><span class="line">  <span class="keyword">var</span> sections = &#123;&#125;;   <span class="comment">// 要存元素的資料</span></span><br><span class="line"></span><br><span class="line">  <span class="comment">// 一一取出元素的 id 和元素上緣的位置值</span></span><br><span class="line">  <span class="title class_">Array</span>.<span class="property"><span class="keyword">prototype</span></span>.<span class="property">forEach</span>.<span class="title function_">call</span>(section, <span class="keyword">function</span>(<span class="params">e</span>) &#123;</span><br><span class="line">    sections[e.<span class="property">id</span>] = e.<span class="property">offsetTop</span>;</span><br><span class="line">  &#125;);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 當滑動捲軸時</span></span><br><span class="line">  <span class="variable language_">window</span>.<span class="property">onscroll</span> = <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="comment">// 取捲軸上緣的位置值，不然就取 body 上緣的位置值</span></span><br><span class="line">    <span class="keyword">var</span> scrollPosition = <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">scrollTop</span> || <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">scrollTop</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 判斷每一個元素的位置，當捲軸捲到時</span></span><br><span class="line">    <span class="comment">// 移除 classname 是 active 的，並在目前位置的相對 A 連結加上 active 的 classname</span></span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">var</span> i <span class="keyword">in</span> sections) &#123;</span><br><span class="line">      <span class="keyword">if</span> (sections[i] &lt;= scrollPosition) &#123;</span><br><span class="line">        <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.active&#x27;</span>).<span class="title function_">setAttribute</span>(<span class="string">&#x27;class&#x27;</span>, <span class="string">&#x27; &#x27;</span>);</span><br><span class="line">        <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;a[href*=&#x27;</span> + i + <span class="string">&#x27;]&#x27;</span>).<span class="title function_">setAttribute</span>(<span class="string">&#x27;class&#x27;</span>, <span class="string">&#x27;active&#x27;</span>);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br></pre></td></tr></table></figure>
+
+
+
+<p>參考： <a target="_blank" rel="noopener" href="https://codepen.io/zchee/pen/ogzvZZ">Vanilla js ScrollSpy</a> </p>
+<p>但這也只可以用在連結的元素不多時，若是有幾十個連結在需要跳到目的地時，就可能會影響效能，這就可以使用相關的插件使用。</p>
+<h1 id="Scrollspy-js"><a href="#Scrollspy-js" class="headerlink" title="Scrollspy.js"></a>Scrollspy.js</h1><p>產生的效果會根據移動到的位置 <strong>自動更新選單連結樣式</strong> 變化。</p>
+<ul>
+<li>參考文件<ul>
+<li><a target="_blank" rel="noopener" href="https://materializecss.com/scrollspy.html">Scrollspy.js</a> </li>
+<li><a target="_blank" rel="noopener" href="https://mootools.net/forge/p/scrollspy">mootools - ScrollSpy</a></li>
+</ul>
+</li>
+</ul>
+<h2 id="置頂選單"><a href="#置頂選單" class="headerlink" title="置頂選單"></a>置頂選單</h2><p>在指定要監聽的元素作為使用者在滾動網頁時監聽的範圍，通常會是整個網頁的內容 <code>&lt;body&gt;</code>  ，加上 <code> data-spy=&quot;scroll</code> 屬性值，以及可以讓 JavaScript 取用的 <code>data-target</code>  屬性，屬性的值需要和選單內的 <code>a</code> 連結元素的 <code>id</code> 或 <code>class</code> 名稱一致，還有一個偏移值的屬性 <code>data-offset</code> 預設是 10 ( px 省略 ) ，當點擊 <code>a</code> 連結元素時跳到指定的位置的偏移值</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 監聽的範圍 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span> <span class="attr">data-spy</span>=<span class="string">&quot;scroll&quot;</span> <span class="attr">data-target</span>=<span class="string">&quot;.navbar&quot;</span> <span class="attr">data-offset</span>=<span class="string">&quot;50&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 內容 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>內容的元素可和前一個的範例一樣使用 <code>&lt;section&gt;</code> 和 <code>&lt;nav&gt;</code> 標籤，或是只使用 <code>&lt;div&gt;</code> </p>
+<p>在 CSS 要對監聽的元素使用 <code>position: relative;</code> </p>
+<p> JavaScript 作法是參考至 <a target="_blank" rel="noopener" href="http://w3schools-fa.ir/bootstrap4/bootstrap_ref_js_scrollspy.html">Bootstrap JS Scrollspy</a> 和 <a target="_blank" rel="noopener" href="https://bootstrap.hexschool.com/docs/4.2/components/scrollspy/"> Bootstrap  滾動監控 (Scrollspy)</a>，需事先載入  Scrollspy.js</p>
+<ul>
+<li>初始化</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// javascript</span></span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;DOMContentLoaded&#x27;</span>, <span class="keyword">function</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">var</span> elems = <span class="variable language_">document</span>.<span class="title function_">querySelectorAll</span>(<span class="string">&#x27;.scrollspy&#x27;</span>);</span><br><span class="line">  <span class="keyword">var</span> instances = M.<span class="property">ScrollSpy</span>.<span class="title function_">init</span>(elems, options);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// jQuery </span></span><br><span class="line">$(<span class="variable language_">document</span>).<span class="title function_">ready</span>(<span class="keyword">function</span>(<span class="params"></span>)&#123;</span><br><span class="line">  $(<span class="string">&#x27;body&#x27;</span>).<span class="title function_">scrollspy</span>(&#123;<span class="attr">target</span>: <span class="string">&quot;.navbar&quot;</span>&#125;);</span><br><span class="line">&#125;);</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><p>scrollspy 可用的方法</p>
+<ul>
+<li><p><code>.scrollspy(&#39;refresh&#39;)</code></p>
+<p>加入或刪除元素使用滾動監控時刷新方式</p>
+</li>
+<li><p><code>.scrollspy(&#39;dispose&#39;)</code><br>刪除滾動監控</p>
+<ul>
+<li>關於 <strong>刪除滾動監控</strong> 會應用到的情況可參考 <a target="_blank" rel="noopener" href="https://stackoverflow.com/questions/47979661/bootstrap-scrollspy-remove-fixed-menu-when-last-section-scrolled-to-view">Bootstrap Scrollspy remove fixed menu when last section scrolled to view</a></li>
+</ul>
+</li>
+<li><p><code>.destroy()</code><br>Javascript 移除的方法</p>
+</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 尋找目標元素</span></span><br><span class="line"><span class="keyword">var</span> instance = M.<span class="property">ScrollSpy</span>.<span class="title function_">getInstance</span>(elem);</span><br><span class="line"></span><br></pre></td></tr></table></figure></li>
+</ul>
+<p>&#x2F;&#x2F; 移除插件的功能<br>  instance.destroy();</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">`getInstance(elem)` 是使用預設 **尋找目標元素** `getActiveElement` 的方法 </span><br><span class="line"></span><br><span class="line">```javascript</span><br><span class="line">function(id) &#123;</span><br><span class="line">return &#x27;a[href=&quot;#&#x27; + id + &#x27;&quot;]&#x27;;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>  而目標元素必需有 <code>id</code> 的名稱</p>
+<h2 id="側邊選單"><a href="#側邊選單" class="headerlink" title="側邊選單"></a>側邊選單</h2><p>這是參考 <a target="_blank" rel="noopener" href="https://github.com/makotot">makotot</a>&#x2F;<strong><a target="_blank" rel="noopener" href="https://github.com/makotot/scrollspy">scrollspy</a></strong> </p>
+<p>Scrollspy.js 除了直接下載也可以用 NPM</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ npm install --save scrollspy-js</span><br></pre></td></tr></table></figure>
+
+
+
+<p>在 HTML 內同樣是使用到 <code>A</code> 連結和目標 <code>ID</code> </p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- 範圍 --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;scrollspy&quot;</span>&gt;</span></span><br><span class="line">  <span class="comment">&lt;!-- 選單 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;scrollspy-nav nav&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#one&quot;</span>&gt;</span>one<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#two&quot;</span>&gt;</span>two<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#three&quot;</span>&gt;</span>three<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">&quot;#four&quot;</span>&gt;</span>four<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  </span><br><span class="line">  <span class="comment">&lt;!-- 內容 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;content&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">&quot;one&quot;</span>&gt;</span>one<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">&quot;two&quot;</span>&gt;</span>two<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">&quot;three&quot;</span>&gt;</span>three<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">li</span> <span class="attr">id</span>=<span class="string">&quot;four&quot;</span>&gt;</span>four<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>CSS 樣式</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 固定選單 */</span></span><br><span class="line"><span class="selector-class">.nav</span>	&#123;</span><br><span class="line">  <span class="attribute">position</span>: fixed;</span><br><span class="line">  <span class="comment">/* 靠右，也可改成置頂 top */</span></span><br><span class="line">  <span class="attribute">right</span>: <span class="number">0</span>;</span><br><span class="line">  <span class="attribute">padding</span>: <span class="number">30px</span>;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">/* 動態加入的 ClassName 樣式 */</span></span><br><span class="line"><span class="selector-class">.is-inview</span>	&#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#4c5eff</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#fff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+
+<p>配合 JavaScript 的方法，當 <code>ScrollSpy()</code> 內的路徑 <code>nav</code> </p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> spy = <span class="keyword">new</span> <span class="title class_">ScrollSpy</span>(<span class="string">&#x27;#scrollspy&#x27;</span>, &#123;</span><br><span class="line">  <span class="comment">// 當移動到目標 ID 時，取得連到目標 ID 的 A 連接</span></span><br><span class="line">  <span class="attr">nav</span>: <span class="string">&#x27;.scrollspy-nav &gt; li &gt; a&#x27;</span>,</span><br><span class="line">  <span class="comment">// 動態加入的 ClassName</span></span><br><span class="line">  <span class="attr">className</span>: <span class="string">&#x27;is-inview&#x27;</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+
+
+
+      
+    </div>
+    <footer class="entry-meta entry-footer">
+      
+      
+  <span class="ico-tags"></span>
+  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/w3HexSchool/" rel="tag">w3HexSchool</a></li></ul>
+
+      
+    </footer>
+    <hr class="entry-footer-hr">
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/blog/2020/10/18/20201018-js-reduce/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Newer</strong>
+      <div class="article-nav-title">
+        
+          reduce() 陣列累加
+        
+      </div>
+    </a>
+  
+  
+    <a href="/blog/2020/10/04/20201004-css-root/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">CSS 變數運用</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+<!-- Table of Contents -->
+
+  <aside id="sidebar">
+    <div id="toc" class="toc-article">
+    <strong class="toc-title">文章目錄</strong>
+    
+      <ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E8%A8%80"><span class="nav-number">1.</span> <span class="nav-text">前言</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#CSS-Scrollspy"><span class="nav-number">2.</span> <span class="nav-text">CSS Scrollspy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JavaScript-Scrollspy"><span class="nav-number">3.</span> <span class="nav-text">JavaScript Scrollspy</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Scrollspy-js"><span class="nav-number">4.</span> <span class="nav-text">Scrollspy.js</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BD%AE%E9%A0%82%E9%81%B8%E5%96%AE"><span class="nav-number">4.1.</span> <span class="nav-text">置頂選單</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%81%B4%E9%82%8A%E9%81%B8%E5%96%AE"><span class="nav-number">4.2.</span> <span class="nav-text">側邊選單</span></a></li></ol></li></ol>
+    
+    </div>
+  </aside>
+</section>
+        
+      </div>
+
+    </div>
+    <!-- <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">Home</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">Archives</a>
+  
+    <a href="/blog/about" class="mobile-nav-link">About</a>
+  
+</nav> -->
+    <footer id="footer" class="site-footer">
+  
+
+  <div class="clearfix container">
+      <div class="site-info">
+	      &copy; 2025 練習筆記 All Rights Reserved.
+        
+      </div>
+      <div class="site-credit">
+        Theme by <a href="https://github.com/iTimeTraveler/hexo-theme-hipaper" target="_blank">hipaper</a>
+      </div>
+  </div>
+</footer>
+
+
+<!-- min height -->
+
+<script>
+    var wrapdiv = document.getElementById("wrap");
+    var contentdiv = document.getElementById("content");
+
+    wrapdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+    contentdiv.style.minHeight = document.body.offsetHeight - document.getElementById("allheader").offsetHeight - document.getElementById("footer").offsetHeight + "px";
+
+
+    <!-- headerblur min height -->
+    
+      var headerblur = document.getElementById("header-blur");
+      headerblur.style.minHeight = window.getComputedStyle(document.getElementById("allheader"), null).height;
+    
+    
+</script>
+    
+<div style="display: none;">
+  <script src="https://s11.cnzz.com/z_stat.php?id=1260716016&web_id=1260716016" language="JavaScript"></script>
+</div>
+
+<!-- mathjax config similar to math.stackexchange -->
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      tex2jax: {
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    });
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+
+
+<script src="/blog/js/script.js"></script>
+
+
+<script src="/blog/js/bootstrap.js"></script>
+
+
+<script src="/blog/js/main.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+
+  <a id="rocket" href="#top" class=""></a>
+  <script type="text/javascript" src="/js/totop.js" async=""></script>
+</body>
+</html>
